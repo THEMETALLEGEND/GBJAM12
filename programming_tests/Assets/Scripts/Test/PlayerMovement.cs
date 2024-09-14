@@ -12,9 +12,24 @@ public class PlayerMovement : MonoBehaviour
 
 	Vector2 moveDirection = Vector2.zero;
 
+    //private void Awake()
+    //{
+    //    actionInput = new PlayerActionsInput();
+    //    rb = GetComponent<Rigidbody2D>();
+    //}
 
+    //private void OnEnable()
+    //{
+    //    move = actionInput.Player.Move;
+    //    move.Enable();
+    //}
 
-	void Update()
+    //private void OnDisable()
+    //{
+    //    move.Disable();
+    //}
+
+    void Update()
 	{
 		// picked up the raw axis because they are int, so it made the pixel perfect work better
 		float horizontal = Input.GetAxisRaw("Horizontal");

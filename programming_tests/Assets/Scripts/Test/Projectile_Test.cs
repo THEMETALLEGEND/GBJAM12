@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Projectile_Test : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float speed = 5f;
+    private Vector3 direction;
+    private Rigidbody2D rb;
+    public PlayerMovement direction_script;
+
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+        direction = direction_script.Direction_Selected;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        rb.velocity = direction * speed;
     }
+
 }

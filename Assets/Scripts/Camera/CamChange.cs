@@ -5,13 +5,13 @@ using Cinemachine;
 
 public class CamChange : MonoBehaviour
 {
-	public CinemachineVirtualCamera cam;
-	public CinemachineVirtualCamera previousCam;
+	private CinemachineVirtualCamera cam;
 	private BoxCollider2D col;
 
 	private void Awake()
 	{
 		col = GetComponent<BoxCollider2D>();
+		cam = transform.parent.GetComponent<CinemachineVirtualCamera>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -20,11 +20,6 @@ public class CamChange : MonoBehaviour
 		{
 			// Get the CinemachineBrain from the main camera
 			CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
-
-			// Get the current active virtual camera
-			previousCam = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
-
-			previousCam.Priority = 0;
 
 			cam.Priority = 10;
 		}
@@ -35,7 +30,7 @@ public class CamChange : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			cam.Priority = 0;
-			previousCam.Priority = 10;
+			//previousCam.Priority = 10;
 		}
 	}
 }

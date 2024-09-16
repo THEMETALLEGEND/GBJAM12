@@ -6,9 +6,10 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 {
     public GameObject projectileEnemy; 
     public float attackInterval = 3f;  
-    public GameObject playerObject;    
-
-    public int health = 10; 
+    public GameObject playerObject;
+    public int room;
+    public int health = 10;
+    public Room_Controller roomEntered;
 
     void Start()
     {
@@ -27,10 +28,18 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
     IEnumerator ShootingProjectile()
     {
+
         while (true)
         {
-            yield return new WaitForSeconds(attackInterval); 
-            Attack();  
+            if (room == roomEntered.room_entered)
+            {
+                yield return new WaitForSeconds(attackInterval);
+                Attack();
+            }
+            else
+            {
+                yield return null;  // Wait until the next frame to check the condition again
+            }
         }
     }
 

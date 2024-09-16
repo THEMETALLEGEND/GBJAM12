@@ -13,7 +13,7 @@ public class PlayerAttacking : MonoBehaviour
     private bool isAttacking = false;
     private Vector2 magicDirection;
     private bool isMagicCharging = false;
-    public int hp;
+    public int hp = 10;
     public LayerMask EnemyLayer;
 
     void Start()
@@ -60,12 +60,18 @@ public class PlayerAttacking : MonoBehaviour
     {
         if (isMagicCharging)
         {
-            GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
-            magicProjectile.SetActive(true);
-            Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
-            projectileScript.GetDirection(magicDirection);
-            isMagicCharging = false;
-            Debug.Log("Magic casted");
+            if (magicDirection == Vector2.zero){
+                Debug.Log("player didnt submit any direction inputs yet so it wont cast the magic");
+            }
+            else
+            {
+                GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
+                magicProjectile.SetActive(true);
+                Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
+                projectileScript.GetDirection(magicDirection);
+                isMagicCharging = false;
+                Debug.Log("Magic casted");
+            }
         }
     }
 
@@ -77,7 +83,7 @@ public class PlayerAttacking : MonoBehaviour
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.Damage(1); // Certifique-se de que o método TakeDamage_Enemy não exige parâmetros
+                enemy.Damage(1); 
             }
         }
 
@@ -94,6 +100,9 @@ public class PlayerAttacking : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        Debug.Log("Player took damage");
         hp -= dmg;
+        if (hp <= 0)
+            Debug.Log("Player died");
     }
 }

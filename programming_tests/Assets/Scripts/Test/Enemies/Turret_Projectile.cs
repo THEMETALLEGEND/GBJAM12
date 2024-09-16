@@ -2,40 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Test : MonoBehaviour
+public class Turret_Projectile : MonoBehaviour
 {
     public float speed = 5f;
     private Vector3 direction;
+    public GameObject Player_;
     private Rigidbody2D rb;
-    public PlayerMovement direction_script;
+    public LayerMask EnemyLayer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        direction = direction_script.Direction_Selected;
     }
 
     void FixedUpdate()
     {
         rb.velocity = direction * speed;
     }
-    public void GetDirection(Vector2 dir)
+    public void SetDirection(Vector2 direc)
     {
-        direction = dir;
+        direction = direc;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == EnemyLayer)
         {
+            Debug.Log("Hit an enemy with magic!");
             Enemy enemy = other.GetComponent<Enemy>();
-
             if (enemy != null)
             {
-                enemy.Damage(1);
-            }
-            else
-            {
-                Debug.LogError("Player script not found");
+                enemy.Damage(1); 
             }
             Destroy(gameObject);
         }

@@ -12,12 +12,15 @@ public class Projectile_Test : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        direction = direction_script.Direction_Selected;
+        //direction = direction_script.Direction_Selected;
     }
 
     void FixedUpdate()
     {
         rb.velocity = direction * speed;
     }
-
+    public void GetDirection(Vector2 dir)
+    {
+        direction = dir;
+    }
 }

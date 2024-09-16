@@ -8,7 +8,7 @@ public class Turret_Projectile : MonoBehaviour
     private Vector3 direction;
     public GameObject Player_;
     private Rigidbody2D rb;
-    public LayerMask EnemyLayer;
+    public LayerMask PlayerLayer;
 
     void Start()
     {
@@ -25,12 +25,12 @@ public class Turret_Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == EnemyLayer)
+        if (other.gameObject == Player_)
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
+            PlayerAttacking player = other.GetComponent<PlayerAttacking>();
+            if (player != null)
             {
-                enemy.Damage(1); 
+                player.TakeDamage(1); 
             }
             Destroy(gameObject);
         }

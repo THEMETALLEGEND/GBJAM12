@@ -27,7 +27,6 @@ public class Turret_Projectile : MonoBehaviour
     {
         if (other.gameObject.layer == EnemyLayer)
         {
-            Debug.Log("Hit an enemy with magic!");
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {

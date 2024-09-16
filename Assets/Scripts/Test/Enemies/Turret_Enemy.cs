@@ -8,7 +8,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     public float attackInterval = 3f;  
     public GameObject playerObject;    
 
-    private int health = 10; 
+    public int health = 10; 
 
     void Start()
     {
@@ -44,26 +44,9 @@ public class Turret_Enemy : MonoBehaviour, Enemy
             GameObject attack = Instantiate(projectileEnemy, transform.position, transform.rotation);
             attack.SetActive(true);
 
-            if (attack != null)
-            {
-                Turret_Projectile projectileScript = attack.GetComponent<Turret_Projectile>();
-                if (projectileScript != null)
-                {
-                    projectileScript.SetDirection(attackDirection);
-                }
-                else
-                {
-                    Debug.LogError("Turret_Projectile script não encontrado no objeto instanciado.");
-                }
-            }
-            else
-            {
-                Debug.LogError("O projétil não pôde ser instanciado.");
-            }
-        }
-        else
-        {
-            Debug.LogError("ProjectileEnemy ou PlayerObject não está configurado corretamente.");
+            Turret_Projectile projectileScript = attack.GetComponent<Turret_Projectile>();
+            projectileScript.SetDirection(attackDirection);
+
         }
     }
 }

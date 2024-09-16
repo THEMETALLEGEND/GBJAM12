@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	public float moveSpeed = 5f;
 	public PlayerActionsInput actionInput;
 	public InputAction move;
+	private Animator animator;
 
 	Vector2 moveDirection = Vector2.zero;
 
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		actionInput = new PlayerActionsInput();
 		rb = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 	}
 
 	private void OnEnable()
@@ -33,10 +35,16 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		moveDirection = move.ReadValue<Vector2>();
+
+		animator.SetFloat("Horizontal", moveDirection.x);
+		animator.SetFloat("Vertical", moveDirection.y);
 	}
 
 	private void FixedUpdate()
 	{
 		rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+
+		float speed = Mathf.Abs(moveDirection.x * moveSpeed) + Mathf.Abs(moveDirection.y * moveSpeed);
+		animator.SetFloat("Speed", speed);
 	}
 }

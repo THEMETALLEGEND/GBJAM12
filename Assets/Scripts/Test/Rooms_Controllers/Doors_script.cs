@@ -4,31 +4,62 @@ using UnityEngine;
 
 public class Doors_script : MonoBehaviour
 {
-    public LayerMask doors_layer;
-    public LayerMask enemy_layer;
-    public int roomnumber;
+    public LayerMask doors_layer;  
+    public LayerMask enemy_layer;  
+    public int roomnumber;        
+    private Vector2 boxSize = new Vector2(10, 10); 
+
+    private Room_Controller roomsManager;  
 
     void Start()
     {
-        Collider2D[] doorColliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(10, 10), 0f, doors_layer);
-        foreach (Collider2D door in doorColliders)
-        {
-            door.gameObject.SetActive(true);
-        }
+        roomsManager = FindObjectOfType<Room_Controller>(); 
+        UpdateDoorState();  
     }
+
     void Update()
     {
+        UpdateDoorState();  
+    }
 
-        Collider2D[] enemyColliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(10, 10), 0f, enemy_layer);
-        if (enemyColliders.Length < 1)
+    void UpdateDoorState()
+    {
+        Collider2D[] enemyColliders = Physics2D.OverlapBoxAll(transform.position, boxSize, 0f, enemy_layer);
+        bool isInCurrentRoom = roomsManager.room_entered == roomnumber; 
+
+        if (isInCurrentRoom)
         {
-            Collider2D[] doorColliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(10, 10), 0f, doors_layer);
-            foreach (Collider2D door in doorColliders)
+            if (enemyColliders.Length > 0)
             {
-                //later i will substitute this setactive for calling a function that changes the animation of the door to the open one
-                door.gameObject.SetActive(false);
-                Debug.Log("Doors deactivated");
+                SetDoorState(false);  
+            }
+            else
+            {
+                SetDoorState(true);  
             }
         }
+    }
+
+    void SetDoorState(bool isOpen)
+    {
+        Collider2D[] doorColliders = Physics2D.OverlapBoxAll(transform.position, boxSize, 0f, doors_layer);
+
+        foreach (Collider2D door in doorColliders)
+        {
+            if (isOpen)
+            {
+                door.isTrigger = true;
+            }
+            else
+            {
+                door.isTrigger = false;
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, boxSize);
     }
 }

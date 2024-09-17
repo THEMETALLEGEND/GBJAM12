@@ -13,9 +13,13 @@ public class Projectile_Test : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         direction = direction_script.Direction_Selected;
-
+        StartCoroutine(ProjectilesCleaner());
     }
-
+    IEnumerator ProjectilesCleaner()
+    {
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
+    }
     void FixedUpdate()
     {
         rb.velocity = direction * speed;

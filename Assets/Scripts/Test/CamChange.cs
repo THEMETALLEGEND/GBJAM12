@@ -1,41 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 
 public class CamChange : MonoBehaviour
 {
-	public CinemachineVirtualCamera cam;
-	public CinemachineVirtualCamera previousCam;
-	private BoxCollider2D col;
+    public Camera cam; 
+    public Camera previousCam; 
+    public Camera canvasCamera; 
+    private BoxCollider2D col;
+    public bool returning = false;
+    private bool isPlayerInside = false;
 
-	private void Awake()
-	{
-		col = GetComponent<BoxCollider2D>();
-	}
+    private void Awake()
+    {
+        col = GetComponent<BoxCollider2D>();
+    }
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			// Get the CinemachineBrain from the main camera
-			CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !isPlayerInside)
+        {
+            isPlayerInside = true;
 
-			// Get the current active virtual camera
-			previousCam = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
+            if (returning)
+            {
+                cam.gameObject.SetActive(false);
+                previousCam.gameObject.SetActive(true);
+                returning = false;
 
-			previousCam.Priority = 0;
+                UpdateMainCamera(previousCam);
+            }
+            else
+            {
+                cam.gameObject.SetActive(true);
+                previousCam.gameObject.SetActive(false);
+                returning = true;
 
-			cam.Priority = 10;
-		}
-	}
+                UpdateMainCamera(cam);
+            }
+        }
+    }
 
-	private void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			cam.Priority = 0;
-			previousCam.Priority = 10;
-		}
-	}
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInside = false;
+        }
+    }
+
+    void UpdateMainCamera(Camera cameratocanvas)
+    {
+        CanvasCameraFollower canvasCameraFollower = canvasCamera.GetComponent<CanvasCameraFollower>();
+        canvasCameraFollower.mainCamera = cameratocanvas;
+    }
 }

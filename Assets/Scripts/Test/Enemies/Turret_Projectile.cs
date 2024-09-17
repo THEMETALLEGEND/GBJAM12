@@ -13,6 +13,12 @@ public class Turret_Projectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(ProjectilesCleaner());
+    }
+    IEnumerator ProjectilesCleaner()
+    {
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
     }
 
     void FixedUpdate()

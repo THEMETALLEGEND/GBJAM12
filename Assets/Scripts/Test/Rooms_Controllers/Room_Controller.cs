@@ -6,6 +6,7 @@ public class Room_Controller : MonoBehaviour
 {
     public int room_entered;
     public BoxCollider2D coll;
+    public Map_Controller map;
     void Start()
     {
         coll = GetComponent<BoxCollider2D>();
@@ -18,6 +19,7 @@ public class Room_Controller : MonoBehaviour
             Debug.Log("new room detected");
             Doors_script script = collision.GetComponent<Doors_script>();
             room_entered = script.roomnumber;
+            map.EnterRoom(room_entered-1);
         }
     }
 }

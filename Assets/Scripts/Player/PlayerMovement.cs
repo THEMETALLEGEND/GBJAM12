@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	public PlayerActionsInput actionInput;
 	public InputAction move;
 	private Animator animator;
+	[HideInInspector] public bool isAllowedToMove = true;
 
 	Vector2 moveDirection = Vector2.zero;
 
@@ -38,28 +39,46 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		moveDirection = move.ReadValue<Vector2>();
-
-		animator.SetFloat("Horizontal", moveDirection.x);
-		animator.SetFloat("Vertical", moveDirection.y);
-
-		// Save the last movement direction if the player is moving
-		if (moveDirection.magnitude > 0.01f) // If there is movement
+		if (isAllowedToMove)
 		{
-			lastDirX = moveDirection.x;
-			lastDirY = moveDirection.y;
-		}
+			moveDirection = move.ReadValue<Vector2>();
 
-		// Send the last direction to the Animator 
-		animator.SetFloat("lastDirX", lastDirX);
-		animator.SetFloat("lastDirY", lastDirY);
+			animator.SetFloat("Horizontal", moveDirection.x);
+			animator.SetFloat("Vertical", moveDirection.y);
+
+			// Save the last movement direction if the player is moving
+			if (moveDirection.magnitude > 0.01f) // If there is movement
+			{
+				lastDirX = moveDirection.x;
+				lastDirY = moveDirection.y;
+			}
+
+			// Send the last direction to the Animator 
+			animator.SetFloat("lastDirX", lastDirX);
+			animator.SetFloat("lastDirY", lastDirY);
+		}
+		else
+		{
+			// If movement is not allowed, reset moveDirection
+			moveDirection = Vector2.zero;
+		}
 	}
 
 	private void FixedUpdate()
 	{
-		rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+		if (isAllowedToMove)
+		{
+			// Update the velocity when movement is allowed
+			rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+		}
+		else
+		{
+			// Stop the player when movement is not allowed
+			rb.velocity = Vector2.zero;
+		}
 
-		float speed = Mathf.Abs(moveDirection.x * moveSpeed) + Mathf.Abs(moveDirection.y * moveSpeed);
+		// Update animator speed parameter based on velocity
+		float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
 		animator.SetFloat("Speed", speed);
 	}
 }

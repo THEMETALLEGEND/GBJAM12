@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class CamChange : MonoBehaviour
 {
+	private float teleportDistance = 2f;
 	private CinemachineVirtualCamera cam;
 	private BoxCollider2D col;
 
@@ -18,10 +19,64 @@ public class CamChange : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			// Get the CinemachineBrain from the main camera
-			CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+			StartCoroutine(RoomTransition(other));
+		}
+	}
 
-			cam.Priority = 10;
+	private IEnumerator RoomTransition(Collider2D player)
+	{
+		PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+
+		// Disable player movement and stop the player immediately
+		playerMovement.isAllowedToMove = false;
+		playerMovement.rb.velocity = Vector2.zero;
+
+		// Delay before switching the camera
+		yield return new WaitForSeconds(0.5f);
+
+		// Switch camera
+		cam.Priority = 10;
+
+		// Teleport player forward based on the entered side
+		TeleportPlayer(player);
+
+		// Delay during the camera transition
+		yield return new WaitForSeconds(1.5f);
+
+		// Enable player movement after the transition
+		playerMovement.isAllowedToMove = true;
+	}
+
+	private void TeleportPlayer(Collider2D player)
+	{
+		Vector2 playerPosition = player.transform.position;
+		Vector2 triggerPosition = transform.position;
+
+		// Determine the side from which the player entered the trigger
+		Vector2 direction = playerPosition - triggerPosition;
+
+		// Teleport player based on the entered direction
+		if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))  // Entered from the left or right
+		{
+			if (direction.x > 0)  // Entered from the right, teleport left (negative X)
+			{
+				player.transform.position = new Vector2(playerPosition.x - teleportDistance, playerPosition.y);
+			}
+			else  // Entered from the left, teleport right (positive X)
+			{
+				player.transform.position = new Vector2(playerPosition.x + teleportDistance, playerPosition.y);
+			}
+		}
+		else  // Entered from the top or bottom
+		{
+			if (direction.y > 0)  // Entered from the top, teleport down (negative Y)
+			{
+				player.transform.position = new Vector2(playerPosition.x, playerPosition.y - teleportDistance);
+			}
+			else  // Entered from the bottom, teleport up (positive Y)
+			{
+				player.transform.position = new Vector2(playerPosition.x, playerPosition.y + teleportDistance);
+			}
 		}
 	}
 
@@ -30,7 +85,6 @@ public class CamChange : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			cam.Priority = 0;
-			//previousCam.Priority = 10;
 		}
 	}
 }

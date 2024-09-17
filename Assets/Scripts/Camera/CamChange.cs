@@ -8,6 +8,7 @@ public class CamChange : MonoBehaviour
 	private float teleportDistance = 2f;
 	private CinemachineVirtualCamera cam;
 	private BoxCollider2D col;
+	[HideInInspector] public bool isTransitioning = false;
 
 	private void Awake()
 	{
@@ -28,6 +29,7 @@ public class CamChange : MonoBehaviour
 		PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
 		// Disable player movement and stop the player immediately
+		isTransitioning = true;
 		playerMovement.isAllowedToMove = false;
 		playerMovement.rb.velocity = Vector2.zero;
 
@@ -45,6 +47,8 @@ public class CamChange : MonoBehaviour
 
 		// Enable player movement after the transition
 		playerMovement.isAllowedToMove = true;
+		isTransitioning = false;
+
 	}
 
 	private void TeleportPlayer(Collider2D player)

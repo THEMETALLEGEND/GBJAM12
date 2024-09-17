@@ -873,6 +873,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "PlayerActionsInput",
+            "bindingGroup": "PlayerActionsInput",
+            "devices": []
         }
     ]
 }

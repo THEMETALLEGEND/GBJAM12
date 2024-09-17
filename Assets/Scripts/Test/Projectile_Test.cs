@@ -7,24 +7,16 @@ public class Projectile_Test : MonoBehaviour
     public float speed = 5f;
     private Vector2 direction;
     private Rigidbody2D rb;
-    public PlayerMovement direction_script;
+    public PlayerAttacking direction_script;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        direction = direction_script.Direction_Selected;
-        StartCoroutine(ProjectilesCleaner());
-    }
-    IEnumerator ProjectilesCleaner()
-    {
-        yield return new WaitForSeconds(4f);
-        Destroy(gameObject);
+        direction = direction_script.magicDirection;
     }
     void FixedUpdate()
     {
         rb.velocity = direction * speed;
-        if (direction == Vector2.zero)
-            Destroy(gameObject);
     }
     public void GetDirection(Vector2 dir)
     {

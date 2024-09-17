@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
 	private Animator animator;
 	[HideInInspector] public bool isAllowedToMove = true;
 
+	//vector2 to use on attacks
+	public Vector2 Direction_Selected;
+
 	Vector2 moveDirection = Vector2.zero;
 
 	// Variables to store the last movement direction
@@ -62,7 +65,13 @@ public class PlayerMovement : MonoBehaviour
 			// If movement is not allowed, reset moveDirection
 			moveDirection = Vector2.zero;
 		}
-	}
+        if (moveDirection != Vector2.zero)
+        {
+            //stores the direction selected to use on magic
+            Direction_Selected = moveDirection;
+            
+        }
+    }
 
 	private void FixedUpdate()
 	{

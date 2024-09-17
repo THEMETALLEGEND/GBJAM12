@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CanvasCameraFollower : MonoBehaviour
 {
-    public Camera mainCamera;  
-    public Camera canvasCamera; 
+    public CinemachineVirtualCamera mainCamera;  
+    public CinemachineVirtualCamera canvasCamera; 
 
     void Start()
     {
@@ -19,10 +20,12 @@ public class CanvasCameraFollower : MonoBehaviour
 
     void SyncCameras()
     {
-        canvasCamera.transform.position = mainCamera.transform.position;
-        canvasCamera.transform.rotation = mainCamera.transform.rotation;
-        canvasCamera.orthographicSize = mainCamera.orthographicSize;
-        canvasCamera.orthographic = mainCamera.orthographic;
-        canvasCamera.fieldOfView = mainCamera.fieldOfView; 
+        Vector3 mainCamPosition = CinemachineCore.Instance.GetActiveBrain(0).OutputCamera.transform.position;
+        Quaternion mainCamRotation = CinemachineCore.Instance.GetActiveBrain(0).OutputCamera.transform.rotation;
+
+        canvasCamera.transform.position = mainCamPosition;
+        canvasCamera.transform.rotation = mainCamRotation;
+
     }
+
 }

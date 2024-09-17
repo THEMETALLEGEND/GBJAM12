@@ -7,7 +7,8 @@ public class CamChange : MonoBehaviour
 {
 	private float teleportDistance = 2f;
 	private CinemachineVirtualCamera cam;
-	private BoxCollider2D col;
+    public CinemachineVirtualCamera canvasCamera;
+    private BoxCollider2D col;
 	[HideInInspector] public bool isTransitioning = false;
 
 	private void Awake()
@@ -38,7 +39,7 @@ public class CamChange : MonoBehaviour
 
 		// Switch camera
 		cam.Priority = 10;
-
+		UpdateMainCamera(cam);
 		// Teleport player forward based on the entered side
 		TeleportPlayer(player);
 
@@ -91,4 +92,29 @@ public class CamChange : MonoBehaviour
 			cam.Priority = 0;
 		}
 	}
+    //i wasnt able to make the canvas work with the overlay by how the template worked, so I made a camera to render the canvas and follow the main camera
+    void UpdateMainCamera(CinemachineVirtualCamera cameratocanvas)
+    {
+        if (canvasCamera == null)
+        {
+            Debug.LogError("canvasCamera não está atribuído.");
+            return;
+        }
+
+        CanvasCameraFollower canvasCameraFollower = canvasCamera.GetComponent<CanvasCameraFollower>();
+
+        if (canvasCameraFollower == null)
+        {
+            Debug.LogError("Componente CanvasCameraFollower não encontrado no canvasCamera.");
+            return;
+        }
+
+        if (cameratocanvas == null)
+        {
+            Debug.LogError("cameratocanvas não está atribuído corretamente.");
+            return;
+        }
+
+        canvasCameraFollower.mainCamera = cameratocanvas;
+    }
 }

@@ -1,86 +1,50 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Map_Controller : MonoBehaviour
 {
-    public GameObject[] roomMapIcons; 
+    public LayerMask doorLayer; // Defina o LayerMask para identificar salas e portas
+    public float detectionRadius = 1f; // Raio para detectar portas
 
-    private bool[] visitedRooms;
-    public int currentRoom; 
-
-    void Start()
+    public void OnPlayerEnterRoom(Room currentRoom)
     {
-        visitedRooms = new bool[roomMapIcons.Length];
-        UpdateMap();
+        // Verifica salas adjacentes e portas
+        CheckAdjacentRooms(currentRoom);
     }
 
-    public void EnterRoom(int roomIndex)
+    private void CheckAdjacentRooms(Room currentRoom)
     {
-        currentRoom = roomIndex;
+        // Usando BoxCollider2D para detectar portas adjacentes
+        Collider2D[] nearbyColliders = Physics2D.OverlapBoxAll(currentRoom.transform.position, new Vector2(detectionRadius, detectionRadius), 0f, doorLayer);
 
-        visitedRooms[roomIndex] = true;
-
-        UpdateMap();
-    }
-
-    void UpdateMap()
-    {
-
-        switch (currentRoom)
+        foreach (Collider2D collider in nearbyColliders)
         {
-            case 0: 
-                ShowRoom(0); 
-                ShowAdjacentRoom(1); 
-                ShowAdjacentRoom(2); 
-                break;
-
-            case 1: 
-                ShowRoom(1); 
-                ShowAdjacentRoom(0); 
-                break;
-
-            case 2: 
-                ShowRoom(2); 
-                ShowAdjacentRoom(0); 
-                ShowAdjacentRoom(3);
-                break;
-
-            case 3: 
-                ShowRoom(3); 
-                ShowAdjacentRoom(4); 
-                ShowAdjacentRoom(6); 
-                break;
-
-            case 4: //room 5
-                ShowRoom(4); 
-                ShowAdjacentRoom(5); 
-                break;
-
-            case 6: 
-                ShowRoom(6); 
-                ShowAdjacentRoom(7); 
-                break;
+            Room adjacentRoom = collider.GetComponent<Room>();
+            if (adjacentRoom != null && !adjacentRoom.IsVisited)
+            {
+                // Verifica a posição da porta para determinar a direção
+                Vector2 direction = GetDirectionFromCollider(collider);
+                adjacentRoom.UpdateRoomIcons(direction); // Atualiza os ícones com base na direção
+                adjacentRoom.SetAccessible(); // Define salas adjacentes como acessíveis (cor amarela)
+            }
         }
     }
 
-    void ShowRoom(int roomIndex)
+    private Vector2 GetDirectionFromCollider(Collider2D collider)
     {
-        roomMapIcons[roomIndex].SetActive(true); 
-
-        if (visitedRooms[roomIndex])
+        // Calcula a direção da porta em relação à sala atual
+        Vector2 direction = Vector2.zero;
+        // Aqui você pode usar a posição do collider e a posição da sala atual para determinar a direção
+        // Exemplo fictício para fins ilustrativos:
+        Vector2 offset = collider.transform.position - transform.position;
+        if (Mathf.Abs(offset.x) > Mathf.Abs(offset.y))
         {
-            roomMapIcons[roomIndex].GetComponent<SpriteRenderer>().color = Color.white;
+            direction = offset.x > 0 ? Vector2.right : Vector2.left;
         }
-        
-    }
-
-    void ShowAdjacentRoom(int roomIndex)
-    {
-        roomMapIcons[roomIndex].SetActive(true);
-        if (!visitedRooms[roomIndex])
+        else
         {
-            roomMapIcons[roomIndex].GetComponent<SpriteRenderer>().color = Color.yellow;
+            direction = offset.y > 0 ? Vector2.up : Vector2.down;
         }
+        return direction;
     }
 }

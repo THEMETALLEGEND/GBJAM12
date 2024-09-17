@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerAttacking : MonoBehaviour
 {
     public PlayerActionsInput actionInput;
-    public InputAction magic_;
-    public InputAction melee_attack;
+    [HideInInspector]  public InputAction magic_;
+    [HideInInspector]  public InputAction melee_attack;
     public GameObject magic;
     public GameObject meleeCollider;
     private bool isAttacking = false;
-    private Vector2 magicDirection;
+    [HideInInspector] public Vector2 magicDirection = Vector2.zero;
     private bool isMagicCharging = false;
     public int hp = 10;
     public LayerMask EnemyLayer;
@@ -48,11 +48,12 @@ public class PlayerAttacking : MonoBehaviour
 
     private void OnMagicStarted(InputAction.CallbackContext context)
     {
-        if (isMagicCharging == false)
+        if (!isMagicCharging)
         {
+            // captures the player direction to use on the magic but on the moment it started holding button
             magicDirection = transform.right;
-            Debug.Log("Magic is being hold");
             isMagicCharging = true;
+            Debug.Log("Magic is being hold");
         }
     }
 
@@ -60,34 +61,42 @@ public class PlayerAttacking : MonoBehaviour
     {
         if (isMagicCharging)
         {
-            if (magicDirection == Vector2.zero){
-                Debug.Log("player didnt submit any direction inputs yet so it wont cast the magic");
+            if (magicDirection == Vector2.zero)
+            {
+                Debug.Log("Player didn't submit any direction inputs yet so it won't cast the magic");
             }
             else
             {
                 GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
                 magicProjectile.SetActive(true);
                 Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
-                projectileScript.GetDirection(magicDirection);
+                if (projectileScript != null)
+                {
+                    projectileScript.GetDirection(magicDirection); 
+                }
                 isMagicCharging = false;
                 Debug.Log("Magic casted");
             }
         }
     }
 
+
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1f, EnemyLayer);
-        foreach (Collider2D collider in hitColliders)
+        if (!isAttacking)
         {
-            Enemy enemy = collider.GetComponent<Enemy>();
-            if (enemy != null)
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1f, EnemyLayer);
+            foreach (Collider2D collider in hitColliders)
             {
-                enemy.Damage(1); 
+                Enemy enemy = collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.Damage(1);
+                }
             }
-        }
 
-        StartCoroutine(AttackCooldown());
+            StartCoroutine(AttackCooldown());
+        }
     }
 
     IEnumerator AttackCooldown()
@@ -96,7 +105,6 @@ public class PlayerAttacking : MonoBehaviour
         yield return new WaitForSeconds(1f);
         isAttacking = false;
     }
-
 
     public void TakeDamage(int dmg)
     {

@@ -1,20 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAttacking : MonoBehaviour
 {
-    public PlayerActionsInput actionInput; 
-    [HideInInspector]  public InputAction magic_;
-    [HideInInspector]  public InputAction melee_attack;
-    public GameObject magic; // the projectile that will be launched when X pressed
-    public GameObject meleeCollider; // the collider that detects enemies in the melee attack
+    public PlayerActionsInput actionInput;
+    [HideInInspector] public InputAction magic_;
+    [HideInInspector] public InputAction melee_attack;
+    public GameObject magic; 
+    public GameObject meleeCollider; // the collider created when you attack
     private bool isAttacking = false;
-    [HideInInspector] public Vector2 magicDirection = Vector2.zero; // direction to the magic follow when created
-    private bool isMagicCharging = false; // checks if the button is being held
+    public Vector2 magicDirection; // direction of the projectile
+    private bool isMagicCharging = false; 
+    private bool isMagicOnCooldown = false; 
     public int hp = 10;
     public LayerMask EnemyLayer;
+
+    public float magicCooldownTime = 0.3f; // cooldown between magics
+
+    private Coroutine magicCoroutine; 
 
     void Start()
     {
@@ -50,41 +54,73 @@ public class PlayerAttacking : MonoBehaviour
     {
         if (!isMagicCharging)
         {
-            // captures the player direction to use on the magic but on the moment it started holding button
-            magicDirection = transform.right;
+            magicDirection = gameObject.GetComponent<PlayerMovement>().Direction_Selected;
             isMagicCharging = true;
-            Debug.Log("Magic is being hold");
+
+            // Set the flag to true when casting starts
+            gameObject.GetComponent<PlayerMovement>().isMagicButtonHeld = true;
+
+            CastMagic();
+
+            magicCoroutine = StartCoroutine(CastMagicWhileHeld());
         }
     }
 
     private void OnMagicCanceled(InputAction.CallbackContext context)
     {
-        if (isMagicCharging)
+        if (isMagicCharging && magicCoroutine != null)
         {
-            if (magicDirection == Vector2.zero) // this checks if the player didnt move yet. if so, it dont cast magics because it doesnt know the intended direction.
-            {                                   //but we can change that if you want.
-                Debug.Log("Player didn't submit any direction inputs yet so it won't cast the magic");
-            }
-            else
+            StopCoroutine(magicCoroutine);
+        }
+        isMagicCharging = false;
+
+        // Set the flag to false when casting stops
+        gameObject.GetComponent<PlayerMovement>().isMagicButtonHeld = false;
+    }
+
+
+    private void CastMagic()
+    {
+        if (magicDirection != Vector2.zero && !isMagicOnCooldown)
+        {
+            GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
+            magicProjectile.SetActive(true);
+            Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
+            if (projectileScript != null)
             {
-                GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
-                magicProjectile.SetActive(true);
-                Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
-                if (projectileScript != null)
-                {
-                    projectileScript.GetDirection(magicDirection); 
-                }
-                isMagicCharging = false;
-                Debug.Log("Magic casted");
+                projectileScript.GetDirection(magicDirection); // keeps the initial direction
             }
+            Debug.Log("Magic casted");
+
+            // starts cooldown
+            StartCoroutine(MagicCooldown());
         }
     }
 
+    private IEnumerator CastMagicWhileHeld()
+    {
+        while (isMagicCharging)
+        {
+            if (!isMagicOnCooldown)
+            {
+                CastMagic(); 
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator MagicCooldown()
+    {
+        isMagicOnCooldown = true;
+        yield return new WaitForSeconds(magicCooldownTime); // waits for cooldown
+        isMagicOnCooldown = false;
+    }
 
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
         if (!isAttacking)
-        { // uses overlapcircleall to check all the enemies and damage all of them at the same time
+        {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1f, EnemyLayer);
             foreach (Collider2D collider in hitColliders)
             {
@@ -111,6 +147,10 @@ public class PlayerAttacking : MonoBehaviour
         Debug.Log("Player took damage");
         hp -= dmg;
         if (hp <= 0)
-            Debug.Log("Player died");
+        {
+            gameObject.SetActive(false);
+        }
+            
+        
     }
 }

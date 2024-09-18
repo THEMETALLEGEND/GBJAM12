@@ -270,6 +270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Camera (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3986324251999148188, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: RoomIcon
+      value: 
+      objectReference: {fileID: 1766096821}
     - target: {fileID: 6225886996732681698, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
       propertyPath: m_Priority
       value: 0
@@ -466,6 +470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Camera (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3986324251999148188, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: RoomIcon
+      value: 
+      objectReference: {fileID: 426895822}
     - target: {fileID: 6225886996732681698, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
       propertyPath: m_Priority
       value: 0
@@ -5660,6 +5668,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Camera (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3986324251999148188, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: RoomIcon
+      value: 
+      objectReference: {fileID: 700067930}
     - target: {fileID: 6225886996732681698, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
       propertyPath: m_Priority
       value: 0

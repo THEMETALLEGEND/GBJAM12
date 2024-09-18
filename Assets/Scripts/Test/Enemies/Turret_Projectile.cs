@@ -6,19 +6,12 @@ public class Turret_Projectile : MonoBehaviour
 {
     public float speed = 5f;
     private Vector3 direction;
-    public GameObject Player_;
     private Rigidbody2D rb;
     public LayerMask PlayerLayer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(ProjectilesCleaner());
-    }
-    IEnumerator ProjectilesCleaner()
-    {
-        yield return new WaitForSeconds(4f);
-        Destroy(gameObject);
     }
 
     void FixedUpdate()
@@ -29,9 +22,10 @@ public class Turret_Projectile : MonoBehaviour
     {
         direction = direc;
     }
+    //when colliding with player calls the function that applies damage
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == Player_)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             PlayerAttacking player = other.GetComponent<PlayerAttacking>();
             if (player != null)

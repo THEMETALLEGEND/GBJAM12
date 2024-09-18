@@ -9,7 +9,6 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     public GameObject playerObject;
     public int room;
     public int health = 10;
-    public int havetochangelater = 1; //has to be changed for the room index.
 
     void Start()
     {
@@ -31,14 +30,14 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
         while (true)
         {
-            if (room == havetochangelater)
+            if (room == playerObject.GetComponent<PlayerMovement>().actual_Room)
             {
                 yield return new WaitForSeconds(attackInterval);
                 Attack();
             }
             else
             {
-                yield return null;  // Wait until the next frame to check the condition again
+                yield return null;  
             }
         }
     }

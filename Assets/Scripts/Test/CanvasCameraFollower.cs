@@ -13,13 +13,15 @@ public class CanvasCameraFollower : MonoBehaviour
         SyncCameras();
     }
 
-    void LateUpdate()
+    void Update()
     {
         SyncCameras();
     }
 
     void SyncCameras()
     {
+        //follows the canvas dedicated camera
+
         Vector3 mainCamPosition = CinemachineCore.Instance.GetActiveBrain(0).OutputCamera.transform.position;
         Quaternion mainCamRotation = CinemachineCore.Instance.GetActiveBrain(0).OutputCamera.transform.rotation;
 

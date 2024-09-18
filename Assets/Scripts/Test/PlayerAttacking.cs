@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttacking : MonoBehaviour
 {
-    public PlayerActionsInput actionInput;
+    public PlayerActionsInput actionInput; 
     [HideInInspector]  public InputAction magic_;
     [HideInInspector]  public InputAction melee_attack;
-    public GameObject magic;
-    public GameObject meleeCollider;
+    public GameObject magic; // the projectile that will be launched when X pressed
+    public GameObject meleeCollider; // the collider that detects enemies in the melee attack
     private bool isAttacking = false;
-    [HideInInspector] public Vector2 magicDirection = Vector2.zero;
-    private bool isMagicCharging = false;
+    [HideInInspector] public Vector2 magicDirection = Vector2.zero; // direction to the magic follow when created
+    private bool isMagicCharging = false; // checks if the button is being held
     public int hp = 10;
     public LayerMask EnemyLayer;
 
@@ -61,8 +61,8 @@ public class PlayerAttacking : MonoBehaviour
     {
         if (isMagicCharging)
         {
-            if (magicDirection == Vector2.zero)
-            {
+            if (magicDirection == Vector2.zero) // this checks if the player didnt move yet. if so, it dont cast magics because it doesnt know the intended direction.
+            {                                   //but we can change that if you want.
                 Debug.Log("Player didn't submit any direction inputs yet so it won't cast the magic");
             }
             else
@@ -84,7 +84,7 @@ public class PlayerAttacking : MonoBehaviour
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
         if (!isAttacking)
-        {
+        { // uses overlapcircleall to check all the enemies and damage all of them at the same time
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1f, EnemyLayer);
             foreach (Collider2D collider in hitColliders)
             {

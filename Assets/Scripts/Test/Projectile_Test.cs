@@ -26,7 +26,7 @@ public class Projectile_Test : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Enemy enemy = other.GetComponent<Enemy>();
+            Turret_Enemy enemy = other.GetComponent<Turret_Enemy>();
 
             if (enemy != null)
             {

@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 	public InputAction move;
 	private Animator animator;
 	[HideInInspector] public bool isAllowedToMove = true;
+    [HideInInspector] public int actual_Room = 1;
 
 	//vector2 to use on attacks
 	public Vector2 Direction_Selected;

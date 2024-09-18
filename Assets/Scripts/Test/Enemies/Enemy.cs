@@ -5,4 +5,5 @@ using UnityEngine;
 public interface Enemy 
 {
     public void Damage(int damageAmount);
+    public void SetRoom(int r);
 }

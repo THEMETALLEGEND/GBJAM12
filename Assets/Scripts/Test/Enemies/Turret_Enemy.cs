@@ -7,7 +7,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     public GameObject projectileEnemy; 
     public float attackInterval = 3f;  
     public GameObject playerObject;
-    public int room;
+    private int room;
     public int health = 10;
 
     void Start()
@@ -17,20 +17,27 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
     public void Damage(int damageAmount)
     {
-        health -= damageAmount;
-        Debug.Log("damage taken: " + damageAmount);
-        if (health <= 0)
+        if (playerObject.GetComponent<PlayerMovement>().actual_Room == room) // prevents the enemy from taking damage if the player is not on the same room.
         {
-            Destroy(gameObject);
+            health -= damageAmount;
+            Debug.Log("damage taken: " + damageAmount);
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
+        
     }
-
+    public void SetRoom(int r)
+    {
+        room = r; //gets the actual room from the room script.
+    }
     IEnumerator ShootingProjectile()
     {
 
         while (true)
         {
-            if (room == playerObject.GetComponent<PlayerMovement>().actual_Room)
+            if (room == playerObject.GetComponent<PlayerMovement>().actual_Room) // checks if the player is on the same room to attack it.
             {
                 yield return new WaitForSeconds(attackInterval);
                 Attack();

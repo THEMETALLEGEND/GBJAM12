@@ -9,7 +9,8 @@ public class Room : MonoBehaviour
     public Map_Controller mapController;
     private SpriteRenderer roomIconRenderer;
     public LayerMask playerLayer;
-    public int roomnumber;
+    public int roomNumber;
+    public LayerMask enemyLayer;
 
     //gets the transform of the room to use as reference to the map
     public Vector2 Position
@@ -22,8 +23,17 @@ public class Room : MonoBehaviour
         //sets the icons as black so it becomes invisible. didnt disable because it could cause more problems.
         roomIconRenderer = RoomIcon.GetComponent<SpriteRenderer>();
         roomIconRenderer.color = Color.black;
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position, new Vector2(9, 9), 0f, enemyLayer);
+        foreach (Collider2D collider in hitEnemies)
+        {
+            Enemy enemy = collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Debug.Log("didnt find enemies");
+                enemy.SetRoom(roomNumber);// sets the rooms for each enemy that is on the interface Enemy.cs.
+            }
+        }
     }
-
     void OnTriggerEnter2D(Collider2D coll)
     {
         //if player collides with the room it sets it as visited and white on the map.
@@ -31,7 +41,7 @@ public class Room : MonoBehaviour
         {
             Doors_Controller doors = gameObject.GetComponent<Doors_Controller>();
             doors.CloseDoors();
-            coll.GetComponent<PlayerMovement>().actual_Room = roomnumber;
+            coll.GetComponent<PlayerMovement>().actual_Room = roomNumber;
             IsVisited = true;
             roomIconRenderer.color = Color.white;
             mapController.OnPlayerEnterRoom(this);

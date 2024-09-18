@@ -376,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasCamera: {fileID: 220651184}
   isTransitioning: 0
+  isSpawnRoom: 0
 --- !u!114 &146429991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,6 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasCamera: {fileID: 220651184}
   isTransitioning: 0
+  isSpawnRoom: 0
 --- !u!114 &531006006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,6 +1526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasCamera: {fileID: 220651184}
   isTransitioning: 0
+  isSpawnRoom: 0
 --- !u!114 &733782423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1579,7 +1582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &793760624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3169,62 +3172,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1148403435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5163591904829406784, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
-  m_PrefabInstance: {fileID: 3357804941484885798}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1148403439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148403435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33131390ab29bc64b93861d04ad31e2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasCamera: {fileID: 220651184}
-  isTransitioning: 0
---- !u!114 &1148403442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148403435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a2021b5f6df364780abf646c9f7427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsVisited: 1
-  RoomIcon: {fileID: 1190697053}
-  mapController: {fileID: 803215626}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  roomnumber: 1
---- !u!114 &1148403443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148403435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e3ee87b1e2c9646b5f3106245e3260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  doorLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &1177370712
 GameObject:
   m_ObjectHideFlags: 0
@@ -6740,20 +6687,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1136731036195746089, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+    - target: {fileID: 3986324251999148188, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: RoomIcon
+      value: 
+      objectReference: {fileID: 1190697053}
+    - target: {fileID: 3986324251999148188, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: mapController
+      value: 
+      objectReference: {fileID: 803215626}
+    - target: {fileID: 6141248579107258016, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: isSpawnRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141248579107258016, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
+      propertyPath: canvasCamera
+      value: 
+      objectReference: {fileID: 220651184}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5163591904829406784, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1148403439}
-    - targetCorrespondingSourceObject: {fileID: 5163591904829406784, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1148403442}
-    - targetCorrespondingSourceObject: {fileID: 5163591904829406784, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1148403443}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}
 --- !u!483693784 &3456831875457399328
 TilemapRenderer:

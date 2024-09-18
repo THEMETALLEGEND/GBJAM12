@@ -237,7 +237,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8591597550342207684}
   - component: {fileID: 2914336406873846965}
-  - component: {fileID: 1136731036195746089}
+  - component: {fileID: 6141248579107258016}
+  - component: {fileID: 3986324251999148188}
+  - component: {fileID: 7104612215748706214}
   m_Layer: 0
   m_Name: ViewRoomTrigger
   m_TagString: Untagged
@@ -305,7 +307,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.897642, y: 8.832432}
   m_EdgeRadius: 0
---- !u!114 &1136731036195746089
+--- !u!114 &6141248579107258016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,6 +316,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 5163591904829406784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11ad31ed5277a4dfca24bf1e0b610903, type: 3}
+  m_Script: {fileID: 11500000, guid: 33131390ab29bc64b93861d04ad31e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasCamera: {fileID: 0}
+  isTransitioning: 0
+--- !u!114 &3986324251999148188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163591904829406784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a2021b5f6df364780abf646c9f7427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsVisited: 1
+  RoomIcon: {fileID: 0}
+  mapController: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  roomnumber: 1
+--- !u!114 &7104612215748706214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163591904829406784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e3ee87b1e2c9646b5f3106245e3260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  doorLayer:
+    serializedVersion: 2
+    m_Bits: 8

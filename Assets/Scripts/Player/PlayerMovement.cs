@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isAllowedToMove = true;
     [HideInInspector] public int actual_Room = 1;
 
+    private bool isOnKnockBack;
+
     // Vector2 to use on attacks
     public Vector2 Direction_Selected;
 
@@ -86,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
             // Update the velocity when movement is allowed
             rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
-        else
+        else if (!isOnKnockBack)
         {
             // Stop the player when movement is not allowed
             rb.velocity = Vector2.zero;
@@ -95,5 +97,21 @@ public class PlayerMovement : MonoBehaviour
         // Update animator speed parameter based on velocity
         float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
         animator.SetFloat("Speed", speed);
+    }
+    public void ApplyKnockback(Vector2 direction)
+    {
+        StartCoroutine(Knock_Back(direction));
+    }
+    private IEnumerator Knock_Back(Vector2 dir)
+    {
+        isAllowedToMove = false;
+        isOnKnockBack = true; // handles those two variables to not conflict with the fixed update if
+        rb.velocity = Vector2.zero;
+        float knockbackForce = 1f; // how much the player will be knocked back
+        rb.velocity = Vector2.zero;
+        rb.velocity = dir * knockbackForce;
+        yield return new WaitForSeconds(1f);
+        isAllowedToMove = true;
+        isOnKnockBack = false;
     }
 }

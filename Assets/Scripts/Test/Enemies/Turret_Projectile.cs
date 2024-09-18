@@ -8,6 +8,7 @@ public class Turret_Projectile : MonoBehaviour
     private Vector3 direction;
     private Rigidbody2D rb;
     public LayerMask PlayerLayer;
+    public GameObject Turret;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class Turret_Projectile : MonoBehaviour
             PlayerAttacking player = other.GetComponent<PlayerAttacking>();
             if (player != null)
             {
-                player.TakeDamage(1); 
+                player.TakeDamage(1, Turret.transform.position); 
             }
             Destroy(gameObject);
         }

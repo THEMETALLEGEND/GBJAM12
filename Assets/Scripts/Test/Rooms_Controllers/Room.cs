@@ -29,7 +29,6 @@ public class Room : MonoBehaviour
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                Debug.Log("didnt find enemies");
                 enemy.SetRoom(roomNumber);// sets the rooms for each enemy that is on the interface Enemy.cs.
             }
         }

@@ -7,6 +7,7 @@ public class Projectile_Test : MonoBehaviour
     public float speed = 5f;
     private Vector2 direction;
     private Rigidbody2D rb;
+    public GameObject Player_;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class Projectile_Test : MonoBehaviour
             if (enemy != null)
             {
                 enemy.Damage(1);
+                //enemy.KnockBack_(Player_.transform.position);
             }
             else
             {

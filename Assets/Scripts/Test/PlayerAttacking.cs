@@ -128,6 +128,7 @@ public class PlayerAttacking : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.Damage(1);
+                    enemy.KnockBack_(transform.position);
                 }
             }
 
@@ -142,15 +143,21 @@ public class PlayerAttacking : MonoBehaviour
         isAttacking = false;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, Vector2 enemyPos)
     {
         Debug.Log("Player took damage");
         hp -= dmg;
+
         if (hp <= 0)
         {
             gameObject.SetActive(false);
         }
+        else
+        {
+            Vector2 direction = (transform.position - (Vector3)enemyPos).normalized; // calculates the direction of the knockback based on enemy position
+            gameObject.GetComponent<PlayerMovement>().ApplyKnockback(direction);
             
-        
+        }
     }
+
 }

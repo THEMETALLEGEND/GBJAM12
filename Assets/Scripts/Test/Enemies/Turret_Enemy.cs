@@ -64,4 +64,17 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
         }
     }
+    public void KnockBack_(Vector2 knockbackDirection)
+    {
+        StartCoroutine(KnockBackRoutine(knockbackDirection));
+    }
+    // if needed we can change that so it doesnt have knock back
+    private IEnumerator KnockBackRoutine(Vector2 knockbackDirection)
+    {
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.velocity = knockbackDirection * 1;
+        yield return new WaitForSeconds(1);
+        rb.velocity = Vector2.zero;
+    }
+
 }

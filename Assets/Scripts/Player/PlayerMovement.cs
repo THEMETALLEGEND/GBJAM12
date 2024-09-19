@@ -97,6 +97,11 @@ public class PlayerMovement : MonoBehaviour
         // Update animator speed parameter based on velocity
         float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
         animator.SetFloat("Speed", speed);
+        Transform meleeCollider = transform.Find("melee_collider");
+        if (meleeCollider != null)
+        {
+            meleeCollider.position = (Vector2)transform.position + Direction_Selected;
+        }
     }
     public void ApplyKnockback(Vector2 direction)
     {

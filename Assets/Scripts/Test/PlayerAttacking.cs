@@ -116,31 +116,28 @@ public class PlayerAttacking : MonoBehaviour
         yield return new WaitForSeconds(magicCooldownTime); // waits for cooldown
         isMagicOnCooldown = false;
     }
-
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
         if (!isAttacking)
         {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 1f, EnemyLayer);
-            foreach (Collider2D collider in hitColliders)
-            {
-                Enemy enemy = collider.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    enemy.Damage(1);
-                    enemy.KnockBack_(transform.position);
-                }
-            }
-
-            StartCoroutine(AttackCooldown());
+            Transform collider = transform.Find("melee_collider");
+            collider.gameObject.SetActive(true); //enables the melee attack collider
+            collider.GetComponent<Melee_CollisionScript>().is_Attacking = true;
+            if (collider != null)
+                StartCoroutine(AttackCooldown(collider.gameObject));
         }
     }
 
-    IEnumerator AttackCooldown()
+    IEnumerator AttackCooldown(GameObject melee)
     {
+        PlayerMovement mov = GetComponent<PlayerMovement>();
+        mov.isAllowedToMove = false; // disables movement while the melee attack animation should be on.
         isAttacking = true;
         yield return new WaitForSeconds(1f);
         isAttacking = false;
+        melee.GetComponent<Melee_CollisionScript>().is_Attacking = false;
+        melee.gameObject.SetActive(false);
+        mov.isAllowedToMove = true;
     }
 
     public void TakeDamage(int dmg, Vector2 enemyPos)

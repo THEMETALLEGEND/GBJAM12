@@ -5,7 +5,8 @@ using Cinemachine;
 
 public class CamChange : MonoBehaviour
 {
-	private float teleportDistance = 2f;
+	private float teleportHorizontalDistance = 2.2f;
+	private float teleportVerticalDistance = 2.7f;
 	private CinemachineVirtualCamera cam;
 	public CinemachineVirtualCamera canvasCamera;
 	private BoxCollider2D col;
@@ -31,7 +32,8 @@ public class CamChange : MonoBehaviour
 
 	private IEnumerator RoomTransition(Collider2D player)
 	{
-		PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+		Collider2D playerParent = player.transform.parent.GetComponent<Collider2D>();
+		PlayerMovement playerMovement = playerParent.GetComponent<PlayerMovement>();
 		// For subsequent transitions, disable player movement and stop the player immediately
 		isTransitioning = true;
 		playerMovement.isAllowedToMove = false;
@@ -45,7 +47,7 @@ public class CamChange : MonoBehaviour
 		UpdateMainCamera(cam);
 
 		// Teleport player forward based on the entered side
-		TeleportPlayer(player);
+		TeleportPlayer(playerParent);
 
 		// Delay during the camera transition
 		yield return new WaitForSeconds(1.5f);
@@ -69,22 +71,22 @@ public class CamChange : MonoBehaviour
 		{
 			if (direction.x > 0)  // Entered from the right, teleport left (negative X)
 			{
-				player.transform.position = new Vector2(playerPosition.x - teleportDistance, playerPosition.y);
+				player.transform.position = new Vector2(playerPosition.x - teleportHorizontalDistance, playerPosition.y);
 			}
 			else  // Entered from the left, teleport right (positive X)
 			{
-				player.transform.position = new Vector2(playerPosition.x + teleportDistance, playerPosition.y);
+				player.transform.position = new Vector2(playerPosition.x + teleportHorizontalDistance, playerPosition.y);
 			}
 		}
 		else  // Entered from the top or bottom
 		{
 			if (direction.y > 0)  // Entered from the top, teleport down (negative Y)
 			{
-				player.transform.position = new Vector2(playerPosition.x, playerPosition.y - teleportDistance);
+				player.transform.position = new Vector2(playerPosition.x, playerPosition.y - teleportVerticalDistance);
 			}
 			else  // Entered from the bottom, teleport up (positive Y)
 			{
-				player.transform.position = new Vector2(playerPosition.x, playerPosition.y + teleportDistance);
+				player.transform.position = new Vector2(playerPosition.x, playerPosition.y + teleportVerticalDistance);
 			}
 		}
 	}

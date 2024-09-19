@@ -7,22 +7,30 @@ public class PlayerAttacking : MonoBehaviour
     public PlayerActionsInput actionInput;
     [HideInInspector] public InputAction magic_;
     [HideInInspector] public InputAction melee_attack;
-    public GameObject magic; 
+    public GameObject magic;
     public GameObject meleeCollider; // the collider created when you attack
     private bool isAttacking = false;
-    public Vector2 magicDirection; // direction of the projectile
-    private bool isMagicCharging = false; 
-    private bool isMagicOnCooldown = false; 
+    [HideInInspector] public Vector2 magicDirection; // direction of the projectile
+    private bool isMagicCharging = false;
+    private bool isMagicOnCooldown = false;
     public int hp = 10;
     public LayerMask EnemyLayer;
 
     public float magicCooldownTime = 0.3f; // cooldown between magics
+    public float invincibilityTime = 1.5f; // time during which the player is invincible after taking damage
 
-    private Coroutine magicCoroutine; 
+    private Coroutine magicCoroutine;
+    private bool isInvincible = false; // variable to track invincibility
+    private SpriteRenderer spriteRenderer; // reference to sprite renderer
+    //private Color originalColor; // store the original color of the player
+
+    public float range; // the range of the magic shot.
 
     void Start()
     {
         meleeCollider.SetActive(false);
+        spriteRenderer = GetComponent<SpriteRenderer>(); // get the sprite renderer for the player
+        //originalColor = spriteRenderer.color; // store the original color at the start
     }
 
     private void Awake()
@@ -85,6 +93,7 @@ public class PlayerAttacking : MonoBehaviour
         {
             GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
             magicProjectile.SetActive(true); // sets the instantiated projectile as active since it starts disabled to prevent bugs
+            magicProjectile.GetComponent<Projectile_Test>().SetRange(range);
             Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
             if (projectileScript != null)
             {
@@ -102,7 +111,7 @@ public class PlayerAttacking : MonoBehaviour
         {
             if (!isMagicOnCooldown)
             {
-                CastMagic(); 
+                CastMagic();
             }
 
             yield return null;
@@ -139,21 +148,44 @@ public class PlayerAttacking : MonoBehaviour
         mov.isAllowedToMove = true;
     }
 
+    // Method to handle player taking damage
     public void TakeDamage(int dmg, Vector2 enemyPos)
     {
+        // If player is invincible, they can't take damage
+        if (isInvincible) return;
+
         Debug.Log("Player took damage");
         hp -= dmg;
 
         if (hp <= 0)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(false); // If health is 0, disable the player (or handle death logic here)
         }
         else
         {
+            // If still alive, apply knockback and start invincibility
             Vector2 direction = (transform.position - (Vector3)enemyPos).normalized; // calculates the direction of the knockback based on enemy position
             gameObject.GetComponent<PlayerMovement>().ApplyKnockback(direction);
-            
+
+            StartCoroutine(InvincibilityCoroutine()); // Start the invincibility coroutine
         }
+    }
+
+    // Coroutine for invincibility
+    private IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true; // Set the player to invincible
+
+        // Flash white 3 times over 1.5 seconds
+        for (int i = 0; i < 3; i++)
+        {
+            spriteRenderer.enabled = false; // Change color to white
+            yield return new WaitForSeconds(0.25f); // Wait for 0.25 seconds
+            spriteRenderer.enabled = true; // Return to original color
+            yield return new WaitForSeconds(0.25f); // Wait for 0.25 seconds
+        }
+
+        isInvincible = false; // After flashing, set invincibility to false
     }
 
 }

@@ -5,14 +5,13 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public bool IsVisited = false;
-    public GameObject RoomIcon;
-    public Map_Controller mapController;
-    private SpriteRenderer roomIconRenderer;
     public LayerMask playerLayer;
     public int roomNumber;
     public LayerMask enemyLayer;
+    public GameObject EnemyToGenerate;
+    public int NumberOfEnemies;
+    public bool isShop;
 
-    //gets the transform of the room to use as reference to the map
     public Vector2 Position
     {
         get { return new Vector2(transform.position.x, transform.position.y); }
@@ -20,56 +19,56 @@ public class Room : MonoBehaviour
 
     void Start()
     {
-        //sets the icons as black so it becomes invisible. didnt disable because it could cause more problems.
-        roomIconRenderer = RoomIcon.GetComponent<SpriteRenderer>();
-        roomIconRenderer.color = Color.black;
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position, new Vector2(9, 9), 0f, enemyLayer);
-        foreach (Collider2D collider in hitEnemies)
-        {
-            Enemy enemy = collider.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.SetRoom(roomNumber);// sets the rooms for each enemy that is on the interface Enemy.cs.
-            }
-        }
-    }
-    /*void OnTriggerEnter2D(Collider2D coll)
-    {
-        //if player collides with the room it sets it as visited and white on the map.
-        if (coll.gameObject.CompareTag("Player"))
-        {
-            Doors_Controller doors = gameObject.GetComponent<Doors_Controller>();
-            doors.CloseDoors();
-            coll.GetComponent<PlayerMovement>().actual_Room = roomNumber;
-            IsVisited = true;
-            roomIconRenderer.color = Color.white;
-            mapController.OnPlayerEnterRoom(this);
-        }
-    }*/
-    //if this room is acessible by doors but not entered before it becomes green
-    public void SetAccessible()
-    {
-        roomIconRenderer.color = Color.yellow;
+        AssignRoomNumbers();
+        
     }
 
-    public void UpdateRoomIcons(Vector2 direction) // used for the map system
+    void AssignRoomNumbers()
     {
-        RoomIcon.SetActive(true);
-        if (direction == Vector2.right)
+        Room[] allRooms = FindObjectsOfType<Room>();
+
+        System.Array.Sort(allRooms, (a, b) =>
         {
-            RoomIcon.transform.position = new Vector2(transform.position.x + 1, transform.position.y);
-        }
-        else if (direction == Vector2.left)
+            if (a.transform.position.x == b.transform.position.x)
+            {
+                return a.transform.position.y.CompareTo(b.transform.position.y);
+            }
+            return a.transform.position.x.CompareTo(b.transform.position.x);
+        });
+
+        for (int i = 0; i < allRooms.Length; i++)
         {
-            RoomIcon.transform.position = new Vector2(transform.position.x - 1, transform.position.y);
+            allRooms[i].roomNumber = i + 1;
         }
-        else if (direction == Vector2.up)
-        {
-            RoomIcon.transform.position = new Vector2(transform.position.x, transform.position.y + 1);
+    }
+
+    public void GenerateEnemies()
+    {
+        if (!isShop && !IsVisited) {
+            for (int i = 0; i < NumberOfEnemies; i++)
+            {
+                if (EnemyToGenerate != null)
+                {
+                    GameObject enemy = Instantiate(EnemyToGenerate, GetRandomPositionInRoom(), Quaternion.identity);
+                    Enemy enemyScript = enemy.GetComponent<Enemy>();
+
+                    if (enemyScript != null)
+                    {
+                        enemyScript.room = roomNumber; 
+                    }
+                }
+            }
         }
-        else if (direction == Vector2.down)
-        {
-            RoomIcon.transform.position = new Vector2(transform.position.x, transform.position.y - 1);
-        }
+        IsVisited = true;
+    }
+
+    Vector2 GetRandomPositionInRoom()
+    {
+        float centerX = transform.position.x;
+        float centerY = transform.position.y;
+        // Reduce the range to spawn enemies closer to the center of the room
+        float randomX = Random.Range(centerX - 2, centerX + 2);
+        float randomY = Random.Range(centerY - 2, centerY + 2);
+        return new Vector2(randomX, randomY);
     }
 }

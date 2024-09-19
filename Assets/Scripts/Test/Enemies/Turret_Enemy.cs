@@ -7,7 +7,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     public GameObject projectileEnemy; 
     public float attackInterval = 3f;  
     public GameObject transitionObject;
-    private int room;
+    [HideInInspector] public int room { get; set; }
     public int health = 10;
     public GameObject coin_prefab;
 
@@ -49,7 +49,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
         while (true)
         {
-            if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room) // checks if the player is on the same room to attack it.
+            if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0) // checks if the player is on the same room to attack it.
             {
                 yield return new WaitForSeconds(attackInterval);
                 Attack();

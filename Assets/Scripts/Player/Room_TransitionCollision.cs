@@ -10,7 +10,10 @@ public class Room_TransitionCollision : MonoBehaviour
     {
         if(((1 << other.gameObject.layer) & roomsMask) != 0)
         {
-            actual_Room = other.gameObject.GetComponent<Room>().roomNumber;
+            Room roomScript = other.gameObject.GetComponent<Room>();
+            actual_Room = roomScript.roomNumber;
+            roomScript.GenerateEnemies();
+            other.GetComponent<Doors_Controller>().CloseDoors();
         }
     }
 }

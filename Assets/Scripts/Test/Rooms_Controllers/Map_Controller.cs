@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Map_Controller : MonoBehaviour
 {
-    public LayerMask doorLayer; 
+    /*public LayerMask doorLayer; 
     public float detectionRadius = 1f; 
 
     public void OnPlayerEnterRoom(Room currentRoom)
@@ -40,5 +40,5 @@ public class Map_Controller : MonoBehaviour
             direction = offset.y > 0 ? Vector2.up : Vector2.down;
         }
         return direction;
-    }
+    }*/
 }

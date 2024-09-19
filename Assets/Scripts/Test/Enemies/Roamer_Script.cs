@@ -6,7 +6,7 @@ public class Roamer_Script : MonoBehaviour, Enemy
 {
     private bool canMove = true;
     private int health = 2;
-    private int room;
+    [HideInInspector] public int room { get; set; }
     private Vector2 moveDirection;
     private Rigidbody2D rb;
     private bool choosed_direction;
@@ -24,8 +24,12 @@ public class Roamer_Script : MonoBehaviour, Enemy
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+            if (Random.Range(0, 100) < 50) // makes the coin dropping random, you can change the drop rate as you want.
+            {
+                GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+            }
         }
+        canMove = false;
         yield return new WaitForSeconds(1); // this is where we can put the animation of death of the enemies
         Destroy(gameObject);
     }

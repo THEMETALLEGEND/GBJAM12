@@ -10,9 +10,7 @@ public class Room_TransitionCollision : MonoBehaviour
     {
         if(((1 << other.gameObject.layer) & roomsMask) != 0)
         {
-            Debug.Log("found");
             actual_Room = other.gameObject.GetComponent<Room>().roomNumber;
         }
     }
-
 }

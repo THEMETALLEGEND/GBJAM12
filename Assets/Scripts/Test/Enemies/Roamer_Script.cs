@@ -11,11 +11,23 @@ public class Roamer_Script : MonoBehaviour, Enemy
     private Rigidbody2D rb;
     private bool choosed_direction;
     private bool isInKnockBack;
+    public Room_TransitionCollision roomsTransition;
+    public GameObject coin_prefab;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(MovementRoutine());
+    }
+
+    public IEnumerator DropCoins(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+        }
+        yield return new WaitForSeconds(1); // this is where we can put the animation of death of the enemies
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()
@@ -37,9 +49,15 @@ public class Roamer_Script : MonoBehaviour, Enemy
 
     public void Damage(int damageAmount)
     {
-        health -= damageAmount;
-        if (health <= 0)
-            Destroy(gameObject);
+        if (roomsTransition.actual_Room == room)
+        {
+            health -= damageAmount;
+            if (health <= 0)
+            {
+                StartCoroutine(DropCoins(1));
+            }
+                
+        }
     }
 
     public void SetRoom(int r)

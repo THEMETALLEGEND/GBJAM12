@@ -9,11 +9,23 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     public GameObject transitionObject;
     private int room;
     public int health = 10;
+    public GameObject coin_prefab;
 
     void Start()
     {
         StartCoroutine(ShootingProjectile());
     }
+
+    public IEnumerator DropCoins(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+        }
+        yield return new WaitForSeconds(1); // this is where we can put the animation of death of the enemies
+        Destroy(gameObject);
+    }
+
 
     public void Damage(int damageAmount)
     {
@@ -23,7 +35,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
             Debug.Log("damage taken: " + damageAmount);
             if (health <= 0)
             {
-                Destroy(gameObject);
+                StartCoroutine(DropCoins(1));
             }
         }
         

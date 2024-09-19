@@ -2,7 +2,7 @@ using Pathfinding;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour, Enemy
+public class Stalker_Script : MonoBehaviour, Enemy
 {
     public Transform target; 
 
@@ -10,25 +10,43 @@ public class EnemyAI : MonoBehaviour, Enemy
     private bool isPaused = false;
     private int health = 2;
     private int room;
+    public Room_TransitionCollision roomsTransition;
 
+    public GameObject coin_prefab;
+
+
+    public IEnumerator DropCoins(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+        }
+        yield return new WaitForSeconds(1); // this is where we can put the animation of death of the enemies
+        Destroy(gameObject);
+
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
     }
+
     public void SetRoom(int r)
     {
         room = r;
     }
-    void FixedUpdate()
-    {
-    }
+
     public void Damage(int damageAmount)
     {
-        health -= damageAmount;
-        if (health <= 0)
-            Destroy(gameObject);
+        if (roomsTransition.actual_Room == room)
+        {
+            health -= damageAmount;
+            if (health <= 0)
+            {
+                StartCoroutine(DropCoins(1));
+            }
+        }
     }
     private IEnumerator PauseMovement(float duration)
     {

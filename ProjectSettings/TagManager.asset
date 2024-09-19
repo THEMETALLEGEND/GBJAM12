@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - EnemyDetecter
   - Obstacle
+  - Collectibles
   layers:
   - Default
   - TransparentFX

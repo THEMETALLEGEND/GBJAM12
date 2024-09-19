@@ -84,16 +84,15 @@ public class PlayerAttacking : MonoBehaviour
         if (magicDirection != Vector2.zero && !isMagicOnCooldown)
         {
             GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
-            magicProjectile.SetActive(true);
+            magicProjectile.SetActive(true); // sets the instantiated projectile as active since it starts disabled to prevent bugs
             Projectile_Test projectileScript = magicProjectile.GetComponent<Projectile_Test>();
             if (projectileScript != null)
             {
-                projectileScript.GetDirection(magicDirection); // keeps the initial direction
+                projectileScript.GetDirection(magicDirection); // sends the direction the player was facing when started pressing to the projectile code.
             }
             Debug.Log("Magic casted");
 
-            // starts cooldown
-            StartCoroutine(MagicCooldown());
+            StartCoroutine(MagicCooldown()); // starts cooldown
         }
     }
 

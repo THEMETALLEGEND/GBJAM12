@@ -12,6 +12,7 @@ public class Projectile_Test : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(DestroyAfterTime());
     }
 
     void FixedUpdate()
@@ -41,5 +42,10 @@ public class Projectile_Test : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
+    private IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(6f); 
+        Destroy(gameObject); 
     }
 }

@@ -23,10 +23,7 @@ public class Doors_Controller : MonoBehaviour
         {
             HandleDoors(true);
         }
-        else
-        {
-            HandleDoors(false);
-        }
+
     }
 
     public void CloseDoors() //called by the function of the room trigger, to happen when the player enters the room

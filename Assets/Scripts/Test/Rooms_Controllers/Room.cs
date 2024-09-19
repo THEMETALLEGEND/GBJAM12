@@ -33,10 +33,10 @@ public class Room : MonoBehaviour
             }
         }
     }
-    void OnTriggerEnter2D(Collider2D coll)
+    /*void OnTriggerEnter2D(Collider2D coll)
     {
         //if player collides with the room it sets it as visited and white on the map.
-        if (playerLayer == (playerLayer | (1 << coll.gameObject.layer)))
+        if (coll.gameObject.CompareTag("Player"))
         {
             Doors_Controller doors = gameObject.GetComponent<Doors_Controller>();
             doors.CloseDoors();
@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
             roomIconRenderer.color = Color.white;
             mapController.OnPlayerEnterRoom(this);
         }
-    }
+    }*/
     //if this room is acessible by doors but not entered before it becomes green
     public void SetAccessible()
     {

@@ -364,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 82825323}
   - component: {fileID: 82825324}
+  - component: {fileID: 82825325}
   m_Layer: 10
   m_Name: TransitionCollider
   m_TagString: Player
@@ -431,6 +432,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2906885, y: 1.8720659}
   m_EdgeRadius: 0
+--- !u!114 &82825325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82825322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c8e066eae6aa04e96a6559f78b42ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actual_Room: 1
 --- !u!114 &138504533
 MonoBehaviour:
   m_ObjectHideFlags: 0

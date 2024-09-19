@@ -6,7 +6,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 {
     public GameObject projectileEnemy; 
     public float attackInterval = 3f;  
-    public GameObject playerObject;
+    public GameObject transitionObject;
     private int room;
     public int health = 10;
 
@@ -17,7 +17,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
     public void Damage(int damageAmount)
     {
-        if (playerObject.GetComponent<PlayerMovement>().actual_Room == room) // prevents the enemy from taking damage if the player is not on the same room.
+        if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room) // prevents the enemy from taking damage if the player is not on the same room.
         {
             health -= damageAmount;
             Debug.Log("damage taken: " + damageAmount);
@@ -37,7 +37,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
         while (true)
         {
-            if (room == playerObject.GetComponent<PlayerMovement>().actual_Room) // checks if the player is on the same room to attack it.
+            if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room) // checks if the player is on the same room to attack it.
             {
                 yield return new WaitForSeconds(attackInterval);
                 Attack();
@@ -51,9 +51,9 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
     void Attack()
     {
-        if (projectileEnemy != null && playerObject != null)  
+        if (projectileEnemy != null && transitionObject != null)  
         {
-            Vector2 playerPosition = playerObject.transform.position;
+            Vector2 playerPosition = transitionObject.transform.position;
             Vector2 attackDirection = (playerPosition - (Vector2)transform.position).normalized;
 
             GameObject attack = Instantiate(projectileEnemy, transform.position, transform.rotation);

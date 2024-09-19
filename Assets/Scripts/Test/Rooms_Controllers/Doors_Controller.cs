@@ -19,9 +19,13 @@ public class Doors_Controller : MonoBehaviour
         //checks if there are enemies in the room with the collider properties
         Collider2D[] enemies = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, enemyLayer);
         // if there are no enemies it deactivate the doors
-        if (enemies.Length == 0)
+        if (enemies.Length <= 0)
         {
             HandleDoors(true);
+        }
+        else
+        {
+            HandleDoors(false);
         }
     }
 

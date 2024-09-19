@@ -999,6 +999,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: CurrentPalette
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51f841e56474c474da45ed4cf25848f8, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ec240d20df4f94341bfafe160318121e, type: 2}
     - target: {fileID: 7654782120352638928, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: m_Depth
       value: 100

@@ -13,7 +13,7 @@ public class PlayerAttacking : MonoBehaviour
     [HideInInspector] public Vector2 magicDirection; // direction of the projectile
     private bool isMagicCharging = false;
     private bool isMagicOnCooldown = false;
-    public int hp = 10;
+    public int hp = 3;
     public LayerMask EnemyLayer;
 
     public float magicCooldownTime = 0.3f; // cooldown between magics
@@ -23,6 +23,8 @@ public class PlayerAttacking : MonoBehaviour
     private bool isInvincible = false; // variable to track invincibility
     private SpriteRenderer spriteRenderer; // reference to sprite renderer
     //private Color originalColor; // store the original color of the player
+
+    public UI_Controller ui;
 
     public float range; // the range of the magic shot.
 
@@ -164,28 +166,29 @@ public class PlayerAttacking : MonoBehaviour
         else
         {
             // If still alive, apply knockback and start invincibility
+            ui.GetComponent<UI_Controller>().UpdateLife(true, dmg);
             Vector2 direction = (transform.position - (Vector3)enemyPos).normalized; // calculates the direction of the knockback based on enemy position
             gameObject.GetComponent<PlayerMovement>().ApplyKnockback(direction);
 
             StartCoroutine(InvincibilityCoroutine()); // Start the invincibility coroutine
         }
     }
-
     // Coroutine for invincibility
+
     private IEnumerator InvincibilityCoroutine()
     {
         isInvincible = true; // Set the player to invincible
 
-        // Flash white 3 times over 1.5 seconds
+        // change visibility to make the "flashing" effect of Iframes
         for (int i = 0; i < 3; i++)
         {
-            spriteRenderer.enabled = false; // Change color to white
-            yield return new WaitForSeconds(0.25f); // Wait for 0.25 seconds
-            spriteRenderer.enabled = true; // Return to original color
-            yield return new WaitForSeconds(0.25f); // Wait for 0.25 seconds
+            spriteRenderer.enabled = false; 
+            yield return new WaitForSeconds(0.25f); 
+            spriteRenderer.enabled = true; 
+            yield return new WaitForSeconds(0.25f); 
         }
 
-        isInvincible = false; // After flashing, set invincibility to false
+        isInvincible = false; 
     }
 
 }

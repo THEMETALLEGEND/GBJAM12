@@ -1,15 +1,15 @@
-using Pathfinding; 
+using Pathfinding;
 using System.Collections;
 using UnityEngine;
 
 public class Stalker_Script : MonoBehaviour, Enemy
 {
-    public Transform target; 
+    public Transform target;
     private Rigidbody2D rb;
     private bool isPaused = false;
     private int health = 2;
-    [HideInInspector] public int room { get; set; }
-    public Room_TransitionCollision roomsTransition;
+    public int room { get; set; }
+    public Room_TransitionCollision roomsTransition; 
 
     public GameObject coin_prefab;
 
@@ -21,15 +21,28 @@ public class Stalker_Script : MonoBehaviour, Enemy
         }
         AIPath ai = GetComponent<AIPath>();
         ai.canMove = false;
-        yield return new WaitForSeconds(1); // this is where we can put the animation of death of the enemies
+        yield return new WaitForSeconds(1); 
         Destroy(gameObject);
-
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(transitionTime()); // gives time to the player to react before it starts following it.
+        FindRoomTransition(); 
+        StartCoroutine(transitionTime()); 
+    }
+
+    private void FindRoomTransition()
+    {
+        Room_TransitionCollision transitionCollider = GetComponentInParent<Room_TransitionCollision>();
+        if (transitionCollider != null)
+        {
+            roomsTransition = transitionCollider; 
+        }
+        else
+        {
+            Debug.LogWarning("Room_TransitionCollision not found in parent!");
+        }
     }
 
     private IEnumerator transitionTime()
@@ -74,11 +87,11 @@ public class Stalker_Script : MonoBehaviour, Enemy
     private IEnumerator KnockBackRoutine(Vector2 knockbackDirection)
     {
         AIPath ai = GetComponent<AIPath>();
-        ai.canMove = false; 
+        ai.canMove = false;
 
         rb.velocity = knockbackDirection * 2f;
 
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
 
         rb.velocity = Vector2.zero;
         ai.canMove = true;

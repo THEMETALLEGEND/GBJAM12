@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 6225886996732681698}
   - component: {fileID: 3155114105889253670}
   - component: {fileID: 8288170715851319893}
-  - component: {fileID: 2164867965660982863}
   m_Layer: 0
   m_Name: Room Camera
   m_TagString: Untagged
@@ -215,18 +214,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &2164867965660982863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3877999923760232004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5163591904829406784
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasCamera: {fileID: 0}
   isTransitioning: 0
+  isSpawnRoom: 0
 --- !u!114 &3986324251999148188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,12 +322,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsVisited: 1
-  RoomIcon: {fileID: 0}
-  mapController: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  roomnumber: 1
+  roomNumber: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  EnemyToGenerate: {fileID: 0}
+  NumberOfEnemies: 0
+  isShop: 0
 --- !u!114 &7104612215748706214
 MonoBehaviour:
   m_ObjectHideFlags: 0

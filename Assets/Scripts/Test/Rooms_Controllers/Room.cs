@@ -8,19 +8,14 @@ public class Room : MonoBehaviour
     public LayerMask playerLayer;
     public int roomNumber;
     public LayerMask enemyLayer;
-    public GameObject EnemyToGenerate;
-    public int NumberOfEnemies;
     public bool isShop;
 
-    public Vector2 Position
-    {
-        get { return new Vector2(transform.position.x, transform.position.y); }
-    }
+    private BoxCollider2D roomCollider;
 
-    void Start()
+    private void Start()
     {
+        roomCollider = GetComponent<BoxCollider2D>();
         AssignRoomNumbers();
-        
     }
 
     void AssignRoomNumbers()
@@ -44,31 +39,26 @@ public class Room : MonoBehaviour
 
     public void GenerateEnemies()
     {
-        if (!isShop && !IsVisited) {
-            for (int i = 0; i < NumberOfEnemies; i++)
-            {
-                if (EnemyToGenerate != null)
-                {
-                    GameObject enemy = Instantiate(EnemyToGenerate, GetRandomPositionInRoom(), Quaternion.identity);
-                    Enemy enemyScript = enemy.GetComponent<Enemy>();
-
-                    if (enemyScript != null)
-                    {
-                        enemyScript.room = roomNumber; 
-                    }
-                }
-            }
+        if (!isShop && !IsVisited)
+        {
+            IsVisited = true;
+            FindAndActivateSpawners();
         }
-        IsVisited = true;
     }
 
-    Vector2 GetRandomPositionInRoom()
+    void FindAndActivateSpawners()
     {
-        float centerX = transform.position.x;
-        float centerY = transform.position.y;
-        // Reduce the range to spawn enemies closer to the center of the room
-        float randomX = Random.Range(centerX - 2, centerX + 2);
-        float randomY = Random.Range(centerY - 2, centerY + 2);
-        return new Vector2(randomX, randomY);
+        Collider2D[] spawnersInRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("EnemySpawner"));
+
+        foreach (Collider2D spawnerCollider in spawnersInRoom)
+        {
+            Debug.Log("there is one spawner");
+            EnemySpawner enemySpawner = spawnerCollider.GetComponent<EnemySpawner>();
+            if (enemySpawner != null)
+            {
+                enemySpawner.roomNumber_ = roomNumber; 
+                enemySpawner.SpawnEnemies();
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ public class CamChange : MonoBehaviour
 
     // Objeto Canvas, definido no inspetor
     public Canvas canvas;
+    public Canvas TMP_canvas;
 
     private void Awake()
     {
@@ -37,10 +38,8 @@ public class CamChange : MonoBehaviour
         Collider2D playerParent = player.transform.parent.GetComponent<Collider2D>();
         PlayerMovement playerMovement = playerParent.GetComponent<PlayerMovement>();
 
-        if (canvas != null)
-        {
-            canvas.enabled = false;
-        }
+        canvas.enabled = false;
+        TMP_canvas.enabled = false;
 
         // For subsequent transitions, disable player movement and stop the player immediately
         isTransitioning = true;
@@ -60,11 +59,8 @@ public class CamChange : MonoBehaviour
         // Delay during the camera transition
         yield return new WaitForSeconds(1.5f);
 
-
-        if (canvas != null)
-        {
-            canvas.enabled = true;
-        }
+        canvas.enabled = true;
+        TMP_canvas.enabled = true;
 
         // Enable player movement after the transition
         playerMovement.isAllowedToMove = true;

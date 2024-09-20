@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
             if (EnemyToGenerate != null)
             {
                 GameObject enemy = Instantiate(EnemyToGenerate, transform.position, Quaternion.identity);
+                enemy.gameObject.SetActive(true);
                 enemy.GetComponent<Enemy>().SetRoom(roomNumber_);
             }
             yield return new WaitForSeconds(1f);

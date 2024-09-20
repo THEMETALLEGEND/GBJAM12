@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Collectibles
   - Shop Itens
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Rocks
   - Room Camera
   - TransitionCollider
-  - 
+  - EnemySpawner
   - 
   - 
   - 

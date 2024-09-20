@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5615d4eb276041128a4aeece3fc9a18
+guid: 1997d28c560724716956ad579496dc9a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,64 +110,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turret_anim_0
+      name: interface_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 22
+        y: 16
+        width: 10
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03aa24ce609156247ab789908cb23459
-      internalID: 1293852109
+      spriteID: 8ae2ba5ba547a49e6a18faed055d1293
+      internalID: 1899999692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_1
+      name: interface_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 17
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7657d9d8d16249cb85da26e04db6b59
+      internalID: -1603354988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interface_2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 17
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc83625bd343a400da03521313e2c634
+      internalID: 1544903153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interface_3
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 17
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e16d0cd356fa4ff5931565b5cd012e2
+      internalID: 997339542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interface_4
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 15
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82740bfd5b0c747f69f50ace4e79eb19
+      internalID: 1987352871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interface_5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f93d0f728fcf14ec99a82051a15e4de1
+      internalID: 1967897572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interface_6
       rect:
         serializedVersion: 2
         x: 16
-        y: 0
-        width: 16
-        height: 22
+        y: 1
+        width: 13
+        height: 6
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2ed73200b9b5a4f934189271690e75
-      internalID: 1356291292
+      spriteID: 9526ab783ac294dc5aabc0d484f22fb0
+      internalID: -398295417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_2
+      name: interface_7
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 0
-        width: 16
-        height: 22
+        width: 11
+        height: 7
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d94cd639c207674e8365071bd8e4633
-      internalID: -1237263988
+      spriteID: c26c1b7a380f44c60bd09c477a704101
+      internalID: -2083133056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interface_8
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 740c28c3374804cd691bbb158ff17a2b
+      internalID: 552910270
       vertices: []
       indices: 
       edges: []
@@ -183,9 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      turret_anim_0: 1293852109
-      turret_anim_1: 1356291292
-      turret_anim_2: -1237263988
+      interface_0: 1899999692
+      interface_1: -1603354988
+      interface_2: 1544903153
+      interface_3: 997339542
+      interface_4: 1987352871
+      interface_5: 1967897572
+      interface_6: -398295417
+      interface_7: -2083133056
+      interface_8: 552910270
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

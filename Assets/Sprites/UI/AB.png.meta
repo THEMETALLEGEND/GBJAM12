@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5615d4eb276041128a4aeece3fc9a18
+guid: e3b09ab979c4b483f8b355853be9f5cc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,64 +110,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turret_anim_0
+      name: AB_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 22
+        width: 8
+        height: 7
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03aa24ce609156247ab789908cb23459
-      internalID: 1293852109
+      spriteID: a4539661a1d92497fa5c8ab6e2dd0180
+      internalID: 111533765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_1
+      name: AB_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 9
         y: 0
-        width: 16
-        height: 22
+        width: 8
+        height: 7
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2ed73200b9b5a4f934189271690e75
-      internalID: 1356291292
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: turret_anim_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d94cd639c207674e8365071bd8e4633
-      internalID: -1237263988
+      spriteID: edf86fd18c8954205b73ad7c20a5a118
+      internalID: -376621787
       vertices: []
       indices: 
       edges: []
@@ -183,9 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      turret_anim_0: 1293852109
-      turret_anim_1: 1356291292
-      turret_anim_2: -1237263988
+      AB_0: 111533765
+      AB_1: -376621787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -8,11 +8,13 @@ public class PlayerInventory : MonoBehaviour
     [HideInInspector] public bool hasKey = false;
     public int money;
     private ShopManager shop_Manager;
-    public AudioSource sourc_;
+    public AudioClip coinPicked;
+    private AudioSource sourc_;
     public GameObject UI_Controller;
 
     void Start()
     {
+        sourc_ = GetComponent<AudioSource>();
         shop_Manager = FindObjectOfType<ShopManager>();
         UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
     }
@@ -24,6 +26,7 @@ public class PlayerInventory : MonoBehaviour
             GameObject coin = coll.gameObject;
             money++;
             Destroy(coin);
+            sourc_.clip = coinPicked;
             sourc_.Play();
             UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
 
@@ -58,6 +61,7 @@ public class PlayerInventory : MonoBehaviour
                 else
                 {
                     playerObject.GetComponent<PlayerAttacking>().hp = 6;
+                    money += item.price;
                 }
                 
                 break; 

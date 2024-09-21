@@ -28,8 +28,13 @@ public class PlayerAttacking : MonoBehaviour
 
     public float range; // the range of the magic shot.
 
+    public AudioClip damageTaken;
+    public AudioClip magicShot;
+    private AudioSource sourceAudio;
+
     void Start()
     {
+        sourceAudio = GetComponent<AudioSource>();
         meleeCollider.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>(); // get the sprite renderer for the player
         //originalColor = spriteRenderer.color; // store the original color at the start
@@ -91,6 +96,8 @@ public class PlayerAttacking : MonoBehaviour
 
     private void CastMagic()
     {
+        sourceAudio.clip = magicShot;
+        sourceAudio.Play();
         if (magicDirection != Vector2.zero && !isMagicOnCooldown)
         {
             GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
@@ -153,6 +160,8 @@ public class PlayerAttacking : MonoBehaviour
     // Method to handle player taking damage
     public void TakeDamage(int dmg, Vector2 enemyPos)
     {
+        sourceAudio.clip = damageTaken; //plays the damage taken audio
+        sourceAudio.Play(); 
         // If player is invincible, they can't take damage
         if (isInvincible) return;
 

@@ -13,9 +13,11 @@ public class Roamer_Script : MonoBehaviour, Enemy
     private bool isInKnockBack;
     public Room_TransitionCollision roomsTransition;
     public GameObject coin_prefab;
+    private AudioSource audio;
 
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(MovementRoutine());
     }
@@ -53,6 +55,7 @@ public class Roamer_Script : MonoBehaviour, Enemy
 
     public void Damage(int damageAmount)
     {
+        audio.Play();
         if (roomsTransition.actual_Room == room)
         {
             health -= damageAmount;

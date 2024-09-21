@@ -10,10 +10,26 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     [HideInInspector] public int room { get; set; }
     public int health = 10;
     public GameObject coin_prefab;
+    private AudioSource audio;
 
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         StartCoroutine(ShootingProjectile());
+    }
+
+    public void Damage(int damageAmount)
+    {
+        audio.Play();
+        if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room) // prevents the enemy from taking damage if the player is not on the same room.
+        {
+            health -= damageAmount;
+            Debug.Log("damage taken: " + damageAmount);
+            if (health <= 0)
+            {
+                StartCoroutine(DropCoins(1));
+            }
+        }
     }
 
     public IEnumerator DropCoins(int amount)
@@ -26,24 +42,11 @@ public class Turret_Enemy : MonoBehaviour, Enemy
         Destroy(gameObject);
     }
 
-
-    public void Damage(int damageAmount)
-    {
-        if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room) // prevents the enemy from taking damage if the player is not on the same room.
-        {
-            health -= damageAmount;
-            Debug.Log("damage taken: " + damageAmount);
-            if (health <= 0)
-            {
-                StartCoroutine(DropCoins(1));
-            }
-        }
-        
-    }
     public void SetRoom(int r)
     {
         room = r; //gets the actual room from the room script.
     }
+
     IEnumerator ShootingProjectile()
     {
 

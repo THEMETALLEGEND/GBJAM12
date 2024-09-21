@@ -12,6 +12,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
     public Room_TransitionCollision roomsTransition; 
 
     public GameObject coin_prefab;
+    private AudioSource audio;
 
     public IEnumerator DropCoins(int amount)
     {
@@ -27,6 +28,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
 
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         FindRoomTransition(); 
         StartCoroutine(transitionTime()); 
@@ -38,10 +40,6 @@ public class Stalker_Script : MonoBehaviour, Enemy
         if (transitionCollider != null)
         {
             roomsTransition = transitionCollider; 
-        }
-        else
-        {
-            Debug.LogWarning("Room_TransitionCollision not found in parent!");
         }
     }
 
@@ -60,6 +58,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
 
     public void Damage(int damageAmount)
     {
+        audio.Play();
         if (roomsTransition.actual_Room == room)
         {
             health -= damageAmount;

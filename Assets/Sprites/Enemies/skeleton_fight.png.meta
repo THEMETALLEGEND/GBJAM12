@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5615d4eb276041128a4aeece3fc9a18
+guid: 735f67077655a444ab90369f184b244e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turret_anim_0
+      name: skeleton_fight_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 22
+        y: 28
+        width: 17
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03aa24ce609156247ab789908cb23459
-      internalID: 1293852109
+      spriteID: aa3318c22c2c04171befac58a7795dc5
+      internalID: 1136735463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_1
+      name: skeleton_fight_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 22
+        x: 27
+        y: 28
+        width: 23
+        height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2ed73200b9b5a4f934189271690e75
-      internalID: 1356291292
+      spriteID: 1e583feab86d54e30bf490885de6d033
+      internalID: 1909146067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_2
+      name: skeleton_fight_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 22
+        x: 60
+        y: 28
+        width: 22
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d94cd639c207674e8365071bd8e4633
-      internalID: -1237263988
+      spriteID: 4f7c7c6f886a7498a990b72a7f7fd050
+      internalID: -511233831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_3
+      name: skeleton_fight_3
       rect:
         serializedVersion: 2
-        x: 49
-        y: 0
-        width: 14
-        height: 22
+        x: 93
+        y: 28
+        width: 19
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8627403dd3fb0418e9ed465a1bd5db98
-      internalID: 138883090
+      spriteID: 799eba2ef33ca4952b753fe3d618c1e8
+      internalID: -1559877805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_fight_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b75080199e03e45b4901a3fb69b83a6c
+      internalID: 1093073620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_fight_5
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 0
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37074e0e0b5d341aaa03b0b3faddc7a4
+      internalID: 1238610034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_fight_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6745922ad9ea644b4af8354ce654923b
+      internalID: 1433543977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_fight_7
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6778f030d12a493991188c9049f7ea1
+      internalID: -2085921438
       vertices: []
       indices: 
       edges: []
@@ -204,10 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      turret_anim_0: 1293852109
-      turret_anim_1: 1356291292
-      turret_anim_2: -1237263988
-      turret_anim_3: 138883090
+      skeleton_fight_0: 1136735463
+      skeleton_fight_1: 1909146067
+      skeleton_fight_2: -511233831
+      skeleton_fight_3: -1559877805
+      skeleton_fight_4: 1093073620
+      skeleton_fight_5: 1238610034
+      skeleton_fight_6: 1433543977
+      skeleton_fight_7: -2085921438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

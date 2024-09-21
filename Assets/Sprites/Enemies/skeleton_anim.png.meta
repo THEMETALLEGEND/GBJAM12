@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5615d4eb276041128a4aeece3fc9a18
+guid: fe6abd76d0eeb49fc97a1d4e4d903389
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turret_anim_0
+      name: skeleton_anim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a677098441d8944c0afce40494003dc2
+      internalID: -1728035697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_anim_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 32
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc8f749862d1d4bcca45c5336fa54610
+      internalID: -329991696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_anim_2
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 32
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac993754d7ae84b8d9cd68ba92ef551c
+      internalID: -1693101441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_anim_3
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 32
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a83588536e22d427297d920287b8dc17
+      internalID: 768281398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_anim_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 22
+        width: 17
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03aa24ce609156247ab789908cb23459
-      internalID: 1293852109
+      spriteID: 4925a758abde046d0a43b9adf7e55979
+      internalID: 1964882865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_1
+      name: skeleton_anim_5
       rect:
         serializedVersion: 2
-        x: 16
+        x: 34
         y: 0
-        width: 16
-        height: 22
+        width: 13
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2ed73200b9b5a4f934189271690e75
-      internalID: 1356291292
+      spriteID: 8f4e8c2e5b8f6462da8d8b183aa4e4d8
+      internalID: 1876863671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_2
+      name: skeleton_anim_6
       rect:
         serializedVersion: 2
-        x: 32
+        x: 67
         y: 0
-        width: 16
-        height: 22
+        width: 11
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d94cd639c207674e8365071bd8e4633
-      internalID: -1237263988
+      spriteID: a0dff4f94b70e42348bbcf22fbda051f
+      internalID: -1651773619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_3
+      name: skeleton_anim_7
       rect:
         serializedVersion: 2
-        x: 49
+        x: 100
         y: 0
-        width: 14
-        height: 22
+        width: 11
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8627403dd3fb0418e9ed465a1bd5db98
-      internalID: 138883090
+      spriteID: 9b32045cd8d5d4eeb8c37a493eadde38
+      internalID: -1703938684
       vertices: []
       indices: 
       edges: []
@@ -204,10 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      turret_anim_0: 1293852109
-      turret_anim_1: 1356291292
-      turret_anim_2: -1237263988
-      turret_anim_3: 138883090
+      skeleton_anim_0: -1728035697
+      skeleton_anim_1: -329991696
+      skeleton_anim_2: -1693101441
+      skeleton_anim_3: 768281398
+      skeleton_anim_4: 1964882865
+      skeleton_anim_5: 1876863671
+      skeleton_anim_6: -1651773619
+      skeleton_anim_7: -1703938684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

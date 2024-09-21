@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5615d4eb276041128a4aeece3fc9a18
+guid: ff71ab01b342d4402a4b9c3d404121ba
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: turret_anim_0
+      name: floor_decoration_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 22
+        y: 1
+        width: 15
+        height: 14
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03aa24ce609156247ab789908cb23459
-      internalID: 1293852109
+      spriteID: 3622523e9740d4d6388dcfcd860eea9a
+      internalID: 134527177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_1
+      name: floor_decoration_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 22
+        x: 19
+        y: 1
+        width: 11
+        height: 13
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2ed73200b9b5a4f934189271690e75
-      internalID: 1356291292
+      spriteID: 33eace9d5806048989929dd4e5485288
+      internalID: 1035681044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_2
+      name: floor_decoration_2
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
-        width: 16
-        height: 22
+        y: 2
+        width: 15
+        height: 13
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d94cd639c207674e8365071bd8e4633
-      internalID: -1237263988
+      spriteID: 8ae721567fb534406b86f844f5eed5a2
+      internalID: 1992650334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: turret_anim_3
+      name: floor_decoration_3
       rect:
         serializedVersion: 2
         x: 49
-        y: 0
-        width: 14
-        height: 22
+        y: 2
+        width: 30
+        height: 14
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8627403dd3fb0418e9ed465a1bd5db98
-      internalID: 138883090
+      spriteID: 251c9676344014f3da581b8fbed5aa85
+      internalID: -500211469
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      turret_anim_0: 1293852109
-      turret_anim_1: 1356291292
-      turret_anim_2: -1237263988
-      turret_anim_3: 138883090
+      floor_decoration_0: 134527177
+      floor_decoration_1: 1035681044
+      floor_decoration_2: 1992650334
+      floor_decoration_3: -500211469
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

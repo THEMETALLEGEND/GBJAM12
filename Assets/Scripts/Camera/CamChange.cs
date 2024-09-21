@@ -16,11 +16,14 @@ public class CamChange : MonoBehaviour
     // Objeto Canvas, definido no inspetor
     public Canvas canvas;
     public Canvas TMP_canvas;
+    public AudioClip closeSound;
+    private AudioSource source;
 
     private void Awake()
     {
         col = GetComponent<BoxCollider2D>();
         cam = transform.parent.GetComponent<CinemachineVirtualCamera>();
+        source = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -28,9 +31,7 @@ public class CamChange : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             StartCoroutine(RoomTransition(other));
-        }
-        /*else if (other.CompareTag("Player") && isSpawnRoom) { }
-            isSpawnRoom = false;*/
+        }   
     }
 
     private IEnumerator RoomTransition(Collider2D player)
@@ -65,7 +66,6 @@ public class CamChange : MonoBehaviour
         // Enable player movement after the transition
         playerMovement.isAllowedToMove = true;
         isTransitioning = false;
-        gameObject.GetComponent<Room>().GenerateEnemies();
     }
 
     private void TeleportPlayer(Collider2D player)

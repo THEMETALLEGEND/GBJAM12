@@ -36,17 +36,24 @@ public class Room : MonoBehaviour
             allRooms[i].roomNumber = i + 1;
         }
     }
-
-    public void GenerateEnemies()
+    /*
+    void Update()
     {
-        if (!isShop && !IsVisited)
+        Collider2D[] EnemiesinRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("Enemy"));
+        if (EnemiesinRoom.Length <= 0)
         {
+            gameObject.GetComponent<Doors_Controller>().HandleDoors(true);
+        }
+        else
+        {
+            gameObject.GetComponent<Doors_Controller>().HandleDoors(false);
             IsVisited = true;
             FindAndActivateSpawners();
         }
-    }
+    }*/
 
-    void FindAndActivateSpawners()
+
+    public void FindAndActivateSpawners()
     {
         Collider2D[] spawnersInRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("EnemySpawner"));
 
@@ -56,7 +63,7 @@ public class Room : MonoBehaviour
             EnemySpawner enemySpawner = spawnerCollider.GetComponent<EnemySpawner>();
             if (enemySpawner != null)
             {
-                enemySpawner.roomNumber_ = roomNumber; 
+                enemySpawner.roomNumber_ = roomNumber; // Mova essa linha aqui
                 enemySpawner.SpawnEnemies();
             }
         }

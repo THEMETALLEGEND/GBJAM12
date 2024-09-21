@@ -51,7 +51,15 @@ public class PlayerInventory : MonoBehaviour
                 if (playerObject != null)
                     playerObject.GetComponent<PlayerAttacking>().hp++;
                 UI_Controller Ui = FindObjectOfType<UI_Controller>();
-                Ui.GetComponent<UI_Controller>().UpdateLife(false, 1);
+                if(playerObject.GetComponent<PlayerAttacking>().hp < 6)
+                {
+                    Ui.GetComponent<UI_Controller>().UpdateHeartStates(Ui.GetComponent<UI_Controller>().life + 1);
+                }
+                else
+                {
+                    playerObject.GetComponent<PlayerAttacking>().hp = 6;
+                }
+                
                 break; 
         }
     }

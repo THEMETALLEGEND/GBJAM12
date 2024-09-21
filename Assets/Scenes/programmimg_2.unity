@@ -759,7 +759,8 @@ GameObject:
   m_Component:
   - component: {fileID: 158672826}
   - component: {fileID: 158672827}
-  m_Layer: 0
+  - component: {fileID: 158672828}
+  m_Layer: 5
   m_Name: Heart (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,6 +834,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &158672828
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158672825}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac3c782736bfff544936a05526d3c67b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &172333162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1236,6 +1258,10 @@ PrefabInstance:
       propertyPath: transitionObject
       value: 
       objectReference: {fileID: 82825322}
+    - target: {fileID: 8193731021311527891, guid: bbbddd03f3c11e948b8e1d7454f0b939, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1390,7 +1416,8 @@ GameObject:
   m_Component:
   - component: {fileID: 394638040}
   - component: {fileID: 394638041}
-  m_Layer: 0
+  - component: {fileID: 394638042}
+  m_Layer: 5
   m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,6 +1491,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &394638042
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394638039}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac3c782736bfff544936a05526d3c67b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!213 &426704248
 Sprite:
   m_ObjectHideFlags: 0
@@ -2858,7 +2906,8 @@ GameObject:
   m_Component:
   - component: {fileID: 808254948}
   - component: {fileID: 808254949}
-  m_Layer: 0
+  - component: {fileID: 808254950}
+  m_Layer: 5
   m_Name: Heart (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2932,6 +2981,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &808254950
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808254947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac3c782736bfff544936a05526d3c67b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &836441436
 GameObject:
   m_ObjectHideFlags: 0
@@ -8735,12 +8805,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82aefc7fc4ace34ba6d8446bc8411ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hearts: {fileID: 801723210}
   Coins: {fileID: 1549695901}
   p_attacking: {fileID: 2052578669}
+  hearts_List:
+  - {fileID: 394638042}
+  - {fileID: 158672828}
+  - {fileID: 808254950}
   coins_counter: {fileID: 931221820}
-  heartSpacing: 0.3
-  startingPosition: {x: -14, y: 18}
+  life: 0
 --- !u!114 &1776505543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9560,7 +9632,7 @@ MonoBehaviour:
   magic: {fileID: 5499033376972112570, guid: 90eda4831206f4ae9a78ceea0f3b6e2d, type: 3}
   meleeCollider: {fileID: 612131411}
   magicDirection: {x: 0, y: 0}
-  hp: 3
+  hp: 6
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 64

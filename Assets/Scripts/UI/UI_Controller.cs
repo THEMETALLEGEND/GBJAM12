@@ -5,81 +5,57 @@ using TMPro;
 
 public class UI_Controller : MonoBehaviour
 {
-    public GameObject Hearts; 
     public GameObject Coins;
     public GameObject p_attacking;
-    List<GameObject> hearts_List = new List<GameObject>();
+    public List<Animator> hearts_List = new List<Animator>();
     public TextMeshProUGUI coins_counter;
 
-
-
-    public float heartSpacing = 50f; 
-    public Vector2 startingPosition = new Vector2(-200f, 100f); 
+    [HideInInspector] public int life;
 
     void Start()
     {
-        int totalHearts = p_attacking.GetComponent<PlayerAttacking>().hp;
-        UpdateHeartUI(totalHearts);
+        // Here you should ensure p_attacking's hp is properly fetched if needed
+        UpdateHeartStates(6);  // Start by testing with 6 HP
     }
+
     public void UpdateCoins(int amount)
     {
-        string textToUi;
-        if (amount < 10)
-        {
-            textToUi = "0" + amount;
-        }
-        else
-        {
-            textToUi = amount.ToString();
-        }
+        string textToUi = amount < 10 ? "0" + amount : amount.ToString();
         coins_counter.text = textToUi;
     }
-    public void UpdateLife(bool isSubtracting, int value)
-    {
-        if (isSubtracting)
-        {
-            for (int i = 0; i < value; i++)
-            {
-                if (hearts_List.Count > 0)
-                {
-                    Destroy(hearts_List[hearts_List.Count - 1]);
-                    hearts_List.RemoveAt(hearts_List.Count - 1);
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < value; i++)
-            {
-                AddHeart();
-            }
-        }
 
-        AlignHearts(); 
-    }
-
-    void UpdateHeartUI(int totalHearts)
+    public void UpdateHeartStates(int currentHP)
     {
-        for (int i = 0; i < totalHearts; i++)
+        switch (currentHP)
         {
-            AddHeart();
-        }
-        AlignHearts(); 
-    }
+            case 0:
+                hearts_List[0].SetInteger("HeartState", 0);
+                break;
+            case 1:
+                hearts_List[0].SetInteger("HeartState", 1);
+                break;
+            case 2:
+                hearts_List[0].SetInteger("HeartState", 2);
+                hearts_List[1].SetInteger("HeartState", 0);
+                break;
+            case 3:
+                hearts_List[1].SetInteger("HeartState", 1);
+                break;
+            case 4:
+                hearts_List[1].SetInteger("HeartState", 2);
+                hearts_List[2].SetInteger("HeartState", 0);
+                break;
+            case 5:
+                hearts_List[2].SetInteger("HeartState", 1);
+                break;
+            case 6:
+                hearts_List[0].SetInteger("HeartState", 2);
+                hearts_List[1].SetInteger("HeartState", 2);
+                hearts_List[2].SetInteger("HeartState", 2);
+                break;
+        } // switch that transitionates the hp
+        Debug.Log("Updating heart states. Current HP: " + currentHP);
 
-    void AddHeart()
-    {
-        GameObject heart = Instantiate(Hearts, Vector2.zero, Quaternion.identity); 
-        heart.transform.SetParent(this.transform, false); 
-        hearts_List.Add(heart); 
-    }
-
-    void AlignHearts()
-    {
-        for (int i = 0; i < hearts_List.Count; i++)
-        {
-            RectTransform heartRect = hearts_List[i].GetComponent<RectTransform>();
-            heartRect.anchoredPosition = new Vector2(startingPosition.x + i * heartSpacing*10, startingPosition.y); 
-        }
+        life = currentHP;
     }
 }

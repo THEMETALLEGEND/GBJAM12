@@ -13,7 +13,7 @@ public class PlayerAttacking : MonoBehaviour
     [HideInInspector] public Vector2 magicDirection; // direction of the projectile
     private bool isMagicCharging = false;
     private bool isMagicOnCooldown = false;
-    public int hp = 3;
+    public int hp = 6;
     public LayerMask EnemyLayer;
 
     public float magicCooldownTime = 0.3f; // cooldown between magics
@@ -158,7 +158,7 @@ public class PlayerAttacking : MonoBehaviour
 
         Debug.Log("Player took damage");
         hp -= dmg;
-
+        ui.UpdateHeartStates(hp);
         if (hp <= 0)
         {
             gameObject.SetActive(false); // If health is 0, disable the player (or handle death logic here)
@@ -166,10 +166,8 @@ public class PlayerAttacking : MonoBehaviour
         else
         {
             // If still alive, apply knockback and start invincibility
-            ui.GetComponent<UI_Controller>().UpdateLife(true, dmg);
             Vector2 direction = (transform.position - (Vector3)enemyPos).normalized; // calculates the direction of the knockback based on enemy position
             gameObject.GetComponent<PlayerMovement>().ApplyKnockback(direction);
-
             StartCoroutine(InvincibilityCoroutine()); // Start the invincibility coroutine
         }
     }
@@ -187,7 +185,7 @@ public class PlayerAttacking : MonoBehaviour
             spriteRenderer.enabled = true; 
             yield return new WaitForSeconds(0.25f); 
         }
-
+        yield return new WaitForSeconds(0.5f);
         isInvincible = false; 
     }
 

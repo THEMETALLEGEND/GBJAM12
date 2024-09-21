@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UI_Controller : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class UI_Controller : MonoBehaviour
     public GameObject Coins;
     public GameObject p_attacking;
     List<GameObject> hearts_List = new List<GameObject>();
+    public TextMeshProUGUI coins_counter;
+
+
 
     public float heartSpacing = 50f; 
     public Vector2 startingPosition = new Vector2(-200f, 100f); 
@@ -17,7 +21,19 @@ public class UI_Controller : MonoBehaviour
         int totalHearts = p_attacking.GetComponent<PlayerAttacking>().hp;
         UpdateHeartUI(totalHearts);
     }
-
+    public void UpdateCoins(int amount)
+    {
+        string textToUi;
+        if (amount < 10)
+        {
+            textToUi = "0" + amount;
+        }
+        else
+        {
+            textToUi = amount.ToString();
+        }
+        coins_counter.text = textToUi;
+    }
     public void UpdateLife(bool isSubtracting, int value)
     {
         if (isSubtracting)

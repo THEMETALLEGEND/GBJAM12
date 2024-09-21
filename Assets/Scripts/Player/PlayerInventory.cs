@@ -8,10 +8,13 @@ public class PlayerInventory : MonoBehaviour
     [HideInInspector] public bool hasKey = false;
     public int money;
     private ShopManager shop_Manager;
+    public AudioSource sourc_;
+    public GameObject UI_Controller;
 
     void Start()
     {
         shop_Manager = FindObjectOfType<ShopManager>();
+        UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -21,6 +24,9 @@ public class PlayerInventory : MonoBehaviour
             GameObject coin = coll.gameObject;
             money++;
             Destroy(coin);
+            sourc_.Play();
+            UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
+
         }
         else if (coll.CompareTag("Shop Itens")) 
         {
@@ -29,6 +35,7 @@ public class PlayerInventory : MonoBehaviour
                 money -= item.price;
                 CollectItem(item); //the switch where the item effects will really be applied
                 Destroy(coll.gameObject);
+                UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
             }
         }
     }

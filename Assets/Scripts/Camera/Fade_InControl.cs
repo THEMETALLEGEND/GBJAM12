@@ -5,11 +5,20 @@ using GBTemplate;
 
 public class Fade_InControl : MonoBehaviour
 {
-    public GBDisplayController disp;
-    // Start is called before the first frame update
-    void Start()
+    public GBConsoleController disp;
+    public Canvas canvasText;
+    void Awake()
     {
-        disp.FadeFromBlack(2);
+        canvasText.enabled = false;
+        StartCoroutine(FadeFromB());
     }
-
+    private IEnumerator FadeFromB()
+    {
+        yield return disp.Display.StartCoroutine(disp.Display.FadeFromBlack(2));
+        canvasText.enabled = true;
+    } 
+    public IEnumerator ChangeScene()
+    {
+        yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));   
+    }
 }

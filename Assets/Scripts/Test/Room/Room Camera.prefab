@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 6225886996732681698}
   - component: {fileID: 3155114105889253670}
   - component: {fileID: 8288170715851319893}
+  - component: {fileID: 101345116186617832}
   m_Layer: 0
   m_Name: Room Camera
   m_TagString: Untagged
@@ -96,7 +97,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -214,6 +215,29 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &101345116186617832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3877999923760232004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &5163591904829406784
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,9 +251,10 @@ GameObject:
   - component: {fileID: 6141248579107258016}
   - component: {fileID: 3986324251999148188}
   - component: {fileID: 7104612215748706214}
-  m_Layer: 0
+  - component: {fileID: 7211870231544435613}
+  m_Layer: 9
   m_Name: ViewRoomTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +306,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000023841858, y: -0.031329155}
+  m_Offset: {x: 0.0000009536743, y: -0.031329155}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -292,7 +317,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.897642, y: 8.832432}
+  m_Size: {x: 9.897644, y: 8.832432}
   m_EdgeRadius: 0
 --- !u!114 &6141248579107258016
 MonoBehaviour:
@@ -309,6 +334,9 @@ MonoBehaviour:
   canvasCamera: {fileID: 0}
   isTransitioning: 0
   isSpawnRoom: 0
+  canvas: {fileID: 0}
+  TMP_canvas: {fileID: 0}
+  closeSound: {fileID: 8300000, guid: 96eea3ebbf27f304c99d94ede6b20b73, type: 3}
 --- !u!114 &3986324251999148188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,16 +349,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a2021b5f6df364780abf646c9f7427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisited: 1
+  IsVisited: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   roomNumber: 0
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
-  EnemyToGenerate: {fileID: 0}
-  NumberOfEnemies: 0
+    m_Bits: 64
   isShop: 0
 --- !u!114 &7104612215748706214
 MonoBehaviour:
@@ -350,3 +376,60 @@ MonoBehaviour:
   doorLayer:
     serializedVersion: 2
     m_Bits: 8
+  openSound: {fileID: 8300000, guid: 79e83642ad8c60c47a174977319c6183, type: 3}
+  closeSound: {fileID: 8300000, guid: 96eea3ebbf27f304c99d94ede6b20b73, type: 3}
+  isAlreadyOpen: 0
+  virtualCamera: {fileID: 6225886996732681698}
+--- !u!114 &7211870231544435613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163591904829406784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0.1, y: -0.1, z: 0}

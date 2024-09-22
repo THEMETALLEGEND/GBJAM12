@@ -5,176 +5,178 @@ using GBTemplate;
 
 public class Stalker_Script : MonoBehaviour, Enemy
 {
-    public AudioClip EnemyDamage;
-    public Transform target;
-    private Rigidbody2D rb;
-    private bool isPaused = false;
-    private int health = 2;
-    public int room { get; set; }
-    public Room_TransitionCollision roomsTransition;
+	public AudioClip EnemyDamage;
+	public Transform target;
+	private Rigidbody2D rb;
+	private bool isPaused = false;
+	private int health = 2;
+	public int room { get; set; }
+	private Room_TransitionCollision roomsTransition;
 
-    public GameObject coin_prefab;
-    private Animator anim;
-    private bool isAttacking = false;
-    private Collider2D attackRangeCollider;
-    private float attackCooldown = 2f;
+	public GameObject coin_prefab;
+	private Animator anim;
+	private bool isAttacking = false;
+	private Collider2D attackRangeCollider;
+	private float attackCooldown = 2f;
 
-    private GBSoundController soundController;
+	private GBSoundController soundController;
 
-    #region Editor Settings
+	#region Editor Settings
 
-    [Tooltip("Material to switch to during the flash.")]
-    [SerializeField] private Material flashMaterial;
+	[Tooltip("Material to switch to during the flash.")]
+	[SerializeField] private Material flashMaterial;
 
-    [Tooltip("Duration of the flash.")]
-    [SerializeField] private float duration = 0.5f;
+	[Tooltip("Duration of the flash.")]
+	[SerializeField] private float duration = 0.5f;
 
-    #endregion
-    #region Private Fields
+	#endregion
+	#region Private Fields
 
-    private SpriteRenderer spriteRenderer;
-    private Material originalMaterial;
-    private Coroutine flashRoutine;
-    #endregion
+	private SpriteRenderer spriteRenderer;
+	private Material originalMaterial;
+	private Coroutine flashRoutine;
+	#endregion
 
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = spriteRenderer.material;
+	void Start()
+	{
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		originalMaterial = spriteRenderer.material;
 
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        target = FindObjectOfType<PlayerMovement>().transform;
-        attackRangeCollider = GetComponent<Collider2D>();
-        soundController = FindObjectOfType<GBSoundController>();
+		rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
+		target = FindObjectOfType<PlayerMovement>().transform;
+		attackRangeCollider = GetComponent<Collider2D>();
+		soundController = FindObjectOfType<GBSoundController>();
 
-        FindRoomTransition();
-        StartCoroutine(transitionTime());
-    }
+		roomsTransition = GameObject.Find("Player").transform.GetChild(1).gameObject.GetComponent<Room_TransitionCollision>();
 
-    private void FindRoomTransition()
-    {
-        Room_TransitionCollision transitionCollider = GetComponentInParent<Room_TransitionCollision>();
-        if (transitionCollider != null)
-        {
-            roomsTransition = transitionCollider;
-        }
-    }
+		FindRoomTransition();
+		StartCoroutine(transitionTime());
+	}
 
-    private IEnumerator transitionTime()
-    {
-        AIPath ai = GetComponent<AIPath>();
-        ai.canMove = false;
-        yield return new WaitForSeconds(3f);
-        ai.canMove = true;
-    }
+	private void FindRoomTransition()
+	{
+		Room_TransitionCollision transitionCollider = GetComponentInParent<Room_TransitionCollision>();
+		if (transitionCollider != null)
+		{
+			roomsTransition = transitionCollider;
+		}
+	}
 
-    private void Update()
-    {
-        if (target != null && !isAttacking)
-        {
-            Vector2 direction = target.position - transform.position;
-            anim.SetFloat("MoveX", direction.x);
-            CheckAttackRange();
-        }
-    }
+	private IEnumerator transitionTime()
+	{
+		AIPath ai = GetComponent<AIPath>();
+		ai.canMove = false;
+		yield return new WaitForSeconds(3f);
+		ai.canMove = true;
+	}
 
-    private void CheckAttackRange()
-    {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRangeCollider.bounds.extents.x, LayerMask.GetMask("Player"));
+	private void Update()
+	{
+		if (target != null && !isAttacking)
+		{
+			Vector2 direction = target.position - transform.position;
+			anim.SetFloat("MoveX", direction.x);
+			CheckAttackRange();
+		}
+	}
 
-        if (hit != null && !isAttacking)
-        {
-            StartCoroutine(PerformAttack());
-        }
-    }
+	private void CheckAttackRange()
+	{
+		Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRangeCollider.bounds.extents.x, LayerMask.GetMask("Player"));
 
-    private IEnumerator PerformAttack()
-    {
-        isAttacking = true;
-        anim.SetBool("IsAttacking", true);
+		if (hit != null && !isAttacking)
+		{
+			StartCoroutine(PerformAttack());
+		}
+	}
 
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+	private IEnumerator PerformAttack()
+	{
+		isAttacking = true;
+		anim.SetBool("IsAttacking", true);
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRangeCollider.bounds.extents.x, LayerMask.GetMask("Player"));
-        if (hit != null)
-        {
-            target.GetComponent<PlayerAttacking>().TakeDamage(1, transform.position);
-        }
+		yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
-        anim.SetBool("IsAttacking", false);
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }
+		Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRangeCollider.bounds.extents.x, LayerMask.GetMask("Player"));
+		if (hit != null)
+		{
+			target.GetComponent<PlayerAttacking>().TakeDamage(1, transform.position);
+		}
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRangeCollider.bounds.extents.x);
-    }
+		anim.SetBool("IsAttacking", false);
+		yield return new WaitForSeconds(attackCooldown);
+		isAttacking = false;
+	}
 
-    public void SetRoom(int r)
-    {
-        room = r;
-    }
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(transform.position, attackRangeCollider.bounds.extents.x);
+	}
 
-    public void Damage(int damageAmount)
-    {
-        if (soundController != null)
-        {
-            soundController.PlaySound(EnemyDamage); // Substitua "HitSound" pelo nome correto do seu som
-        }
+	public void SetRoom(int r)
+	{
+		room = r;
+	}
 
-        if (roomsTransition.actual_Room == room)
-        {
-            health -= damageAmount;
-            StartCoroutine(FlashRoutine());
-            if (health <= 0)
-            {
-                StartCoroutine(DropCoins(1));
-            }
-        }
-    }
-    private IEnumerator FlashRoutine()
-    {
-        // Swap to the flashMaterial.
-        spriteRenderer.material = flashMaterial;
+	public void Damage(int damageAmount)
+	{
+		if (soundController != null)
+		{
+			soundController.PlaySound(EnemyDamage); // Substitua "HitSound" pelo nome correto do seu som
+		}
 
-        // Pause the execution of this function for "duration" seconds.
-        yield return new WaitForSeconds(duration);
+		if (roomsTransition.actual_Room == room)
+		{
+			health -= damageAmount;
+			StartCoroutine(FlashRoutine());
+			if (health <= 0)
+			{
+				StartCoroutine(DropCoins(1));
+			}
+		}
+	}
+	private IEnumerator FlashRoutine()
+	{
+		// Swap to the flashMaterial.
+		spriteRenderer.material = flashMaterial;
 
-        // After the pause, swap back to the original material.
-        spriteRenderer.material = originalMaterial;
+		// Pause the execution of this function for "duration" seconds.
+		yield return new WaitForSeconds(duration);
 
-        // Set the routine to null, signaling that it's finished.
-        flashRoutine = null;
-    }
+		// After the pause, swap back to the original material.
+		spriteRenderer.material = originalMaterial;
 
-    public IEnumerator DropCoins(int amount)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
-        }
-        AIPath ai = GetComponent<AIPath>();
-        ai.canMove = false;
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
-    }
+		// Set the routine to null, signaling that it's finished.
+		flashRoutine = null;
+	}
 
-    public void KnockBack_(Vector2 knockbackDirection)
-    {
-        Vector2 direction = (transform.position - (Vector3)knockbackDirection).normalized;
-        StartCoroutine(KnockBackRoutine(direction));
-    }
+	public IEnumerator DropCoins(int amount)
+	{
+		for (int i = 0; i < amount; i++)
+		{
+			GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+		}
+		AIPath ai = GetComponent<AIPath>();
+		ai.canMove = false;
+		yield return new WaitForSeconds(1);
+		Destroy(gameObject);
+	}
 
-    private IEnumerator KnockBackRoutine(Vector2 knockbackDirection)
-    {
-        AIPath ai = GetComponent<AIPath>();
-        ai.canMove = false;
-        rb.velocity = knockbackDirection * 2f;
-        yield return new WaitForSeconds(1f);
-        rb.velocity = Vector2.zero;
-        ai.canMove = true;
-    }
+	public void KnockBack_(Vector2 knockbackDirection)
+	{
+		Vector2 direction = (transform.position - (Vector3)knockbackDirection).normalized;
+		StartCoroutine(KnockBackRoutine(direction));
+	}
+
+	private IEnumerator KnockBackRoutine(Vector2 knockbackDirection)
+	{
+		AIPath ai = GetComponent<AIPath>();
+		ai.canMove = false;
+		rb.velocity = knockbackDirection * 2f;
+		yield return new WaitForSeconds(1f);
+		rb.velocity = Vector2.zero;
+		ai.canMove = true;
+	}
 }

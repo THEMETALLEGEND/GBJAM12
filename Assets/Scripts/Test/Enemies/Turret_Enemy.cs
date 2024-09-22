@@ -5,125 +5,127 @@ using GBTemplate;
 
 public class Turret_Enemy : MonoBehaviour, Enemy
 {
-    public GameObject projectileEnemy;
-    public float attackInterval = 3f;
-    public GameObject transitionObject;
-    public AudioClip enemyDamage_;
-    [HideInInspector] public int room { get; set; }
-    public int health = 2;
-    public GameObject coin_prefab;
+	public GameObject projectileEnemy;
+	public float attackInterval = 3f;
+	private GameObject transitionObject;
+	public AudioClip enemyDamage_;
+	[HideInInspector] public int room { get; set; }
+	public int health = 2;
+	public GameObject coin_prefab;
 
-    #region Editor Settings
+	#region Editor Settings
 
-    [Tooltip("Material to switch to during the flash.")]
-    [SerializeField] private Material flashMaterial;
+	[Tooltip("Material to switch to during the flash.")]
+	[SerializeField] private Material flashMaterial;
 
-    [Tooltip("Duration of the flash.")]
-    [SerializeField] private float duration = 0.5f;
+	[Tooltip("Duration of the flash.")]
+	[SerializeField] private float duration = 0.5f;
 
-    #endregion
+	#endregion
 
-    #region Private Fields
+	#region Private Fields
 
-    private SpriteRenderer spriteRenderer;
-    private Material originalMaterial;
-    private Coroutine flashRoutine;
+	private SpriteRenderer spriteRenderer;
+	private Material originalMaterial;
+	private Coroutine flashRoutine;
 
-    #endregion
-    private GBSoundController soundController;
+	#endregion
+	private GBSoundController soundController;
 
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = spriteRenderer.material;
-        StartCoroutine(ShootingProjectile());
-        soundController = FindObjectOfType<GBSoundController>();
-    }
+	void Start()
+	{
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		originalMaterial = spriteRenderer.material;
+		StartCoroutine(ShootingProjectile());
+		soundController = FindObjectOfType<GBSoundController>();
 
-    public void Damage(int damageAmount)
-    {
-        if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room)
-        {
-            health -= damageAmount;
-            if (flashRoutine != null)
-            {
-                StopCoroutine(flashRoutine);
-            }
-            flashRoutine = StartCoroutine(FlashRoutine());
+		transitionObject = GameObject.Find("Player").transform.GetChild(1).gameObject;
+	}
 
-            soundController.PlaySound(enemyDamage_); 
+	public void Damage(int damageAmount)
+	{
+		if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room)
+		{
+			health -= damageAmount;
+			if (flashRoutine != null)
+			{
+				StopCoroutine(flashRoutine);
+			}
+			flashRoutine = StartCoroutine(FlashRoutine());
 
-            if (health <= 0)
-            {
-                StartCoroutine(DropCoins(1));
-            }
-        }
-    }
+			soundController.PlaySound(enemyDamage_);
 
-    public IEnumerator DropCoins(int amount)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
-        }
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
-    }
+			if (health <= 0)
+			{
+				StartCoroutine(DropCoins(1));
+			}
+		}
+	}
 
-    public void SetRoom(int r)
-    {
-        room = r;
-    }
+	public IEnumerator DropCoins(int amount)
+	{
+		for (int i = 0; i < amount; i++)
+		{
+			GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
+		}
+		yield return new WaitForSeconds(1);
+		Destroy(gameObject);
+	}
 
-    private IEnumerator FlashRoutine()
-    {
-        spriteRenderer.material = flashMaterial;
-        yield return new WaitForSeconds(duration);
-        spriteRenderer.material = originalMaterial;
-    }
+	public void SetRoom(int r)
+	{
+		room = r;
+	}
 
-    IEnumerator ShootingProjectile()
-    {
-        yield return new WaitForSeconds(2f);
-        while (true)
-        {
-            if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0)
-            {
-                yield return new WaitForSeconds(attackInterval);
-                Attack();
-            }
-            else
-            {
-                yield return null;
-            }
-        }
-    }
+	private IEnumerator FlashRoutine()
+	{
+		spriteRenderer.material = flashMaterial;
+		yield return new WaitForSeconds(duration);
+		spriteRenderer.material = originalMaterial;
+	}
 
-    void Attack()
-    {
-        if (projectileEnemy != null && transitionObject != null && health > 0)
-        {
-            Vector2 playerPosition = transitionObject.transform.position;
-            Vector2 attackDirection = (playerPosition - (Vector2)transform.position).normalized;
+	IEnumerator ShootingProjectile()
+	{
+		yield return new WaitForSeconds(2f);
+		while (true)
+		{
+			if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0)
+			{
+				yield return new WaitForSeconds(attackInterval);
+				Attack();
+			}
+			else
+			{
+				yield return null;
+			}
+		}
+	}
 
-            GameObject attack = Instantiate(projectileEnemy, transform.position, transform.rotation);
-            attack.SetActive(true);
+	void Attack()
+	{
+		if (projectileEnemy != null && transitionObject != null && health > 0)
+		{
+			Vector2 playerPosition = transitionObject.transform.position;
+			Vector2 attackDirection = (playerPosition - (Vector2)transform.position).normalized;
 
-            Turret_Projectile projectileScript = attack.GetComponent<Turret_Projectile>();
-            projectileScript.SetDirection(attackDirection);
-        }
-    }
+			GameObject attack = Instantiate(projectileEnemy, transform.position, transform.rotation);
+			attack.SetActive(true);
 
-    public void KnockBack_(Vector2 knockbackDirection)
-    {
-        StartCoroutine(KnockBackRoutine(knockbackDirection));
-    }
+			Turret_Projectile projectileScript = attack.GetComponent<Turret_Projectile>();
+			projectileScript.SetDirection(attackDirection);
+		}
+	}
 
-    private IEnumerator KnockBackRoutine(Vector2 knockbackDirection)
-    {
-        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.velocity = knockbackDirection * 1;
-        yield return new WaitForSeconds(1);
-        rb.velocity = Vector2.zero;
-    }
+	public void KnockBack_(Vector2 knockbackDirection)
+	{
+		StartCoroutine(KnockBackRoutine(knockbackDirection));
+	}
+
+	private IEnumerator KnockBackRoutine(Vector2 knockbackDirection)
+	{
+		Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+		rb.velocity = knockbackDirection * 1;
+		yield return new WaitForSeconds(1);
+		rb.velocity = Vector2.zero;
+	}
 }

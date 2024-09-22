@@ -67,7 +67,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
 	{
 		AIPath ai = GetComponent<AIPath>();
 		ai.canMove = false;
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(1f);
 		ai.canMove = true;
 	}
 

@@ -38,13 +38,15 @@ public class Doors_Controller : MonoBehaviour
 
     public void OnRoomEnter()
     {
-        Collider2D[] EnemiesinRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("Enemy"));
-        if (EnemiesinRoom.Length <= 0)
+        Collider2D[] EnemiesinRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("EnemySpawner"));
+        if (EnemiesinRoom.Length < 1)
         {
+            Debug.Log("OpeningDoors");
             StartCoroutine(HandleDoors(true));
         }
         else
         {
+            Debug.Log("ClosingDoors");
             StartCoroutine(HandleDoors(false));
             gameObject.GetComponent<Room>().FindAndActivateSpawners();
         }

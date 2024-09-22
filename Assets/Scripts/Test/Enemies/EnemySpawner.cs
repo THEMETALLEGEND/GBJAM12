@@ -26,14 +26,15 @@ public class EnemySpawner : MonoBehaviour
 	{
 		if (!alreadyGenerated)
 		{
-			alreadyGenerated = true;
+            alreadyGenerated = true;
+            yield return new WaitForSeconds(2f);
 			if (EnemyToGenerate != null)
 			{
 				GameObject enemy = Instantiate(EnemyToGenerate, transform.position, Quaternion.identity);
 				enemy.gameObject.SetActive(true);
 				enemy.GetComponent<Enemy>().SetRoom(roomNumber_);
 			}
-			yield return new WaitForSeconds(1f);
+
 			Destroy(gameObject);
 		}
 	}

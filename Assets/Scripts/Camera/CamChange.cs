@@ -65,7 +65,7 @@ public class CamChange : MonoBehaviour
             child.gameObject.SetActive(true);
         }
         TMP_canvas.enabled = true;
-
+        
         playerMovement.isAllowedToMove = true;
         isTransitioning = false;
         yield return new WaitForSeconds(1f);

@@ -13,7 +13,6 @@ public class CamChange : MonoBehaviour
     [HideInInspector] public bool isTransitioning = false;
     [SerializeField] private bool isSpawnRoom = false;
 
-    // Objeto Canvas, definido no inspetor
     public Canvas canvas;
     public Canvas TMP_canvas;
     public AudioClip closeSound;
@@ -41,33 +40,41 @@ public class CamChange : MonoBehaviour
         Collider2D playerParent = player.transform.parent.GetComponent<Collider2D>();
         PlayerMovement playerMovement = playerParent.GetComponent<PlayerMovement>();
 
-        canvas.enabled = false;
+        foreach (Transform child in canvas.transform) // disables all canvas childs
+        {
+            child.gameObject.SetActive(false);
+        }
+
         TMP_canvas.enabled = false;
 
-        // For subsequent transitions, disable player movement and stop the player immediately
         isTransitioning = true;
         playerMovement.isAllowedToMove = false;
         playerMovement.rb.velocity = Vector2.zero;
 
-        // Delay before switching the camera
         yield return new WaitForSeconds(0.5f);
 
-        // Switch camera
         cam.Priority = 10;
         UpdateMainCamera(cam);
 
-        // Teleport player forward based on the entered side
         TeleportPlayer(playerParent);
 
-        // Delay during the camera transition
         yield return new WaitForSeconds(1.5f);
 
-        canvas.enabled = true;
+        foreach (Transform child in canvas.transform) // enables all canvas childs
+        {
+            child.gameObject.SetActive(true);
+        }
         TMP_canvas.enabled = true;
 
-        // Enable player movement after the transition
         playerMovement.isAllowedToMove = true;
         isTransitioning = false;
+        yield return new WaitForSeconds(1f);
+        
+    }
+
+    public CinemachineVirtualCamera ReturnCamera()
+    {
+        return cam;
     }
 
     private void TeleportPlayer(Collider2D player)

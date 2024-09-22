@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GBTemplate;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -9,12 +10,12 @@ public class PlayerInventory : MonoBehaviour
     public int money;
     private ShopManager shop_Manager;
     public AudioClip coinPicked;
-    private AudioSource sourc_;
+    private GBSoundController soundController; 
     public GameObject UI_Controller;
 
     void Start()
     {
-        sourc_ = GetComponent<AudioSource>();
+        soundController = FindObjectOfType<GBSoundController>(); 
         shop_Manager = FindObjectOfType<ShopManager>();
         UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
     }
@@ -26,17 +27,16 @@ public class PlayerInventory : MonoBehaviour
             GameObject coin = coll.gameObject;
             money++;
             Destroy(coin);
-            sourc_.clip = coinPicked;
-            sourc_.Play();
+            soundController.PlaySound(coinPicked); 
             UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
-
         }
-        else if (coll.CompareTag("Shop Itens")) 
+        else if (coll.CompareTag("Shop Itens"))
         {
-            ShopItens item = shop_Manager.GetItemById(coll.GetComponent<Item>().itemId); // finds item in ShopManager list by the id of the Item.cs on the object.
-            if (item.price <= money) { // see if the player has the money to pay for it
+            ShopItens item = shop_Manager.GetItemById(coll.GetComponent<Item>().itemId); 
+            if (item.price <= money) 
+            {
                 money -= item.price;
-                CollectItem(item); //the switch where the item effects will really be applied
+                CollectItem(item); 
                 Destroy(coll.gameObject);
                 UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
             }
@@ -47,24 +47,23 @@ public class PlayerInventory : MonoBehaviour
     {
         Debug.Log($"Collected: {item.itemName}, Description: {item.description}");
         Inventory.Add(item);
-        switch(item.id)
+        switch (item.id)
         {
-            case 0 :
+            case 0:
                 PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
                 if (playerObject != null)
                     playerObject.GetComponent<PlayerAttacking>().hp++;
-                UI_Controller Ui = FindObjectOfType<UI_Controller>();
-                if(playerObject.GetComponent<PlayerAttacking>().hp < 6)
+                UI_Controller ui = FindObjectOfType<UI_Controller>();
+                if (playerObject.GetComponent<PlayerAttacking>().hp < 6)
                 {
-                    Ui.GetComponent<UI_Controller>().UpdateHeartStates(Ui.GetComponent<UI_Controller>().life + 1);
+                    ui.GetComponent<UI_Controller>().UpdateHeartStates(ui.GetComponent<UI_Controller>().life + 1);
                 }
                 else
                 {
                     playerObject.GetComponent<PlayerAttacking>().hp = 6;
                     money += item.price;
                 }
-                
-                break; 
+                break;
         }
     }
 }

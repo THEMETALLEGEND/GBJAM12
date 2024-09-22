@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using GBTemplate; 
 
 public class PlayerAttacking : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class PlayerAttacking : MonoBehaviour
     private Coroutine magicCoroutine;
     private bool isInvincible = false; // variable to track invincibility
     private SpriteRenderer spriteRenderer; // reference to sprite renderer
-    //private Color originalColor; // store the original color of the player
 
     public UI_Controller ui;
 
@@ -30,14 +30,13 @@ public class PlayerAttacking : MonoBehaviour
 
     public AudioClip damageTaken;
     public AudioClip magicShot;
-    private AudioSource sourceAudio;
+    private GBSoundController soundController; 
 
     void Start()
     {
-        sourceAudio = GetComponent<AudioSource>();
+        soundController = FindObjectOfType<GBSoundController>(); 
         meleeCollider.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>(); // get the sprite renderer for the player
-        //originalColor = spriteRenderer.color; // store the original color at the start
     }
 
     private void Awake()
@@ -93,11 +92,9 @@ public class PlayerAttacking : MonoBehaviour
         gameObject.GetComponent<PlayerMovement>().isMagicButtonHeld = false;
     }
 
-
     private void CastMagic()
     {
-        sourceAudio.clip = magicShot;
-        sourceAudio.Play();
+        soundController.PlaySound(magicShot); // using GBSoundController
         if (magicDirection != Vector2.zero && !isMagicOnCooldown)
         {
             GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
@@ -133,6 +130,7 @@ public class PlayerAttacking : MonoBehaviour
         yield return new WaitForSeconds(magicCooldownTime); // waits for cooldown
         isMagicOnCooldown = false;
     }
+
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
         if (!isAttacking)
@@ -160,8 +158,7 @@ public class PlayerAttacking : MonoBehaviour
     // Method to handle player taking damage
     public void TakeDamage(int dmg, Vector2 enemyPos)
     {
-        sourceAudio.clip = damageTaken; //plays the damage taken audio
-        sourceAudio.Play(); 
+        soundController.PlaySound(damageTaken); // using GBSoundController
         // If player is invincible, they can't take damage
         if (isInvincible) return;
 
@@ -170,7 +167,7 @@ public class PlayerAttacking : MonoBehaviour
         ui.UpdateHeartStates(hp);
         if (hp <= 0)
         {
-            gameObject.SetActive(false); // If health is 0, disable the player (or handle death logic here)
+            StartCoroutine(Death());
         }
         else
         {
@@ -180,8 +177,19 @@ public class PlayerAttacking : MonoBehaviour
             StartCoroutine(InvincibilityCoroutine()); // Start the invincibility coroutine
         }
     }
-    // Coroutine for invincibility
 
+    private IEnumerator Death()
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.isKinematic = true;
+        isAttacking = true;
+        isMagicOnCooldown = true;
+        GetComponent<PlayerMovement>().isAllowedToMove = false;
+        GetComponent<Animator>().SetBool("IsDead", true);
+        yield return new WaitForSeconds(3f);
+    }
+
+    // Coroutine for invincibility
     private IEnumerator InvincibilityCoroutine()
     {
         isInvincible = true; // Set the player to invincible
@@ -189,13 +197,12 @@ public class PlayerAttacking : MonoBehaviour
         // change visibility to make the "flashing" effect of Iframes
         for (int i = 0; i < 3; i++)
         {
-            spriteRenderer.enabled = false; 
-            yield return new WaitForSeconds(0.25f); 
-            spriteRenderer.enabled = true; 
-            yield return new WaitForSeconds(0.25f); 
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.25f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.25f);
         }
         yield return new WaitForSeconds(0.5f);
-        isInvincible = false; 
+        isInvincible = false;
     }
-
 }

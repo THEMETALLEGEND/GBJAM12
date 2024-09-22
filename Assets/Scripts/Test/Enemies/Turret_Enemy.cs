@@ -49,7 +49,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
     IEnumerator ShootingProjectile()
     {
-
+        yield return new WaitForSeconds(2f);
         while (true)
         {
             if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0) // checks if the player is on the same room to attack it.

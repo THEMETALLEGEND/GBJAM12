@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GBTemplate;
+using Cinemachine;
 
 public class Doors_Controller : MonoBehaviour
 {
@@ -9,16 +11,17 @@ public class Doors_Controller : MonoBehaviour
     private Collider2D roomCollider;
     public AudioClip openSound;
     public AudioClip closeSound;
-    private AudioSource source;
+    private GBSoundController soundController;
     public bool isAlreadyOpen = false;
     private bool isOnBattle = false;
+    public CinemachineVirtualCamera virtualCamera;
+    private CinemachineImpulseSource impulseSource; 
 
     private void Start()
     {
-        //gets the collider of the room to check if there are enemies
         roomCollider = GetComponent<Collider2D>();
-        source = GetComponent<AudioSource>();
-
+        soundController = FindObjectOfType<GBSoundController>();
+        impulseSource = GetComponent<CinemachineImpulseSource>(); 
     }
 
     void Update()
@@ -28,72 +31,60 @@ public class Doors_Controller : MonoBehaviour
             Collider2D[] EnemiesinRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("Enemy"));
             if (EnemiesinRoom.Length <= 0)
             {
-                HandleDoors(true);
+                StartCoroutine(HandleDoors(true));
             }
         }
-        /*/checks if there are enemies in the room with the collider properties
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, enemyLayer);
-        // if there are no enemies it deactivate the doors
-        if (enemies.Length <= 0)
-        {
-            HandleDoors(true);
-        }
-        */
     }
 
-    /*public void CloseDoors() //called by the function of the room trigger, to happen when the player enters the room
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, enemyLayer);
-        if (enemies.Length > 0)
-        {
-            HandleDoors(false);
-        }
-    }*/
     public void OnRoomEnter()
     {
         Collider2D[] EnemiesinRoom = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("Enemy"));
         if (EnemiesinRoom.Length <= 0)
         {
-            HandleDoors(true);
+            StartCoroutine(HandleDoors(true));
         }
         else
         {
-            HandleDoors(false);
+            StartCoroutine(HandleDoors(false));
             gameObject.GetComponent<Room>().FindAndActivateSpawners();
         }
     }
-    public void HandleDoors(bool open)
+
+    private IEnumerator HandleDoors(bool open)
     {
         Collider2D[] doors = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, doorLayer);
-
+        yield return new WaitForSeconds(2f);
         foreach (var door in doors)
         {
             Debug.Log($"Detected door: {door.name}");
-            //try to find the open door and closed door objects to handle them
             Transform openDoor = door.transform.GetComponentInChildren<Transform>().Find("OpenDoor");
             Transform closedDoor = door.transform.GetComponentInChildren<Transform>().Find("ClosedDoor");
 
             if (openDoor != null && closedDoor != null)
             {
-                if (open) //if it needs to be open
+                if (open)
                 {
                     openDoor.gameObject.SetActive(true);
                     closedDoor.gameObject.SetActive(false);
                     if (!isAlreadyOpen)
                     {
-                        source.clip = openSound;
-                        source.Play();
-                        isAlreadyOpen = true;  
+                        soundController.PlaySound(openSound);
+                        isAlreadyOpen = true;
                     }
-                    
                 }
-                else if (!isAlreadyOpen) // if it needs to be closed
+                else
                 {
                     openDoor.gameObject.SetActive(false);
                     closedDoor.gameObject.SetActive(true);
-                    source.clip = closeSound;
-                    source.Play();
-                    isOnBattle = true; // triggers so the update can now check for enemies (checking before caused bugs)
+
+                    if (impulseSource != null) 
+                    {
+                        impulseSource.GenerateImpulse();
+                    }
+
+                    soundController.PlaySound(closeSound);
+                    isOnBattle = true;
+                
                 }
             }
         }

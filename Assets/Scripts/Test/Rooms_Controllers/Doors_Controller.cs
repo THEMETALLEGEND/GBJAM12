@@ -21,7 +21,12 @@ public class Doors_Controller : MonoBehaviour
     {
         roomCollider = GetComponent<Collider2D>();
         soundController = FindObjectOfType<GBSoundController>();
-        impulseSource = GetComponent<CinemachineImpulseSource>(); 
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+        Collider2D[] enemiesSpawn = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("EnemySpawner"));
+        if (enemiesSpawn.Length < 1)
+        {
+            isAlreadyOpen = true;
+        }
     }
 
     void Update()

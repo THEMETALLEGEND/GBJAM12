@@ -94,9 +94,9 @@ public class PlayerAttacking : MonoBehaviour
 
     private void CastMagic()
     {
-        soundController.PlaySound(magicShot); // using GBSoundController
         if (magicDirection != Vector2.zero && !isMagicOnCooldown)
         {
+            soundController.PlaySound(magicShot); // using GBSoundController
             GameObject magicProjectile = Instantiate(magic, transform.position, transform.rotation);
             magicProjectile.SetActive(true); // sets the instantiated projectile as active since it starts disabled to prevent bugs
             magicProjectile.GetComponent<Projectile_Test>().SetRange(range);
@@ -158,7 +158,7 @@ public class PlayerAttacking : MonoBehaviour
     // Method to handle player taking damage
     public void TakeDamage(int dmg, Vector2 enemyPos)
     {
-        soundController.PlaySound(damageTaken); // using GBSoundController
+        
         // If player is invincible, they can't take damage
         if (isInvincible) return;
 
@@ -171,6 +171,7 @@ public class PlayerAttacking : MonoBehaviour
         }
         else
         {
+            soundController.PlaySound(damageTaken); // using GBSoundController
             // If still alive, apply knockback and start invincibility
             Vector2 direction = (transform.position - (Vector3)enemyPos).normalized; // calculates the direction of the knockback based on enemy position
             gameObject.GetComponent<PlayerMovement>().ApplyKnockback(direction);

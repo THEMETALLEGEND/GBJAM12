@@ -1027,13 +1027,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ac18284ae4288cc4d8465520bd8c1af3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 31
+  Priority: 34
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1139,8 +1139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalAudioVolume: 1
-  CurrentMusicVolume: 0.7
-  CurrentSoundVolume: 0.7
+  CurrentMusicVolume: 0.2
+  CurrentSoundVolume: 1
   soundSources:
   - {fileID: 843939897}
   musicSource: {fileID: 230399156}
@@ -12025,6 +12025,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1650204707}
     - target: {fileID: 8904307686793211050, guid: 54c88f283bd3140f48ac5af1667f7e50, type: 3}
+      propertyPath: flashDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904307686793211050, guid: 54c88f283bd3140f48ac5af1667f7e50, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a5b2a04058d504e9de773bebd3bcb5, type: 2}
+    - target: {fileID: 8904307686793211050, guid: 54c88f283bd3140f48ac5af1667f7e50, type: 3}
+      propertyPath: enemyDamageClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c1bfa5a94b07ab40b34cc328ab3738b, type: 3}
+    - target: {fileID: 8904307686793211050, guid: 54c88f283bd3140f48ac5af1667f7e50, type: 3}
       propertyPath: roomsTransition
       value: 
       objectReference: {fileID: 82825325}
@@ -12050,9 +12062,25 @@ PrefabInstance:
       value: TurretSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 4448969428356051899, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: duration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448969428356051899, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: coin_prefab
       value: 
       objectReference: {fileID: 1650204707}
+    - target: {fileID: 4448969428356051899, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: enemyDamage_
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c1bfa5a94b07ab40b34cc328ab3738b, type: 3}
+    - target: {fileID: 4448969428356051899, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a5b2a04058d504e9de773bebd3bcb5, type: 2}
+    - target: {fileID: 4448969428356051899, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: enemyDamageClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c1bfa5a94b07ab40b34cc328ab3738b, type: 3}
     - target: {fileID: 4448969428356051899, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: transitionObject
       value: 
@@ -14123,6 +14151,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2052578670}
     - target: {fileID: 6700140130010107789, guid: 82c4fb41b1e004252a0b1eca95f3943f, type: 3}
+      propertyPath: duration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6700140130010107789, guid: 82c4fb41b1e004252a0b1eca95f3943f, type: 3}
+      propertyPath: EnemyDamage
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c1bfa5a94b07ab40b34cc328ab3738b, type: 3}
+    - target: {fileID: 6700140130010107789, guid: 82c4fb41b1e004252a0b1eca95f3943f, type: 3}
       propertyPath: attackRange
       value: 
       objectReference: {fileID: 1540796630}
@@ -14130,6 +14166,10 @@ PrefabInstance:
       propertyPath: coin_prefab
       value: 
       objectReference: {fileID: 1650204707}
+    - target: {fileID: 6700140130010107789, guid: 82c4fb41b1e004252a0b1eca95f3943f, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 15a5b2a04058d504e9de773bebd3bcb5, type: 2}
     - target: {fileID: 6700140130010107789, guid: 82c4fb41b1e004252a0b1eca95f3943f, type: 3}
       propertyPath: roomsTransition
       value: 

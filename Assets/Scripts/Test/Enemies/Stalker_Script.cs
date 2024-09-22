@@ -1,9 +1,11 @@
 using Pathfinding;
 using System.Collections;
 using UnityEngine;
+using GBTemplate;
 
 public class Stalker_Script : MonoBehaviour, Enemy
 {
+    public AudioClip EnemyDamage;
     public Transform target;
     private Rigidbody2D rb;
     private bool isPaused = false;
@@ -12,21 +14,39 @@ public class Stalker_Script : MonoBehaviour, Enemy
     public Room_TransitionCollision roomsTransition;
 
     public GameObject coin_prefab;
-    private AudioSource audio;
-    private Animator anim; 
-    private bool isAttacking = false; 
-    private Collider2D attackRangeCollider; 
+    private Animator anim;
+    private bool isAttacking = false;
+    private Collider2D attackRangeCollider;
     private float attackCooldown = 2f;
+
+    private GBSoundController soundController;
+
+    #region Editor Settings
+
+    [Tooltip("Material to switch to during the flash.")]
+    [SerializeField] private Material flashMaterial;
+
+    [Tooltip("Duration of the flash.")]
+    [SerializeField] private float duration = 0.5f;
+
+    #endregion
+    #region Private Fields
+
+    private SpriteRenderer spriteRenderer;
+    private Material originalMaterial;
+    private Coroutine flashRoutine;
+    #endregion
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
         target = FindObjectOfType<PlayerMovement>().transform;
-
         attackRangeCollider = GetComponent<Collider2D>();
+        soundController = FindObjectOfType<GBSoundController>();
 
         FindRoomTransition();
         StartCoroutine(transitionTime());
@@ -55,7 +75,6 @@ public class Stalker_Script : MonoBehaviour, Enemy
         {
             Vector2 direction = target.position - transform.position;
             anim.SetFloat("MoveX", direction.x);
-
             CheckAttackRange();
         }
     }
@@ -73,7 +92,6 @@ public class Stalker_Script : MonoBehaviour, Enemy
     private IEnumerator PerformAttack()
     {
         isAttacking = true;
-
         anim.SetBool("IsAttacking", true);
 
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
@@ -85,9 +103,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
         }
 
         anim.SetBool("IsAttacking", false);
-
         yield return new WaitForSeconds(attackCooldown);
-
         isAttacking = false;
     }
 
@@ -104,15 +120,34 @@ public class Stalker_Script : MonoBehaviour, Enemy
 
     public void Damage(int damageAmount)
     {
-        audio.Play();
+        if (soundController != null)
+        {
+            soundController.PlaySound(EnemyDamage); // Substitua "HitSound" pelo nome correto do seu som
+        }
+
         if (roomsTransition.actual_Room == room)
         {
             health -= damageAmount;
+            StartCoroutine(FlashRoutine());
             if (health <= 0)
             {
                 StartCoroutine(DropCoins(1));
             }
         }
+    }
+    private IEnumerator FlashRoutine()
+    {
+        // Swap to the flashMaterial.
+        spriteRenderer.material = flashMaterial;
+
+        // Pause the execution of this function for "duration" seconds.
+        yield return new WaitForSeconds(duration);
+
+        // After the pause, swap back to the original material.
+        spriteRenderer.material = originalMaterial;
+
+        // Set the routine to null, signaling that it's finished.
+        flashRoutine = null;
     }
 
     public IEnumerator DropCoins(int amount)
@@ -137,11 +172,8 @@ public class Stalker_Script : MonoBehaviour, Enemy
     {
         AIPath ai = GetComponent<AIPath>();
         ai.canMove = false;
-
         rb.velocity = knockbackDirection * 2f;
-
         yield return new WaitForSeconds(1f);
-
         rb.velocity = Vector2.zero;
         ai.canMove = true;
     }

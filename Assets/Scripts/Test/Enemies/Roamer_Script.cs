@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GBTemplate;
 
 public class Roamer_Script : MonoBehaviour, Enemy
 {
@@ -13,14 +14,31 @@ public class Roamer_Script : MonoBehaviour, Enemy
     private bool isInKnockBack;
     public Room_TransitionCollision roomsTransition;
     public GameObject coin_prefab;
-    private AudioSource audio;
-    private Animator anim; 
+    private Animator anim;
+
+    #region Editor Settings
+
+    [Tooltip("Material to switch to during the flash.")]
+    [SerializeField] private Material flashMaterial;
+
+    [Tooltip("Duration of the flash.")]
+    [SerializeField] private float flashDuration = 0.5f;
+
+    [Tooltip("Audio clip for damage sound.")]
+    public AudioClip enemyDamageClip;
+
+    #endregion
+
+    private Material originalMaterial;
+    private Coroutine flashRoutine;
+    private GBSoundController soundController;
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        soundController = FindObjectOfType<GBSoundController>();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>(); 
+        anim = GetComponent<Animator>();
+        originalMaterial = GetComponent<SpriteRenderer>().material;
         StartCoroutine(MovementRoutine());
     }
 
@@ -42,29 +60,35 @@ public class Roamer_Script : MonoBehaviour, Enemy
     {
         if (isInKnockBack)
         {
-            return; 
+            return;
         }
 
         if (canMove)
         {
             rb.velocity = moveDirection;
-            UpdateAnimation(); 
+            UpdateAnimation();
         }
         else
         {
             rb.velocity = Vector2.zero;
-            anim.Play("roamer_idle"); 
+            anim.Play("roamer_idle");
         }
     }
 
     public void Damage(int damageAmount)
     {
-        audio.Play();
+        soundController.PlaySound(enemyDamageClip);
         if (roomsTransition.actual_Room == room)
         {
             health -= damageAmount;
+            if (flashRoutine != null)
+            {
+                StopCoroutine(flashRoutine);
+            }
+            flashRoutine = StartCoroutine(FlashRoutine());
             if (health <= 0)
             {
+                isInKnockBack = true;   
                 StartCoroutine(DropCoins(1));
             }
         }
@@ -137,5 +161,13 @@ public class Roamer_Script : MonoBehaviour, Enemy
         {
             anim.Play("roamer_idle");
         }
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material = flashMaterial;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.material = originalMaterial;
     }
 }

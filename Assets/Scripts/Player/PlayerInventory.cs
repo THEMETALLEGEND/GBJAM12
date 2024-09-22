@@ -45,7 +45,7 @@ public class PlayerInventory : MonoBehaviour
 
     void CollectItem(ShopItens item)
     {
-        Debug.Log($"Collected: {item.name}, Description: {item.description}");
+        Debug.Log($"Collected: {item.itemName}, Description: {item.description}");
         Inventory.Add(item);
         switch(item.id)
         {

@@ -7,8 +7,11 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        //here's where we are gonna input all the items. it is classified by id, name, description, and then price.
-        items.Add(new ShopItens(0, "Heart", "Increases health.", 1));
+        // Apenas um exemplo de como acessar os itens
+        foreach (var item in items)
+        {
+            Debug.Log($"Item: {item.itemName}, Description: {item.description}, Price: {item.price}");
+        }
     }
 
     public ShopItens GetItemById(int id)

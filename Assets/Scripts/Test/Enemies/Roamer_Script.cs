@@ -14,11 +14,13 @@ public class Roamer_Script : MonoBehaviour, Enemy
     public Room_TransitionCollision roomsTransition;
     public GameObject coin_prefab;
     private AudioSource audio;
+    private Animator anim; 
 
     void Start()
     {
         audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>(); 
         StartCoroutine(MovementRoutine());
     }
 
@@ -26,13 +28,13 @@ public class Roamer_Script : MonoBehaviour, Enemy
     {
         for (int i = 0; i < amount; i++)
         {
-            if (Random.Range(0, 100) < 50) // makes the coin dropping random, you can change the drop rate as you want.
+            if (Random.Range(0, 100) < 50)
             {
                 GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
             }
         }
         canMove = false;
-        yield return new WaitForSeconds(1); // this is where we can put the animation of death of the enemies
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 
@@ -40,16 +42,18 @@ public class Roamer_Script : MonoBehaviour, Enemy
     {
         if (isInKnockBack)
         {
-            return; // If in knockback, ignore normal movement
+            return; 
         }
 
         if (canMove)
         {
             rb.velocity = moveDirection;
+            UpdateAnimation(); 
         }
         else
         {
             rb.velocity = Vector2.zero;
+            anim.Play("roamer_idle"); 
         }
     }
 
@@ -63,7 +67,6 @@ public class Roamer_Script : MonoBehaviour, Enemy
             {
                 StartCoroutine(DropCoins(1));
             }
-                
         }
     }
 
@@ -95,7 +98,7 @@ public class Roamer_Script : MonoBehaviour, Enemy
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Player"))
+        if (coll.gameObject.CompareTag("Player") && health > 0)
         {
             coll.gameObject.GetComponent<PlayerAttacking>().TakeDamage(1, transform.position);
         }
@@ -118,5 +121,21 @@ public class Roamer_Script : MonoBehaviour, Enemy
         canMove = true;
         rb.velocity = Vector2.zero;
         isInKnockBack = false;
+    }
+
+    private void UpdateAnimation()
+    {
+        if (moveDirection.x < 0)
+        {
+            anim.Play("roamer_moving_left");
+        }
+        else if (moveDirection.x > 0)
+        {
+            anim.Play("roamer_moving_right");
+        }
+        else
+        {
+            anim.Play("roamer_idle");
+        }
     }
 }

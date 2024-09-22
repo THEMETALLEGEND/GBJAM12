@@ -28,10 +28,12 @@ public class CamChange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isSpawnRoom)
         {
             StartCoroutine(RoomTransition(other));
-        }   
+        }
+        else if (other.CompareTag("Player") && isSpawnRoom)
+            isSpawnRoom = false;
     }
 
     private IEnumerator RoomTransition(Collider2D player)

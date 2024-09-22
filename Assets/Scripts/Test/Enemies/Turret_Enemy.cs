@@ -8,7 +8,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
     public float attackInterval = 3f;  
     public GameObject transitionObject;
     [HideInInspector] public int room { get; set; }
-    public int health = 10;
+    public int health = 2;
     public GameObject coin_prefab;
     private AudioSource audio;
 
@@ -66,7 +66,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
     void Attack()
     {
-        if (projectileEnemy != null && transitionObject != null)  
+        if (projectileEnemy != null && transitionObject != null && health > 0)  
         {
             Vector2 playerPosition = transitionObject.transform.position;
             Vector2 attackDirection = (playerPosition - (Vector2)transform.position).normalized;

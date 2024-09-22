@@ -43,8 +43,5 @@ public class Turret_Projectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Obstacle") && other != null){
-            Destroy(gameObject);
-        }
     }
 }

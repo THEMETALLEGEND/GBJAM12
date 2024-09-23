@@ -1184,6 +1184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf79c361fb6d8544c991ca34edf2d9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theme1: {fileID: 8300000, guid: ac18284ae4288cc4d8465520bd8c1af3, type: 3}
+  theme2: {fileID: 8300000, guid: 5707e34f2524f0c44b6faa017ccac45a, type: 3}
+  theme3: {fileID: 8300000, guid: 0267b53173897bf4492a86b38745f156, type: 3}
 --- !u!1 &397352483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3877999923760232004, guid: 99b3db3de1d054feaa4ff4fc526c9f56, type: 3}

@@ -12,6 +12,8 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 	[HideInInspector] public int room { get; set; }
 	public int health = 2;
 	public GameObject coin_prefab;
+	private bool isdying;
+	private Animator anim;
 
 	#region Editor Settings
 
@@ -34,6 +36,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
 	void Start()
 	{
+		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		originalMaterial = spriteRenderer.material;
 		StartCoroutine(ShootingProjectile());
@@ -57,18 +60,21 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
 			if (health <= 0)
 			{
-				StartCoroutine(DropCoins(1));
+                anim.SetBool("IsDead", true);
+                StartCoroutine(DropCoins(1));
 			}
 		}
 	}
 
 	public IEnumerator DropCoins(int amount)
 	{
+		isdying = true;
 		for (int i = 0; i < amount; i++)
 		{
 			GameObject Coin = Instantiate(coin_prefab, transform.position, transform.rotation);
 		}
-		yield return new WaitForSeconds(1);
+        
+        yield return new WaitForSeconds(1);
 		Destroy(gameObject);
 	}
 
@@ -87,7 +93,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 	IEnumerator ShootingProjectile()
 	{
 		yield return new WaitForSeconds(2f);
-		while (true)
+		while (!isdying)
 		{
 			if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0)
 			{

@@ -13,7 +13,6 @@ public class ExitDoor : MonoBehaviour
 
     private void Awake()
 	{
-        disp = FindObjectOfType<GBConsoleController>();
         playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 	}
 	void Update()
@@ -41,6 +40,7 @@ public class ExitDoor : MonoBehaviour
 	}
     public IEnumerator ChangeScene()
     {
+        disp = FindObjectOfType<GBConsoleController>();
         canvasTMPs.enabled = false;
         yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

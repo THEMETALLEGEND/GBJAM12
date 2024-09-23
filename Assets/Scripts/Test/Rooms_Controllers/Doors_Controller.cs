@@ -20,7 +20,6 @@ public class Doors_Controller : MonoBehaviour
     private void Start()
     {
         roomCollider = GetComponent<Collider2D>();
-        soundController = FindObjectOfType<GBSoundController>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         Collider2D[] enemiesSpawn = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, LayerMask.GetMask("EnemySpawner"));
         if (enemiesSpawn.Length < 1)
@@ -59,6 +58,7 @@ public class Doors_Controller : MonoBehaviour
 
     private IEnumerator HandleDoors(bool open)
     {
+        soundController = FindObjectOfType<GBSoundController>();
         Collider2D[] doors = Physics2D.OverlapBoxAll(roomCollider.bounds.center, roomCollider.bounds.size, 0f, doorLayer);
         yield return new WaitForSeconds(2f);
         foreach (var door in doors)

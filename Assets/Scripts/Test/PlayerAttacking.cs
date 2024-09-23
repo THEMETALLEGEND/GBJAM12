@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using GBTemplate; 
+using GBTemplate;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttacking : MonoBehaviour
 {
@@ -30,11 +31,12 @@ public class PlayerAttacking : MonoBehaviour
 
     public AudioClip damageTaken;
     public AudioClip magicShot;
-    private GBSoundController soundController; 
+    public AudioClip deathSound; // New AudioClip for death sound
+
+    private GBSoundController soundController;
 
     void Start()
     {
-        soundController = FindObjectOfType<GBSoundController>(); 
         meleeCollider.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>(); // get the sprite renderer for the player
     }
@@ -94,6 +96,7 @@ public class PlayerAttacking : MonoBehaviour
 
     private void CastMagic()
     {
+        soundController = FindObjectOfType<GBSoundController>();
         if (magicDirection != Vector2.zero && !isMagicOnCooldown)
         {
             soundController.PlaySound(magicShot); // using GBSoundController
@@ -158,7 +161,7 @@ public class PlayerAttacking : MonoBehaviour
     // Method to handle player taking damage
     public void TakeDamage(int dmg, Vector2 enemyPos)
     {
-        
+        soundController = FindObjectOfType<GBSoundController>();
         // If player is invincible, they can't take damage
         if (isInvincible) return;
 
@@ -181,13 +184,25 @@ public class PlayerAttacking : MonoBehaviour
 
     private IEnumerator Death()
     {
+        soundController = FindObjectOfType<GBSoundController>();
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;
         isAttacking = true;
         isMagicOnCooldown = true;
         GetComponent<PlayerMovement>().isAllowedToMove = false;
         GetComponent<Animator>().SetBool("IsDead", true);
+
+        // Play death sound
+        if (deathSound != null)
+        {
+            soundController.PlaySound(deathSound);
+        }
+
         yield return new WaitForSeconds(3f);
+        Fade_InControl fadein = FindObjectOfType<Fade_InControl>();
+        yield return fadein.StartCoroutine(fadein.FadeToB());
+        SceneManager.LoadScene(4);
     }
 
     // Coroutine for invincibility

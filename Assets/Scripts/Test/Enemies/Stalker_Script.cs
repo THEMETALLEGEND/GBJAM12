@@ -18,7 +18,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
 	private bool isAttacking = false;
 	private Collider2D attackRangeCollider;
 	private float attackCooldown = 2f;
-
+	private bool canAttack = true;
 	private GBSoundController soundController;
 
 	#region Editor Settings
@@ -85,7 +85,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
 	{
 		Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRangeCollider.bounds.extents.x, LayerMask.GetMask("Player"));
 
-		if (hit != null && !isAttacking)
+		if (hit != null && !isAttacking && canAttack)
 		{
 			StartCoroutine(PerformAttack());
 		}
@@ -133,7 +133,9 @@ public class Stalker_Script : MonoBehaviour, Enemy
 			StartCoroutine(FlashRoutine());
 			if (health <= 0)
 			{
-				StartCoroutine(DropCoins(1));
+				anim.SetBool("Isdead", true);
+				canAttack = false;
+                StartCoroutine(DropCoins(1));
 			}
 		}
 	}
@@ -160,7 +162,8 @@ public class Stalker_Script : MonoBehaviour, Enemy
 		}
 		AIPath ai = GetComponent<AIPath>();
 		ai.canMove = false;
-		yield return new WaitForSeconds(1);
+        
+        yield return new WaitForSeconds(1);
 		Destroy(gameObject);
 	}
 

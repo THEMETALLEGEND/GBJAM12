@@ -588,6 +588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.906501
@@ -1527,6 +1531,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.209393
@@ -1929,6 +1937,10 @@ PrefabInstance:
     - target: {fileID: 1947045484538963921, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
       propertyPath: m_LocalPosition.z
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450538616864657362, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3155751002372480836, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2648,6 +2660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.11
@@ -3987,6 +4003,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.226306
@@ -6016,6 +6036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.914858
@@ -6165,6 +6189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.059980392
@@ -13122,6 +13150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.2263336
@@ -13254,6 +13286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSpawner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1775654142043274973, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 459d384eb594e4271b3b98e0f06f24b1, type: 2}
     - target: {fileID: 8835662903542379050, guid: aa3da4b98551e4463834675a18d743d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.201172
@@ -14115,6 +14151,10 @@ PrefabInstance:
       propertyPath: range
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1181073219476865899, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2cbd4a72d08dbfa4084ce696eb2cdf4e, type: 3}
     - target: {fileID: 5140563686075534453, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
       propertyPath: m_Name
       value: Player

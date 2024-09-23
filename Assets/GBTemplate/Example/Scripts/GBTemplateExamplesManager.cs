@@ -62,9 +62,17 @@ namespace GBTemplate
             //A button press from the main menu was detected,
             //let's set the example based on the option index of the menu
             //... unless it's the last option:
-            if (mainMenu.CurrentOption == 0)
+            if (mainMenu.CurrentOption == 0 && SceneManager.GetActiveScene().buildIndex != 5)
             {
                 StartCoroutine(changeScene());
+            }
+            else if(mainMenu.CurrentOption == 1 && SceneManager.GetActiveScene().buildIndex == 4)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else if(mainMenu.CurrentOption == 0 && SceneManager.GetActiveScene().buildIndex == 5)
+            {
+                SceneManager.LoadScene(0);
             }
             else
             {
@@ -77,6 +85,12 @@ namespace GBTemplate
             yield return controlConsole.StartCoroutine(controlConsole.Display.FadeToBlack(2));
             SceneManager.LoadScene(1);
         }
+        //private IEnumerator ReturnTOMenu()
+        //{
+        //    controlConsole = FindObjectOfType<GBConsoleController>();
+        //    yield return controlConsole.StartCoroutine(controlConsole.Display.FadeToBlack(2));
+        //    SceneManager.LoadScene(0);
+        //}
 
         public void SetCurrentExample(int value)
         {

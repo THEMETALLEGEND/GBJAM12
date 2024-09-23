@@ -56,6 +56,7 @@ public class Roamer_Script : MonoBehaviour, Enemy
             }
         }
         canMove = false;
+        
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
@@ -95,6 +96,7 @@ public class Roamer_Script : MonoBehaviour, Enemy
             flashRoutine = StartCoroutine(FlashRoutine());
             if (health <= 0)
             {
+                anim.SetBool("IsDead", true);
                 isInKnockBack = true;
                 StartCoroutine(DropCoins(1));
             }

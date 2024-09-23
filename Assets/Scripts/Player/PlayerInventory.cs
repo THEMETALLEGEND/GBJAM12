@@ -14,14 +14,14 @@ public class PlayerInventory : MonoBehaviour
     public GameObject UI_Controller;
 
     void Start()
-    {
-        soundController = FindObjectOfType<GBSoundController>(); 
+    { 
         shop_Manager = FindObjectOfType<ShopManager>();
         UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        soundController = FindObjectOfType<GBSoundController>();
         if (coll.CompareTag("Collectibles"))
         {
             GameObject coin = coll.gameObject;

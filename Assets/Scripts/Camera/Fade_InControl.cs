@@ -31,6 +31,12 @@ public class Fade_InControl : MonoBehaviour
         yield return disp.Display.StartCoroutine(disp.Display.FadeFromBlack(2));
         canvasText.enabled = true;
     }
+    public IEnumerator FadeToB()
+    {
+        canvasText.enabled = false;
+        yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
+        
+    }
 
     public IEnumerator ChangeScene()
     {

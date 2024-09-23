@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 public class Fade_InControl : MonoBehaviour
 {
     public Canvas canvasText;
-    private GBConsoleController disp; // Alterado para ser encontrado na cena
+    private GBConsoleController disp; 
 
     void Awake()
     {
         canvasText.enabled = false;
 
-        // Achar o GBConsoleController na cena
+
         disp = FindObjectOfType<GBConsoleController>();
 
         if (disp != null)
@@ -35,6 +35,19 @@ public class Fade_InControl : MonoBehaviour
     public IEnumerator ChangeScene()
     {
         yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        switch(currentSceneIndex){
+            case 1:
+                SceneManager.LoadScene(2);
+                break;
+            case 2:
+                SceneManager.LoadScene(3);
+                break;
+            case 3:
+                SceneManager.LoadScene(5);
+                break;
+        }
+        
     }
 
     public void ReloadSceneMenu()

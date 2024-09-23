@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 public class ExitDoor : MonoBehaviour
 {
 	private PlayerInventory playerInventory;
-    private GBConsoleController disp;
+	private GBConsoleController disp;
 	public Canvas canvasTMPs;
 	private bool isOpen;
+	public bool isExitDoor = false;
 
-    private void Awake()
+	private void Awake()
 	{
-        playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
+		playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 	}
 	void Update()
 	{
@@ -35,15 +36,25 @@ public class ExitDoor : MonoBehaviour
 		if (other.CompareTag("Player") && playerInventory.hasKey)
 		{
 			Debug.Log("Exited the level");
-			StartCoroutine(ChangeScene());
+			if (!isExitDoor)
+				StartCoroutine(ChangeScene());
+			else if (isExitDoor)
+				StartCoroutine(ToEndingScene());
 		}
 	}
-    public IEnumerator ChangeScene()
-    {
-        disp = FindObjectOfType<GBConsoleController>();
-        canvasTMPs.enabled = false;
-        yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex+1);
-    }
+	public IEnumerator ChangeScene()
+	{
+		disp = FindObjectOfType<GBConsoleController>();
+		canvasTMPs.enabled = false;
+		yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		SceneManager.LoadScene(currentSceneIndex + 1);
+	}
+	public IEnumerator ToEndingScene()
+	{
+		disp = FindObjectOfType<GBConsoleController>();
+		canvasTMPs.enabled = false;
+		yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2)); // Fade to black over 2 seconds
+		SceneManager.LoadScene("EndingScreen"); // Load the ending scene by name
+	}
 }

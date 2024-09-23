@@ -1138,6 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasText: {fileID: 958289971}
+  paletteNumber: 4
 --- !u!1 &394638039
 GameObject:
   m_ObjectHideFlags: 0

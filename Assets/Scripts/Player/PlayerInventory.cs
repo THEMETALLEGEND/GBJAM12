@@ -35,17 +35,6 @@ public class PlayerInventory : MonoBehaviour
                 gameObject.GetComponent<PlayerAttacking>().magicCooldownTime = PlayerPrefs.GetFloat("originalCooldown");
             }
         }
-        else
-        {
-            if (PlayerPrefs.HasKey("rangeUpgrade"))
-            {
-                gameObject.GetComponent<PlayerAttacking>().range += PlayerPrefs.GetFloat("rangeUpgrade");
-            }
-            if (PlayerPrefs.HasKey("magicCooldown"))
-            {
-                gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= PlayerPrefs.GetFloat("magicCooldown");
-            }
-        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -113,7 +102,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
 
             case 2:
-                
+
                 if (!PlayerPrefs.HasKey("originalRange"))
                 {
                     PlayerPrefs.SetFloat("originalRange", gameObject.GetComponent<PlayerAttacking>().range);
@@ -125,7 +114,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
 
             case 3:
-                
+
                 if (!PlayerPrefs.HasKey("originalCooldown"))
                 {
                     PlayerPrefs.SetFloat("originalCooldown", gameObject.GetComponent<PlayerAttacking>().magicCooldownTime);

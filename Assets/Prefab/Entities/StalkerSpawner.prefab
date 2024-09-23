@@ -148,6 +148,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 359876255638551458, guid: c5858ce3d8227e345ab76ef3f9beb94e, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3258953914466126755, guid: c5858ce3d8227e345ab76ef3f9beb94e, type: 3}
       propertyPath: duration
       value: 0.2

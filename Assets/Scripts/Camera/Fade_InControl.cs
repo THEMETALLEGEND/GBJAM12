@@ -6,73 +6,83 @@ using UnityEngine.SceneManagement;
 
 public class Fade_InControl : MonoBehaviour
 {
-    public Canvas canvasText;
-    private GBConsoleController disp; 
+	public Canvas canvasText;
+	private GBConsoleController disp;
+	public int paletteNumber = 0;
 
-    void Awake()
-    {
-        canvasText.enabled = false;
+	void Awake()
+	{
+		canvasText.enabled = false;
 
 
-        disp = FindObjectOfType<GBConsoleController>();
+		disp = FindObjectOfType<GBConsoleController>();
 
-        if (disp != null)
-        {
-            StartCoroutine(FadeFromB());
-        }
-        else
-        {
-            Debug.LogError("GBConsoleController not found in the scene!");
-        }
-    }
+		if (disp != null)
+		{
+			StartCoroutine(FadeFromB());
+			StartCoroutine(ChangePalette(paletteNumber));
+		}
+		else
+		{
+			Debug.LogError("GBConsoleController not found in the scene!");
+		}
+	}
 
-    private IEnumerator FadeFromB()
-    {
-        yield return new WaitForSeconds(0.01f);
-        disp = FindObjectOfType<GBConsoleController>();
-        yield return disp.Display.StartCoroutine(disp.Display.FadeFromBlack(2));
-        canvasText.enabled = true;
-    }
-    public IEnumerator FadeToB()
-    {
-        canvasText.enabled = false;
-        yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
-        
-    }
+	private IEnumerator ChangePalette(int paletteNumber)
+	{
+		yield return new WaitForSeconds(0.01f);
+		disp = FindObjectOfType<GBConsoleController>();
+		disp.Display.UpdateColorPalette(paletteNumber);
+	}
 
-    public IEnumerator ChangeScene()
-    {
-        yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        switch(currentSceneIndex){
-            case 1:
-                SceneManager.LoadScene(2);
-                break;
-            case 2:
-                SceneManager.LoadScene(3);
-                break;
-            case 3:
-                SceneManager.LoadScene(5);
-                break;
-        }
-        
-    }
+	private IEnumerator FadeFromB()
+	{
+		yield return new WaitForSeconds(0.01f);
+		disp = FindObjectOfType<GBConsoleController>();
+		yield return disp.Display.StartCoroutine(disp.Display.FadeFromBlack(2));
+		canvasText.enabled = true;
+	}
+	public IEnumerator FadeToB()
+	{
+		canvasText.enabled = false;
+		yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
 
-    public void ReloadSceneMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-    public void EndGame()
-    {
-        StartCoroutine(EndingGame());   
-    }
-    private IEnumerator EndingGame()
-    {
-        yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
+	}
+
+	public IEnumerator ChangeScene()
+	{
+		yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		switch (currentSceneIndex)
+		{
+			case 1:
+				SceneManager.LoadScene(2);
+				break;
+			case 2:
+				SceneManager.LoadScene(3);
+				break;
+			case 3:
+				SceneManager.LoadScene(5);
+				break;
+		}
+
+	}
+
+	public void ReloadSceneMenu()
+	{
+		SceneManager.LoadScene(0);
+	}
+	public void EndGame()
+	{
+		StartCoroutine(EndingGame());
+	}
+	private IEnumerator EndingGame()
+	{
+		yield return disp.Display.StartCoroutine(disp.Display.FadeToBlack(2));
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+		UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+		Application.Quit();
 #endif
-    }
+	}
 }

@@ -19,6 +19,16 @@ public class PlayerInventory : MonoBehaviour
     {
         shop_Manager = FindObjectOfType<ShopManager>();
         UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
+
+        // UPGRADES ARE REUTILIZED ON EACH LEVEL HERE.
+        if (PlayerPrefs.HasKey("rangeUpgrade"))
+        {
+            gameObject.GetComponent<PlayerAttacking>().range += PlayerPrefs.GetFloat("rangeUpgrade");
+        }
+        if (PlayerPrefs.HasKey("magicCooldown"))
+        {
+            gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= PlayerPrefs.GetFloat("magicCooldown");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -82,11 +92,17 @@ public class PlayerInventory : MonoBehaviour
                     money += item.price;
                 }
                 break;
-            case 2:
+
+            case 2: //UPGRADES STORED HERE
                 gameObject.GetComponent<PlayerAttacking>().range += rangeIncreaseOnUpgrade;
+                PlayerPrefs.SetFloat("rangeUpgrade", rangeIncreaseOnUpgrade);
+                PlayerPrefs.Save();  
                 break;
-            case 3:
+
+            case 3: //UPGRADES STORED HERE
                 gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= CooldownTimeToDecrease;
+                PlayerPrefs.SetFloat("magicCooldown", CooldownTimeToDecrease);
+                PlayerPrefs.Save();  
                 break;
         }
     }

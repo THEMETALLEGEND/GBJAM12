@@ -6,7 +6,7 @@ using GBTemplate;
 public class Turret_Enemy : MonoBehaviour, Enemy
 {
 	public GameObject projectileEnemy;
-	public float attackInterval = 3f;
+	public float attackInterval = 2.5f;
 	private GameObject transitionObject;
 	public AudioClip enemyDamage_;
 	[HideInInspector] public int room { get; set; }
@@ -92,13 +92,13 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
 	IEnumerator ShootingProjectile()
 	{
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         while (!isdying)
 		{
 			if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0)
 			{
-				yield return new WaitForSeconds(attackInterval);
-				Attack();
+                Attack();
+                yield return new WaitForSeconds(attackInterval);
 			}
 			else
 			{

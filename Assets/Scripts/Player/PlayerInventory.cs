@@ -21,6 +21,7 @@ public class PlayerInventory : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
         soundController = FindObjectOfType<GBSoundController>();
         if (coll.CompareTag("Collectibles"))
         {
@@ -45,12 +46,15 @@ public class PlayerInventory : MonoBehaviour
 
     void CollectItem(ShopItens item)
     {
+        /*
+        PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
         Debug.Log($"Collected: {item.itemName}, Description: {item.description}");
         Inventory.Add(item);
+        
         switch (item.id)
         {
-            case 0:
-                PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
+            case 0: // small heart
+                
                 if (playerObject != null)
                     playerObject.GetComponent<PlayerAttacking>().hp++;
                 UI_Controller ui = FindObjectOfType<UI_Controller>();
@@ -64,6 +68,26 @@ public class PlayerInventory : MonoBehaviour
                     money += item.price;
                 }
                 break;
-        }
+
+            case 1:
+                
+                if (playerObject != null)
+                    playerObject.GetComponent<PlayerAttacking>().hp+= 2;
+                UI_Controller ui = FindObjectOfType<UI_Controller>();
+                if (playerObject.GetComponent<PlayerAttacking>().hp < 6)
+                {
+                    ui.GetComponent<UI_Controller>().UpdateHeartStates(ui.GetComponent<UI_Controller>().life + 2);
+                }
+                else
+                {
+                    playerObject.GetComponent<PlayerAttacking>().hp = 6;
+                    money += item.price;
+                }
+                break;
+            case 2:
+                PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
+
+                break;
+        }*/
     }
 }

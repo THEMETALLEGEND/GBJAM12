@@ -69,7 +69,6 @@ public class CamChange : MonoBehaviour
         playerMovement.isAllowedToMove = true;
         isTransitioning = false;
         yield return new WaitForSeconds(1f);
-        
     }
 
     public CinemachineVirtualCamera ReturnCamera()

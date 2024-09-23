@@ -28,6 +28,8 @@ public class Fade_InControl : MonoBehaviour
 
     private IEnumerator FadeFromB()
     {
+        yield return new WaitForSeconds(0.01f);
+        disp = FindObjectOfType<GBConsoleController>();
         yield return disp.Display.StartCoroutine(disp.Display.FadeFromBlack(2));
         canvasText.enabled = true;
     }

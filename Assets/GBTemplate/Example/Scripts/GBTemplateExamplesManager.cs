@@ -68,11 +68,11 @@ namespace GBTemplate
             }
             else if(mainMenu.CurrentOption == 1 && SceneManager.GetActiveScene().buildIndex == 4)
             {
-                SceneManager.LoadScene(0);
+                StartCoroutine(ReturnTOMenu());
             }
             else if(mainMenu.CurrentOption == 0 && SceneManager.GetActiveScene().buildIndex == 5)
             {
-                SceneManager.LoadScene(0);
+                StartCoroutine(ReturnTOMenu());
             }
             else
             {
@@ -85,12 +85,12 @@ namespace GBTemplate
             yield return controlConsole.StartCoroutine(controlConsole.Display.FadeToBlack(2));
             SceneManager.LoadScene(1);
         }
-        //private IEnumerator ReturnTOMenu()
-        //{
-        //    controlConsole = FindObjectOfType<GBConsoleController>();
-        //    yield return controlConsole.StartCoroutine(controlConsole.Display.FadeToBlack(2));
-        //    SceneManager.LoadScene(0);
-        //}
+        private IEnumerator ReturnTOMenu()
+        {
+            controlConsole = FindObjectOfType<GBConsoleController>();
+            yield return controlConsole.StartCoroutine(controlConsole.Display.FadeToBlack(2));
+            SceneManager.LoadScene(0);
+        }
 
         public void SetCurrentExample(int value)
         {

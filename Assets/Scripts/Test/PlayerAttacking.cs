@@ -221,4 +221,8 @@ public class PlayerAttacking : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isInvincible = false;
     }
+    void Update()
+    {
+        ui.UpdateHeartStates(hp);
+    }
 }

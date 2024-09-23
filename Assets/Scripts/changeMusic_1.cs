@@ -13,9 +13,16 @@ public class changeMusic_1 : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(Changesound());
+
+    }
+    private IEnumerator Changesound()
+    {
+        yield return new WaitForSeconds(0.01f);
         gbControll = FindObjectOfType<GBSoundController>();
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        switch (currentSceneIndex) {
+        switch (currentSceneIndex)
+        {
             case 1:
                 gbControll.PlayMusic(theme1);
                 break;
@@ -28,6 +35,5 @@ public class changeMusic_1 : MonoBehaviour
             default:
                 break;
         }
-
     }
 }

@@ -8,12 +8,22 @@ public class ExitDoor : MonoBehaviour
 	private PlayerInventory playerInventory;
     public GBConsoleController disp;
 	public Canvas canvasTMPs;
+	private bool isOpen;
 
     private void Awake()
 	{
         playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 	}
-
+	void Update()
+	{
+		if (playerInventory.hasKey == true && !isOpen)
+		{
+			GameObject doorop = transform.Find("DoorOpen").gameObject;
+			GameObject doorcl = transform.Find("DoorClosed").gameObject;
+			doorop.SetActive(true);
+			doorcl.SetActive(false);
+		}
+	}
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Player") && playerInventory.hasKey)

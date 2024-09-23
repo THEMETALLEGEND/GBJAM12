@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GBTemplate
 {
@@ -171,6 +172,10 @@ namespace GBTemplate
             {
                 gb.Sound.PlaySound(SoundMenuMove);
             }
+        }
+        private void ReturnToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

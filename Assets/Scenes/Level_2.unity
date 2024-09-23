@@ -16614,6 +16614,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorOpen
       objectReference: {fileID: 0}
+    - target: {fileID: 150203784439524165, guid: e1246a821cc8d214985fda74396c16b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 819211221180844842, guid: e1246a821cc8d214985fda74396c16b1, type: 3}
       propertyPath: disp
       value: 
@@ -16677,6 +16681,10 @@ PrefabInstance:
     - target: {fileID: 7104773720135012507, guid: e1246a821cc8d214985fda74396c16b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310689497577297960, guid: e1246a821cc8d214985fda74396c16b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509823277912352078, guid: e1246a821cc8d214985fda74396c16b1, type: 3}
       propertyPath: m_Name
@@ -17032,7 +17040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2059173351
 Transform:
   m_ObjectHideFlags: 0

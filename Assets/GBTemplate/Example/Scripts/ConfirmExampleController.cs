@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 namespace GBTemplate
 {
     public class ConfirmExampleController : MonoBehaviour
@@ -69,7 +70,6 @@ namespace GBTemplate
                 OKSelected = true;
                 ConfirmMenuGroup.SetActive(false);
                 ConfirmOKGroup.SetActive(true);
-
                 gb.Sound.PlaySound(SoundOK);
             }
             else

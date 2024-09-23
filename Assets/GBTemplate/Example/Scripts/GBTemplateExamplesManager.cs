@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GBTemplate
 {
@@ -20,6 +21,7 @@ namespace GBTemplate
 
         private SimpleMenuController mainMenu;
         private bool whiteFade = false;
+        private GBConsoleController controlConsole;
 
         public enum eExampleType
         {
@@ -56,18 +58,24 @@ namespace GBTemplate
 
         private void MainMenuSelection()
         {
+            
             //A button press from the main menu was detected,
             //let's set the example based on the option index of the menu
             //... unless it's the last option:
-            if (mainMenu.CurrentOption == 4)
+            if (mainMenu.CurrentOption == 0)
             {
-                StartCoroutine(FadeTest());
-                whiteFade = !whiteFade;
+                StartCoroutine(changeScene());
             }
             else
             {
                 SetCurrentExample(mainMenu.CurrentOption);
             }
+        }
+        private IEnumerator changeScene()
+        {
+            controlConsole = FindObjectOfType<GBConsoleController>();
+            yield return controlConsole.StartCoroutine(controlConsole.Display.FadeToBlack(2));
+            SceneManager.LoadScene(1);
         }
 
         public void SetCurrentExample(int value)

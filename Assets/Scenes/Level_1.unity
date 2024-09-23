@@ -14156,21 +14156,9 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 539862319}
-    - target: {fileID: 1181073219476865899, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
-      propertyPath: range
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1181073219476865899, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
-      propertyPath: deathSound
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5140563686075534453, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259238886196300645, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
-      propertyPath: money
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8259238886196300645, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
       propertyPath: UI_Controller

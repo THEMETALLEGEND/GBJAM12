@@ -1271,7 +1271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4600000426556305250, guid: 94e915b8840c04101b5d40fac9ccc99f, type: 3}
       propertyPath: m_text
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4600000426556305250, guid: 94e915b8840c04101b5d40fac9ccc99f, type: 3}
       propertyPath: m_fontSize
@@ -4872,7 +4872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4600000426556305250, guid: 94e915b8840c04101b5d40fac9ccc99f, type: 3}
       propertyPath: m_text
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4600000426556305250, guid: 94e915b8840c04101b5d40fac9ccc99f, type: 3}
       propertyPath: m_fontSize
@@ -6418,7 +6418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5142773124370308778, guid: aabf0b3b727664d09b1a86fc88bfa34a, type: 3}
       propertyPath: m_text
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5142773124370308778, guid: aabf0b3b727664d09b1a86fc88bfa34a, type: 3}
       propertyPath: m_fontSize
@@ -25116,11 +25116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7304013872330581141, guid: 2115ffbcc1dbb4e30b7cecb397d96e0e, type: 3}
       propertyPath: price_Heart
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7304013872330581141, guid: 2115ffbcc1dbb4e30b7cecb397d96e0e, type: 3}
       propertyPath: price_SmallHeart
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7304013872330581141, guid: 2115ffbcc1dbb4e30b7cecb397d96e0e, type: 3}
       propertyPath: price_RNG_Upgrade

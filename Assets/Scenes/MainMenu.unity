@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasText: {fileID: 958289971}
-  paletteNumber: 4
+  paletteNumber: 0
 --- !u!1 &394638039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,13 +1262,53 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.size
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: Palettes.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 51f841e56474c474da45ed4cf25848f8, type: 2}
+      objectReference: {fileID: 11400000, guid: 7a2704d73a883468d86570494fb00ae6, type: 2}
     - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: Palettes.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: ec240d20df4f94341bfafe160318121e, type: 2}
+      objectReference: {fileID: 11400000, guid: 577b5e1b6793946c6bf755bf62170c10, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: a39b59c176266469998a2ad2e9ab148d, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 55a2b77adb7dd4d06bc3cf08ea9eed35, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 83f59b33a0525436585a1b1fc5946697, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6588d5448df4347a0ad7f2e937cd005b, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51f841e56474c474da45ed4cf25848f8, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[38]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f4d32a164a66b64a8d06ca7538fefce, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[39]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f4d32a164a66b64a8d06ca7538fefce, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[40]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f4d32a164a66b64a8d06ca7538fefce, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[41]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f4d32a164a66b64a8d06ca7538fefce, type: 2}
     - target: {fileID: 7654782120352638928, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: m_Depth
       value: 100

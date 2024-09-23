@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22b81de0497758f408919b3ef798e8d9, type: 3}
-  m_Name: METALWORKS
+  m_Name: METALWORKS4
   m_EditorClassIdentifier: 
-  Darkest: {r: 0, g: 0, b: 0, a: 0}
-  Dark: {r: 0.1509434, g: 0.101815596, b: 0.105909586, a: 0}
-  Light: {r: 0.3773585, g: 0.097899616, b: 0.104475155, a: 0}
-  Lightest: {r: 0.764151, g: 0.032440357, b: 0.032440357, a: 0}
+  Unlocked: 1
+  Darkest: {r: 0.2509804, g: 0.3137255, b: 0.15686275, a: 0}
+  Dark: {r: 0.5019608, g: 0.53333336, b: 0.2509804, a: 0}
+  Light: {r: 0.72156864, g: 0.75294125, b: 0.34509805, a: 0}
+  Lightest: {r: 0.9725491, g: 0.9725491, b: 0.7843138, a: 0}

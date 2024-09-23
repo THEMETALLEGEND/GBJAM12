@@ -1233,6 +1233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasText: {fileID: 958289971}
+  paletteNumber: 2
 --- !u!114 &389027506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,6 +1708,10 @@ PrefabInstance:
       propertyPath: Palettes.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: ec240d20df4f94341bfafe160318121e, type: 2}
+    - target: {fileID: 7654782120064271161, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
+      propertyPath: Palettes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: a39b59c176266469998a2ad2e9ab148d, type: 2}
     - target: {fileID: 7654782120352638928, guid: 4d17c0d1ba771c546a8ac46210062831, type: 3}
       propertyPath: m_Depth
       value: 100
@@ -19465,6 +19470,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1700838458609629070, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700838458609629070, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700838458609629070, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.76862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700838458609629070, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4286226372
+      objectReference: {fileID: 0}
     - target: {fileID: 3175558000014450599, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
       propertyPath: m_Name
       value: UserInterfaceShowcase
@@ -19524,6 +19545,22 @@ PrefabInstance:
     - target: {fileID: 8939063376610436518, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
       propertyPath: m_text
       value: Stage 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939063376610436518, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939063376610436518, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939063376610436518, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.76862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939063376610436518, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4286226372
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

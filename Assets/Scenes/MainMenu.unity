@@ -307,6 +307,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GBCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 148382560364537889, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 148382560364537889, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7027754295192694595, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 148382560364537889, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 209692574986593656, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -322,6 +334,18 @@ PrefabInstance:
     - target: {fileID: 764593838968906993, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 798958836753481148, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10.102
+      objectReference: {fileID: 0}
+    - target: {fileID: 798958836753481148, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 897315034746550190, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 934545979089389172, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: m_Camera
@@ -381,6 +405,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1443349000862882928, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733347877616503979, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 1733347877616503979, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7027754295192694595, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 1733347877616503979, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1919459630916529325, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
@@ -547,10 +583,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3950419213310744124, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4069344367874858437, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: SoundMenuSelect
       value: 
       objectReference: {fileID: 8300000, guid: 047192819a2bf2744853168ec2699c1b, type: 3}
+    - target: {fileID: 4121322897916971341, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 4121322897916971341, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121322897916971341, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7027754295192694595, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 4121322897916971341, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478183395733647755, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: SoundMenuMove
       value: 
@@ -643,6 +699,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5786139951904254981, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 5786139951904254981, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7027754295192694595, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 5786139951904254981, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5835579146178547855, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -664,6 +732,18 @@ PrefabInstance:
       value: 'turning off
 
         console'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346446830487924397, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 6346446830487924397, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7027754295192694595, guid: 79d445fd1d5cb4655aba53d1d1143530, type: 2}
+    - target: {fileID: 6346446830487924397, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6958609529914654659, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       propertyPath: OnMenuBack.m_PersistentCalls.m_Calls.Array.size
@@ -761,10 +841,19 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8084687462581807089, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8867714985318025679, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 764593838968906993, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
     - {fileID: 6095429696510973800, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
+    - {fileID: 897315034746550190, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9206697700284314514, guid: ece84ba2794c246b59271abc23416fdb, type: 3}
       insertIndex: 1

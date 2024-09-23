@@ -10,11 +10,13 @@ public class PlayerInventory : MonoBehaviour
     public int money;
     private ShopManager shop_Manager;
     public AudioClip coinPicked;
-    private GBSoundController soundController; 
+    private GBSoundController soundController;
     public GameObject UI_Controller;
+    public float rangeIncreaseOnUpgrade = 1f;
+    public float CooldownTimeToDecrease = 0.3f;
 
     void Start()
-    { 
+    {
         shop_Manager = FindObjectOfType<ShopManager>();
         UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
     }
@@ -28,16 +30,16 @@ public class PlayerInventory : MonoBehaviour
             GameObject coin = coll.gameObject;
             money++;
             Destroy(coin);
-            soundController.PlaySound(coinPicked); 
+            soundController.PlaySound(coinPicked);
             UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
         }
         else if (coll.CompareTag("Shop Itens"))
         {
-            ShopItens item = shop_Manager.GetItemById(coll.GetComponent<Item>().itemId); 
-            if (item.price <= money) 
+            ShopItens item = shop_Manager.GetItemById(coll.GetComponent<Item>().itemId);
+            if (item.price <= money)
             {
                 money -= item.price;
-                CollectItem(item); 
+                CollectItem(item);
                 Destroy(coll.gameObject);
                 UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
             }
@@ -46,21 +48,19 @@ public class PlayerInventory : MonoBehaviour
 
     void CollectItem(ShopItens item)
     {
-        /*
         PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
-        Debug.Log($"Collected: {item.itemName}, Description: {item.description}");
+        UI_Controller ui = FindObjectOfType<UI_Controller>();
+
         Inventory.Add(item);
-        
+
         switch (item.id)
         {
-            case 0: // small heart
-                
+            case 0:
                 if (playerObject != null)
                     playerObject.GetComponent<PlayerAttacking>().hp++;
-                UI_Controller ui = FindObjectOfType<UI_Controller>();
                 if (playerObject.GetComponent<PlayerAttacking>().hp < 6)
                 {
-                    ui.GetComponent<UI_Controller>().UpdateHeartStates(ui.GetComponent<UI_Controller>().life + 1);
+                    ui.UpdateHeartStates(playerObject.GetComponent<PlayerAttacking>().hp);
                 }
                 else
                 {
@@ -70,13 +70,11 @@ public class PlayerInventory : MonoBehaviour
                 break;
 
             case 1:
-                
                 if (playerObject != null)
-                    playerObject.GetComponent<PlayerAttacking>().hp+= 2;
-                UI_Controller ui = FindObjectOfType<UI_Controller>();
+                    playerObject.GetComponent<PlayerAttacking>().hp += 2;
                 if (playerObject.GetComponent<PlayerAttacking>().hp < 6)
                 {
-                    ui.GetComponent<UI_Controller>().UpdateHeartStates(ui.GetComponent<UI_Controller>().life + 2);
+                    ui.UpdateHeartStates(playerObject.GetComponent<PlayerAttacking>().hp);
                 }
                 else
                 {
@@ -85,9 +83,11 @@ public class PlayerInventory : MonoBehaviour
                 }
                 break;
             case 2:
-                PlayerAttacking playerObject = FindObjectOfType<PlayerAttacking>();
-
+                gameObject.GetComponent<PlayerAttacking>().range += rangeIncreaseOnUpgrade;
                 break;
-        }*/
+            case 3:
+                gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= CooldownTimeToDecrease;
+                break;
+        }
     }
 }

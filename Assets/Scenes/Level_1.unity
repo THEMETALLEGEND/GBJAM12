@@ -1987,9 +1987,13 @@ PrefabInstance:
       value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 3409978838812949905, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+      propertyPath: Coins
+      value: 
+      objectReference: {fileID: 539862321}
+    - target: {fileID: 3409978838812949905, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
       propertyPath: p_attacking
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3256844519134509285}
     - target: {fileID: 3946525398379502683, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.181005
@@ -2143,6 +2147,11 @@ MonoBehaviour:
 --- !u!223 &539862320 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 7030800825594830259, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
+  m_PrefabInstance: {fileID: 539862316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &539862321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9176008363508058125, guid: 611aa151f7f55ca4aa747847aad79f83, type: 3}
   m_PrefabInstance: {fileID: 539862316}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &547112202 stripped
@@ -14228,6 +14237,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
+--- !u!1 &3256844519134509285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5140563686075534453, guid: b4a03a9f7d57146378dfd67137a6f8e8, type: 3}
+  m_PrefabInstance: {fileID: 3256844519134509284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3357804941484885798
 PrefabInstance:
   m_ObjectHideFlags: 0

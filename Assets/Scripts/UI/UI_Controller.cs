@@ -14,8 +14,18 @@ public class UI_Controller : MonoBehaviour
 
     void Start()
     {
-        // Here you should ensure p_attacking's hp is properly fetched if needed
-        UpdateHeartStates(6);  // Start by testing with 6 HP
+        hearts_List.Add(null);
+        hearts_List.Add(null);
+        hearts_List.Add(null);
+
+        UpdateHeartStates(6);
+    }
+
+    void Update()
+    {
+        hearts_List[0] = transform.Find("Heart").GetComponent<Animator>();
+        hearts_List[1] = transform.Find("Heart (1)").GetComponent<Animator>();
+        hearts_List[2] = transform.Find("Heart (2)").GetComponent<Animator>();
     }
 
     public void UpdateCoins(int amount)
@@ -30,22 +40,32 @@ public class UI_Controller : MonoBehaviour
         {
             case 0:
                 hearts_List[0].SetInteger("HeartState", 0);
+                hearts_List[1].SetInteger("HeartState", 0);
+                hearts_List[2].SetInteger("HeartState", 0);
                 break;
             case 1:
                 hearts_List[0].SetInteger("HeartState", 1);
+                hearts_List[1].SetInteger("HeartState", 0);
+                hearts_List[2].SetInteger("HeartState", 0);
                 break;
             case 2:
                 hearts_List[0].SetInteger("HeartState", 2);
                 hearts_List[1].SetInteger("HeartState", 0);
+                hearts_List[2].SetInteger("HeartState", 0);
                 break;
             case 3:
+                hearts_List[0].SetInteger("HeartState", 2);
                 hearts_List[1].SetInteger("HeartState", 1);
+                hearts_List[2].SetInteger("HeartState", 0);
                 break;
             case 4:
+                hearts_List[0].SetInteger("HeartState", 2);
                 hearts_List[1].SetInteger("HeartState", 2);
                 hearts_List[2].SetInteger("HeartState", 0);
                 break;
             case 5:
+                hearts_List[0].SetInteger("HeartState", 2);
+                hearts_List[1].SetInteger("HeartState", 2);
                 hearts_List[2].SetInteger("HeartState", 1);
                 break;
             case 6:
@@ -53,9 +73,7 @@ public class UI_Controller : MonoBehaviour
                 hearts_List[1].SetInteger("HeartState", 2);
                 hearts_List[2].SetInteger("HeartState", 2);
                 break;
-        } // switch that transitionates the hp
-        Debug.Log("Updating heart states. Current HP: " + currentHP);
-
+        }
         life = currentHP;
     }
 }

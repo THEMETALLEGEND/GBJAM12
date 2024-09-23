@@ -60,7 +60,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
 			if (health <= 0)
 			{
-                anim.SetBool("IsDead", true);
+                anim.SetBool("Isdead", true);
                 StartCoroutine(DropCoins(1));
 			}
 		}
@@ -92,8 +92,8 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 
 	IEnumerator ShootingProjectile()
 	{
-		yield return new WaitForSeconds(2f);
-		while (!isdying)
+        yield return new WaitForSeconds(1f);
+        while (!isdying)
 		{
 			if (transitionObject.GetComponent<Room_TransitionCollision>().actual_Room == room && health > 0)
 			{
@@ -105,7 +105,7 @@ public class Turret_Enemy : MonoBehaviour, Enemy
 				yield return null;
 			}
 		}
-	}
+    }
 
 	void Attack()
 	{

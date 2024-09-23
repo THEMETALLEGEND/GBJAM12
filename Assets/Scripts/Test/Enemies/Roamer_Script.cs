@@ -96,7 +96,7 @@ public class Roamer_Script : MonoBehaviour, Enemy
             flashRoutine = StartCoroutine(FlashRoutine());
             if (health <= 0)
             {
-                anim.SetBool("IsDead", true);
+                anim.SetBool("Isdead", true);
                 isInKnockBack = true;
                 StartCoroutine(DropCoins(1));
             }

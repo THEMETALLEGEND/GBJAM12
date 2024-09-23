@@ -124,7 +124,7 @@ public class Stalker_Script : MonoBehaviour, Enemy
 	{
 		if (soundController != null)
 		{
-			soundController.PlaySound(EnemyDamage); // Substitua "HitSound" pelo nome correto do seu som
+			soundController.PlaySound(EnemyDamage); 
 		}
 
 		if (roomsTransition.actual_Room == room)

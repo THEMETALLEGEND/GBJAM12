@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Para verificar a cena atual
 using GBTemplate;
 
 public class PlayerInventory : MonoBehaviour
@@ -14,20 +15,36 @@ public class PlayerInventory : MonoBehaviour
     public GameObject UI_Controller;
     public float rangeIncreaseOnUpgrade = 1f;
     public float CooldownTimeToDecrease = 0.3f;
+    private float originalRange;
+    private float originalCooldownTime;
 
     void Start()
     {
         shop_Manager = FindObjectOfType<ShopManager>();
         UI_Controller.GetComponent<UI_Controller>().UpdateCoins(money);
 
-        // UPGRADES ARE REUTILIZED ON EACH LEVEL HERE.
-        if (PlayerPrefs.HasKey("rangeUpgrade"))
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            gameObject.GetComponent<PlayerAttacking>().range += PlayerPrefs.GetFloat("rangeUpgrade");
+            PlayerPrefs.SetInt("actualHP", 6);
+            if (PlayerPrefs.HasKey("originalRange"))
+            {
+                gameObject.GetComponent<PlayerAttacking>().range = PlayerPrefs.GetFloat("originalRange");
+            }
+            if (PlayerPrefs.HasKey("originalCooldown"))
+            {
+                gameObject.GetComponent<PlayerAttacking>().magicCooldownTime = PlayerPrefs.GetFloat("originalCooldown");
+            }
         }
-        if (PlayerPrefs.HasKey("magicCooldown"))
+        else
         {
-            gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= PlayerPrefs.GetFloat("magicCooldown");
+            if (PlayerPrefs.HasKey("rangeUpgrade"))
+            {
+                gameObject.GetComponent<PlayerAttacking>().range += PlayerPrefs.GetFloat("rangeUpgrade");
+            }
+            if (PlayerPrefs.HasKey("magicCooldown"))
+            {
+                gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= PlayerPrefs.GetFloat("magicCooldown");
+            }
         }
     }
 
@@ -77,6 +94,7 @@ public class PlayerInventory : MonoBehaviour
                     playerObject.GetComponent<PlayerAttacking>().hp = 6;
                     money += item.price;
                 }
+                PlayerPrefs.SetInt("actualHP", playerObject.GetComponent<PlayerAttacking>().hp);
                 break;
 
             case 1:
@@ -91,18 +109,31 @@ public class PlayerInventory : MonoBehaviour
                     playerObject.GetComponent<PlayerAttacking>().hp = 6;
                     money += item.price;
                 }
+                PlayerPrefs.SetInt("actualHP", playerObject.GetComponent<PlayerAttacking>().hp);
                 break;
 
-            case 2: //UPGRADES STORED HERE
+            case 2:
+                
+                if (!PlayerPrefs.HasKey("originalRange"))
+                {
+                    PlayerPrefs.SetFloat("originalRange", gameObject.GetComponent<PlayerAttacking>().range);
+                }
+
                 gameObject.GetComponent<PlayerAttacking>().range += rangeIncreaseOnUpgrade;
                 PlayerPrefs.SetFloat("rangeUpgrade", rangeIncreaseOnUpgrade);
-                PlayerPrefs.Save();  
+                PlayerPrefs.Save();
                 break;
 
-            case 3: //UPGRADES STORED HERE
+            case 3:
+                
+                if (!PlayerPrefs.HasKey("originalCooldown"))
+                {
+                    PlayerPrefs.SetFloat("originalCooldown", gameObject.GetComponent<PlayerAttacking>().magicCooldownTime);
+                }
+
                 gameObject.GetComponent<PlayerAttacking>().magicCooldownTime -= CooldownTimeToDecrease;
                 PlayerPrefs.SetFloat("magicCooldown", CooldownTimeToDecrease);
-                PlayerPrefs.Save();  
+                PlayerPrefs.Save();
                 break;
         }
     }
